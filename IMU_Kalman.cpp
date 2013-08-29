@@ -21,6 +21,9 @@ void setup()
 						DATAOUTPUTSEL_75HZ,
 						NORMALOPERATION_SEL,
 						MAGRANGE_SEL_1_3);			// initialize HMC5883 with 8 sample averaging, 75 Hz data rate, normal (no bias) operation, and +-1.3 gauss scale
+	Hmc5883.set_offset(	MAG_OFFSET_X,
+						MAG_OFFSET_Y,
+						MAG_OFFSET_Z);				// set magnetic sensor offset values
 }
 
 // The loop function is called in an endless loop

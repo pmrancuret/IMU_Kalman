@@ -45,6 +45,10 @@
 #define MAGRANGE_SEL_8_1		7		// this selection value chooses the 8.1 Gauss full-scale range
 #define MAGGAIN_SELDEFAULT		MAGRANGE_SEL_1_3	// Default selection value for magnetic range
 
+// Sensor Sign directions
+#define MAG_XAXIS_SIGN			1		// x-axis magnetic sign convention.  setting to 1 gives default, setting to -1 gives negative
+#define MAG_YAXIS_SIGN			1		// y-axis magnetic sign convention.  setting to 1 gives default, setting to -1 gives negative
+#define MAG_ZAXIS_SIGN			1		// z-axis magnetic sign convention.  setting to 1 gives default, setting to -1 gives negative
 
 // Address Definitions
 #define COMPASS_ADDRESS			0x1E	// I2C address of the magnetometer
@@ -108,13 +112,14 @@
  */
 class HMC5883 {
 private:
-	char	identity[3];						// 3-byte identifier of device.  must be ascii H43
-	int		offsetx;							// offset for x-axis reading
-	int		offsety;							// offset for y-axis reading
-	int		offsetz;							// offset for z-axis reading
-	int		magx_counts;						// magnetic reading in x-axis, in ADC reading counts
-	int		magy_counts;						// magnetic reading in x-axis, in ADC reading counts
-	int		magz_counts;						// magnetic reading in x-axis, in ADC reading counts
+	char			identity[3];				// 3-byte identifier of device.  must be ascii H43
+	int				offsetx;					// offset for x-axis reading
+	int				offsety;					// offset for y-axis reading
+	int				offsetz;					// offset for z-axis reading
+	int				magx_counts;				// magnetic reading in x-axis, in ADC reading counts
+	int				magy_counts;				// magnetic reading in x-axis, in ADC reading counts
+	int				magz_counts;				// magnetic reading in x-axis, in ADC reading counts
+	volatile byte 	datacount;					// this counter increments whenever new data is available, and decrements when it is read
 
 	boolean read(	byte startaddr,
 					byte numbytes,
@@ -128,10 +133,19 @@ public:
 						byte DataRateSel,
 						byte MeasBiasSel,
 						byte MagRangeSel);		// This function initializes the HMC5883 defice with specified settings
+	void data_int(void);						// On Interrupt, increments counter which tells new data is ready
+	void set_offset(	int offset_x,
+						int offset_y,
+						int offset_z);			// Sets offset values for magnetometer
+	boolean Read_Mag_Data(void);				// reads magnetic data from HMC5883 magnetometer
 
 };	// end of class HMC5883
 
 // global classes
 extern HMC5883 Hmc5883;
+
+// global functions
+extern void HMC5883_data_int();
+
 
 #endif /* HMC5883_H_ */

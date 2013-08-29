@@ -285,6 +285,8 @@ void MPU6000::Read_Accel_and_Gyro(void){
 	byte_L = SPI_read(MPUREG_GYRO_ZOUT_L);
 	gyroZ = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
 
+	if (datacount > 0) datacount--;	// decrement data counter
+
 	return;
 }
 
@@ -335,6 +337,8 @@ void MPU6000::Read_Accel(void){
 		accelZ = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
 	}
 
+	if (datacount > 0) datacount--;	// decrement data counter
+
 	return;
 }
 
@@ -363,6 +367,8 @@ void MPU6000::Read_Gyro(void){
 	byte_H = SPI_read(MPUREG_GYRO_ZOUT_H);
 	byte_L = SPI_read(MPUREG_GYRO_ZOUT_L);
 	gyroZ = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
+
+	if (datacount > 0) datacount--;	// decrement data counter
 
 	return;
 }
@@ -435,6 +441,8 @@ void MPU6000::Read_All_Data(void){
     byte_L = SPI_read(MPUREG_TEMP_OUT_L);
     temp32int = constrain((int32_t)((byte_H<<8)| byte_L),-32767,31098);
     temp = (_sAccum)((temp32int * 1542)>>11) + 9352;	// temp in degC*256 = temp32int*256/340 +  256*36.53.  = temp32int*1542/2048 + 9352.   From datasheet
+
+	if (datacount > 0) datacount--;	// decrement data counter
 
 	return;
 }

@@ -32,6 +32,7 @@ HMC5883::HMC5883(void) {
 	magx_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
 	magy_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
 	magz_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
+	datacount = 0;						// Initial value of 0.  this counter increments whenever new data is available, and decrements when it is read
 	return;
 }
 
@@ -184,10 +185,63 @@ boolean HMC5883::Initialize(byte SampleAvgSel, byte DataRateSel, byte MeasBiasSe
 	write(MODEREG,write_value);					// write specified value in mode register
 	delay(50);									// wait 50 ms
 
+	// DRDY is connected to INT 1 on pin D3. Enable interrupt on INT1
+	attachInterrupt(1,HMC5883_data_int,RISING);
+
 	return rtn;									// return
 }
 
+/*
+ * Class:		HMC5883
+ * Function:	data_int()
+ * Scope:		public
+ * Arguments:	none
+ * Description:	Increments counter which tells new data is ready
+ */
+void HMC5883::data_int(void) {
+	datacount++;
+	return;
+}
 
+/*
+ * Class:		HMC5883
+ * Function:	set_offset()
+ * Scope:		public
+ * Arguments:	none
+ * Description:	Sets offset values for magnetometer
+ */
+void HMC5883::set_offset(int offset_x, int offset_y, int offset_z)
+{
+	offsetx = offset_x;
+	offsetx = offset_y;
+	offsetx = offset_z;
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	Read_Mag_Data()
+ * Scope:		public
+ * Arguments:	none
+ * Description: reads magnetic data from HMC5883 magnetometer
+ */
+boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 magnetometer
+	boolean rtn = true;								// value to return at end - initialize to true
+	byte databuffer[6];								// buffer to store measured data in
+
+	if (!read(DATAOUTXMSB,6,&databuffer[0]))		// read data
+	{
+		rtn = false;								// if read failure, set return value to false to indicate the failure
+	}
+	else
+	{
+		magx_counts = (( ((int)databuffer[0]) << 8 | databuffer[1] ) * MAG_XAXIS_SIGN + offsetx);	// read x-axis adc counts
+		magy_counts = (( ((int)databuffer[4]) << 8 | databuffer[5] ) * MAG_YAXIS_SIGN + offsety);	// read y-axis adc counts
+		magz_counts = (( ((int)databuffer[2]) << 8 | databuffer[3] ) * MAG_ZAXIS_SIGN + offsetz);	// read z-axis adc counts
+		if (datacount > 0) datacount--;	// decrement data counter
+	}
+
+	return rtn;
+}
 
 // HMC5883 private functions
 
@@ -236,3 +290,18 @@ void HMC5883::write(byte addr, byte data) {
 	Wire.endTransmission();						// end transmission
 	return;
 }
+
+// Global Functions
+
+/*
+ * Class:		NA
+ * Function:	HMC5883_data_int()
+ * Scope:		global
+ * Arguments:	none
+ * Description:	HMC5883 INTERRUPT ON INT1 - calls function data_int() in class Hmc5883
+ */
+ void HMC5883_data_int(void)
+ {
+	 Hmc5883.data_int();
+	 return;
+ }
