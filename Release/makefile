@@ -10,6 +10,9 @@ RM := rm -rf
 -include sources.mk
 -include Wire/subdir.mk
 -include SPI/subdir.mk
+-include MPU6000/subdir.mk
+-include Kalman_Filters/subdir.mk
+-include HMC5883/subdir.mk
 -include subdir.mk
 -include objects.mk
 

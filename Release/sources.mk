@@ -37,5 +37,8 @@ SIZEDUMMY :=
 SUBDIRS := \
 Wire \
 SPI \
+MPU6000 \
+Kalman_Filters \
 . \
+HMC5883 \
 

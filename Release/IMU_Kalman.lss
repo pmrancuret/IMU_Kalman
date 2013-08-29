@@ -17,15 +17,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   6 .debug_abbrev 00001bca  00000000  00000000  0000b4b4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00004941  00000000  00000000  0000d07e  2**0
+  7 .debug_line   000049b0  00000000  00000000  0000d07e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000db0  00000000  00000000  000119c0  2**2
+  8 .debug_frame  00000db0  00000000  00000000  00011a30  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00002240  00000000  00000000  00012770  2**0
+  9 .debug_str    0000225f  00000000  00000000  000127e0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000046f1  00000000  00000000  000149b0  2**0
+ 10 .debug_loc    000046f1  00000000  00000000  00014a3f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000700  00000000  00000000  000190a1  2**0
+ 11 .debug_ranges 00000700  00000000  00000000  00019130  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -45,25 +45,25 @@ void SPIClass::setDataMode(uint8_t mode)
   SPCR = (SPCR & ~SPI_MODE_MASK) | mode;
 }
        4:	0c 94 6f 07 	jmp	0xede	; 0xede <__vector_1>
+ * Arguments:	none
+ * Description:	returns identity of the MPU6000
+ */
+byte MPU6000::GetIdentity(void) {
+	return identity;
+}
+       8:	0c 94 9c 07 	jmp	0xf38	; 0xf38 <__vector_2>
  * Description:	Constructor for GyroKalman object
  */
 GyroKalman::GyroKalman(void) {
 
 	return;
 } // end of GyroKalman()
-       8:	0c 94 9c 07 	jmp	0xf38	; 0xf38 <__vector_2>
+       c:	0c 94 8d 00 	jmp	0x11a	; 0x11a <__bad_interrupt>
  * Description:	Increments counter which tells new data is ready
  */
 void HMC5883::data_int(void) {
 	datacount++;
 	return;
-}
-       c:	0c 94 8d 00 	jmp	0x11a	; 0x11a <__bad_interrupt>
- * Arguments:	none
- * Description:	returns identity of the MPU6000
- */
-byte MPU6000::GetIdentity(void) {
-	return identity;
 }
       10:	0c 94 8d 00 	jmp	0x11a	; 0x11a <__bad_interrupt>
 #endif
@@ -129,9 +129,9 @@ int digitalRead(uint8_t pin)
 
 000000c2 <__ctors_start>:
       c2:	57 03       	mulsu	r21, r23
-      c4:	2a 04       	cpc	r2, r10
-      c6:	35 04       	cpc	r3, r5
-      c8:	a1 05       	cpc	r26, r1
+      c4:	30 04       	cpc	r3, r0
+      c6:	db 05       	cpc	r29, r11
+      c8:	e6 05       	cpc	r30, r6
 
 000000ca <__ctors_end>:
       ca:	11 24       	eor	r1, r1
@@ -1700,1194 +1700,1194 @@ void SPIClass::begin() {
 }
      852:	08 95       	ret
 
-00000854 <_GLOBAL__I_XAxisGyroKalman>:
-     854:	08 95       	ret
-
-00000856 <_ZN7HMC588310set_offsetEiii>:
- */
-void HMC5883::set_offset(int offset_x, int offset_y, int offset_z)
-{
-	offsetx = offset_x;
-	offsetx = offset_y;
-	offsetx = offset_z;
-     856:	fc 01       	movw	r30, r24
-     858:	34 83       	std	Z+4, r19	; 0x04
-     85a:	23 83       	std	Z+3, r18	; 0x03
-}
-     85c:	08 95       	ret
-
-0000085e <_Z16HMC5883_data_intv>:
- * Scope:		public
- * Arguments:	none
- * Description:	Increments counter which tells new data is ready
- */
-void HMC5883::data_int(void) {
-	datacount++;
-     85e:	80 91 df 01 	lds	r24, 0x01DF
-     862:	8f 5f       	subi	r24, 0xFF	; 255
-     864:	80 93 df 01 	sts	0x01DF, r24
- */
- void HMC5883_data_int(void)
- {
-	 Hmc5883.data_int();
-	 return;
- }
-     868:	08 95       	ret
-
-0000086a <_GLOBAL__I_Hmc5883>:
- * Scope:		Public
- * Arguments:	None
- * Description:	Constructor for HMC5883 object
- */
-HMC5883::HMC5883(void) {
-	identity[0] = 0;					// initialize to zero.  first byte of identifier of device.  must be ascii H when read
-     86a:	10 92 d0 01 	sts	0x01D0, r1
-	identity[1] = 0;					// initialize to zero.  second byte of identifier of device.  must be ascii 4 when read
-     86e:	10 92 d1 01 	sts	0x01D1, r1
-	identity[2] = 0;					// initialize to zero.  third byte of identifier of device.  must be ascii 3 when read
-     872:	10 92 d2 01 	sts	0x01D2, r1
-	offsetx = 0;						// initialize to zero.  offset for x-axis reading
-     876:	10 92 d4 01 	sts	0x01D4, r1
-     87a:	10 92 d3 01 	sts	0x01D3, r1
-	offsety = 0;						// initialize to zero.  offset for y-axis reading
-     87e:	10 92 d6 01 	sts	0x01D6, r1
-     882:	10 92 d5 01 	sts	0x01D5, r1
-	offsetz = 0;						// initialize to zero.  offset for z-axis reading
-     886:	10 92 d8 01 	sts	0x01D8, r1
-     88a:	10 92 d7 01 	sts	0x01D7, r1
-	magx_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
-     88e:	10 92 da 01 	sts	0x01DA, r1
-     892:	10 92 d9 01 	sts	0x01D9, r1
-	magy_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
-     896:	10 92 dc 01 	sts	0x01DC, r1
-     89a:	10 92 db 01 	sts	0x01DB, r1
-	magz_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
-     89e:	10 92 de 01 	sts	0x01DE, r1
-     8a2:	10 92 dd 01 	sts	0x01DD, r1
-	datacount = 0;						// Initial value of 0.  this counter increments whenever new data is available, and decrements when it is read
-     8a6:	10 92 df 01 	sts	0x01DF, r1
- */
- void HMC5883_data_int(void)
- {
-	 Hmc5883.data_int();
-	 return;
- }
-     8aa:	08 95       	ret
-
-000008ac <_ZN7HMC58835writeEhh>:
- * Function:	write()
- * Scope:		private
- * Arguments:	None
- * Description:	This function writes the specified data at the specified address of the HMC5883
- */
-void HMC5883::write(byte addr, byte data) {
-     8ac:	ef 92       	push	r14
-     8ae:	ff 92       	push	r15
-     8b0:	0f 93       	push	r16
-     8b2:	1f 93       	push	r17
-     8b4:	16 2f       	mov	r17, r22
-     8b6:	04 2f       	mov	r16, r20
-	Wire.beginTransmission(COMPASS_ADDRESS);	// Begin I2C transmission with the magnetometer
-     8b8:	84 ec       	ldi	r24, 0xC4	; 196
-     8ba:	e8 2e       	mov	r14, r24
-     8bc:	81 e0       	ldi	r24, 0x01	; 1
-     8be:	f8 2e       	mov	r15, r24
-     8c0:	c7 01       	movw	r24, r14
-     8c2:	6e e1       	ldi	r22, 0x1E	; 30
-     8c4:	70 e0       	ldi	r23, 0x00	; 0
-     8c6:	0e 94 1d 03 	call	0x63a	; 0x63a <_ZN7TwoWire17beginTransmissionEi>
-	Wire.write(addr);							// Tell magnetometer which register we are writing to
-     8ca:	c7 01       	movw	r24, r14
-     8cc:	61 2f       	mov	r22, r17
-     8ce:	0e 94 9f 03 	call	0x73e	; 0x73e <_ZN7TwoWire5writeEh>
-	Wire.write(data);							// write specified value to register
-     8d2:	c7 01       	movw	r24, r14
-     8d4:	60 2f       	mov	r22, r16
-     8d6:	0e 94 9f 03 	call	0x73e	; 0x73e <_ZN7TwoWire5writeEh>
-	Wire.endTransmission();						// end transmission
-     8da:	c7 01       	movw	r24, r14
-     8dc:	0e 94 e2 03 	call	0x7c4	; 0x7c4 <_ZN7TwoWire15endTransmissionEv>
-	return;
-}
-     8e0:	1f 91       	pop	r17
-     8e2:	0f 91       	pop	r16
-     8e4:	ff 90       	pop	r15
-     8e6:	ef 90       	pop	r14
-     8e8:	08 95       	ret
-
-000008ea <_ZN7HMC58834readEhhPh>:
- * Scope:		private
- * Arguments:	None
- * Description:	This function reads the specified number of bytes, starting from the specified
- * 				address of the HMC5883.  It places this data in the specified databuffer.
- */
-boolean HMC5883::read(byte startaddr, byte numbytes, byte * databuffer) {
-     8ea:	0f 93       	push	r16
-     8ec:	1f 93       	push	r17
-     8ee:	cf 93       	push	r28
-     8f0:	df 93       	push	r29
-     8f2:	16 2f       	mov	r17, r22
-     8f4:	04 2f       	mov	r16, r20
-     8f6:	e9 01       	movw	r28, r18
-	boolean rtn = true;	// value to return (true or false for success or failure)
-	byte i = 0;			// initialize index used for counting received bytes
-
-	Wire.beginTransmission(COMPASS_ADDRESS);		// Begin I2C transmission with the magnetometer
-     8f8:	84 ec       	ldi	r24, 0xC4	; 196
-     8fa:	91 e0       	ldi	r25, 0x01	; 1
-     8fc:	6e e1       	ldi	r22, 0x1E	; 30
-     8fe:	70 e0       	ldi	r23, 0x00	; 0
-     900:	0e 94 1d 03 	call	0x63a	; 0x63a <_ZN7TwoWire17beginTransmissionEi>
-	Wire.write(startaddr);							// send starting address to read from
-     904:	84 ec       	ldi	r24, 0xC4	; 196
-     906:	91 e0       	ldi	r25, 0x01	; 1
-     908:	61 2f       	mov	r22, r17
-     90a:	0e 94 9f 03 	call	0x73e	; 0x73e <_ZN7TwoWire5writeEh>
-	Wire.endTransmission();							// end I2C transmission
-     90e:	84 ec       	ldi	r24, 0xC4	; 196
-     910:	91 e0       	ldi	r25, 0x01	; 1
-     912:	0e 94 e2 03 	call	0x7c4	; 0x7c4 <_ZN7TwoWire15endTransmissionEv>
-
-	Wire.requestFrom((byte)COMPASS_ADDRESS,numbytes);		// request specified number of bytes from HMC5883
-     916:	84 ec       	ldi	r24, 0xC4	; 196
-     918:	91 e0       	ldi	r25, 0x01	; 1
-     91a:	6e e1       	ldi	r22, 0x1E	; 30
-     91c:	40 2f       	mov	r20, r16
-     91e:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <_ZN7TwoWire11requestFromEhh>
-     922:	10 e0       	ldi	r17, 0x00	; 0
-     924:	09 c0       	rjmp	.+18     	; 0x938 <__stack+0x39>
-	while(Wire.available())							// while data is available on I2C bus
-	{
-		*(databuffer+i) = Wire.read();				// receive one byte
-     926:	84 ec       	ldi	r24, 0xC4	; 196
-     928:	91 e0       	ldi	r25, 0x01	; 1
-     92a:	0e 94 30 03 	call	0x660	; 0x660 <_ZN7TwoWire4readEv>
-     92e:	fe 01       	movw	r30, r28
-     930:	e1 0f       	add	r30, r17
-     932:	f1 1d       	adc	r31, r1
-     934:	80 83       	st	Z, r24
-		i++;										// increment counter of received bytes
-     936:	1f 5f       	subi	r17, 0xFF	; 255
-	Wire.beginTransmission(COMPASS_ADDRESS);		// Begin I2C transmission with the magnetometer
-	Wire.write(startaddr);							// send starting address to read from
-	Wire.endTransmission();							// end I2C transmission
-
-	Wire.requestFrom((byte)COMPASS_ADDRESS,numbytes);		// request specified number of bytes from HMC5883
-	while(Wire.available())							// while data is available on I2C bus
-     938:	84 ec       	ldi	r24, 0xC4	; 196
-     93a:	91 e0       	ldi	r25, 0x01	; 1
-     93c:	0e 94 27 03 	call	0x64e	; 0x64e <_ZN7TwoWire9availableEv>
-     940:	89 2b       	or	r24, r25
-     942:	89 f7       	brne	.-30     	; 0x926 <__stack+0x27>
-	{
-		*(databuffer+i) = Wire.read();				// receive one byte
-		i++;										// increment counter of received bytes
-	}
-	Wire.endTransmission();							// end I2C transmission
-     944:	84 ec       	ldi	r24, 0xC4	; 196
-     946:	91 e0       	ldi	r25, 0x01	; 1
-     948:	0e 94 e2 03 	call	0x7c4	; 0x7c4 <_ZN7TwoWire15endTransmissionEv>
-     94c:	80 e0       	ldi	r24, 0x00	; 0
-     94e:	10 17       	cp	r17, r16
-     950:	09 f4       	brne	.+2      	; 0x954 <__stack+0x55>
-     952:	81 e0       	ldi	r24, 0x01	; 1
-	if (i != numbytes)								// if number of bytes received does not match request
-	{
-		rtn = false;								// set return to false to indicate failure
-	}
-	return rtn;										// return
-} // end of read()
-     954:	df 91       	pop	r29
-     956:	cf 91       	pop	r28
-     958:	1f 91       	pop	r17
-     95a:	0f 91       	pop	r16
-     95c:	08 95       	ret
-
-0000095e <_ZN7HMC588310InitializeEhhhh>:
- * Function:	Initialize()
- * Scope:		Public
- * Arguments:	None
- * Description:	This function initializes the HMC5883 device
- */
-boolean HMC5883::Initialize(byte SampleAvgSel, byte DataRateSel, byte MeasBiasSel, byte MagRangeSel) {
-     95e:	df 92       	push	r13
-     960:	ef 92       	push	r14
-     962:	ff 92       	push	r15
-     964:	0f 93       	push	r16
-     966:	1f 93       	push	r17
-     968:	cf 93       	push	r28
-     96a:	df 93       	push	r29
-     96c:	ec 01       	movw	r28, r24
-     96e:	f6 2e       	mov	r15, r22
-     970:	14 2f       	mov	r17, r20
-     972:	d2 2e       	mov	r13, r18
-	boolean rtn = true;							// value to return at end of function
-	byte	write_value;						// this byte temporarily stores info to transmit to magnetometer
-
-	Wire.begin();								// initialize and begin the I2C communications line
-     974:	84 ec       	ldi	r24, 0xC4	; 196
-     976:	91 e0       	ldi	r25, 0x01	; 1
-     978:	0e 94 f7 03 	call	0x7ee	; 0x7ee <_ZN7TwoWire5beginEv>
-	delay(10);									// wait 10 ms
-     97c:	6a e0       	ldi	r22, 0x0A	; 10
-     97e:	70 e0       	ldi	r23, 0x00	; 0
-     980:	80 e0       	ldi	r24, 0x00	; 0
-     982:	90 e0       	ldi	r25, 0x00	; 0
-     984:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
-
-	// read the identifier letters
-	if (!read(IDENTREGA,3,(byte*)&identity))	// read identity bytes from HMC3883
-     988:	ce 01       	movw	r24, r28
-     98a:	6a e0       	ldi	r22, 0x0A	; 10
-     98c:	43 e0       	ldi	r20, 0x03	; 3
-     98e:	9e 01       	movw	r18, r28
-     990:	0e 94 75 04 	call	0x8ea	; 0x8ea <_ZN7HMC58834readEhhPh>
-     994:	68 2f       	mov	r22, r24
-	{
-		rtn = false;							// if failed to succesfully read, set return value to false, indicating failure
-	}
-
-	// check to ensure identifier bytes match expected values for the HMC3883
-	if (	(identity[0] != 'H') |				// if the first identifier byte is not 'H'
-     996:	90 e0       	ldi	r25, 0x00	; 0
-     998:	88 81       	ld	r24, Y
-     99a:	88 34       	cpi	r24, 0x48	; 72
-     99c:	09 f0       	breq	.+2      	; 0x9a0 <_ZN7HMC588310InitializeEhhhh+0x42>
-     99e:	91 e0       	ldi	r25, 0x01	; 1
-     9a0:	20 e0       	ldi	r18, 0x00	; 0
-     9a2:	89 81       	ldd	r24, Y+1	; 0x01
-     9a4:	84 33       	cpi	r24, 0x34	; 52
-     9a6:	09 f0       	breq	.+2      	; 0x9aa <_ZN7HMC588310InitializeEhhhh+0x4c>
-     9a8:	21 e0       	ldi	r18, 0x01	; 1
-     9aa:	92 2b       	or	r25, r18
-     9ac:	29 2f       	mov	r18, r25
-     9ae:	30 e0       	ldi	r19, 0x00	; 0
-     9b0:	40 e0       	ldi	r20, 0x00	; 0
-     9b2:	50 e0       	ldi	r21, 0x00	; 0
-     9b4:	8a 81       	ldd	r24, Y+2	; 0x02
-     9b6:	83 33       	cpi	r24, 0x33	; 51
-     9b8:	11 f0       	breq	.+4      	; 0x9be <_ZN7HMC588310InitializeEhhhh+0x60>
-     9ba:	41 e0       	ldi	r20, 0x01	; 1
-     9bc:	50 e0       	ldi	r21, 0x00	; 0
-     9be:	24 2b       	or	r18, r20
-     9c0:	35 2b       	or	r19, r21
-     9c2:	23 2b       	or	r18, r19
-     9c4:	11 f0       	breq	.+4      	; 0x9ca <_ZN7HMC588310InitializeEhhhh+0x6c>
-     9c6:	ee 24       	eor	r14, r14
-     9c8:	04 c0       	rjmp	.+8      	; 0x9d2 <_ZN7HMC588310InitializeEhhhh+0x74>
-     9ca:	86 2f       	mov	r24, r22
-     9cc:	61 11       	cpse	r22, r1
-     9ce:	81 e0       	ldi	r24, 0x01	; 1
-     9d0:	e8 2e       	mov	r14, r24
-	{
-		rtn = false;							// set return value to false, indicating failure
-	}
-
-	// prepare to write configuration selections in config register A
-	switch (SampleAvgSel)						// determine which bits to set for selected sample average setting
-     9d2:	81 e0       	ldi	r24, 0x01	; 1
-     9d4:	f8 16       	cp	r15, r24
-     9d6:	49 f0       	breq	.+18     	; 0x9ea <_ZN7HMC588310InitializeEhhhh+0x8c>
-     9d8:	f8 16       	cp	r15, r24
-     9da:	48 f0       	brcs	.+18     	; 0x9ee <_ZN7HMC588310InitializeEhhhh+0x90>
-     9dc:	82 e0       	ldi	r24, 0x02	; 2
-     9de:	f8 16       	cp	r15, r24
-     9e0:	41 f0       	breq	.+16     	; 0x9f2 <_ZN7HMC588310InitializeEhhhh+0x94>
-     9e2:	83 e0       	ldi	r24, 0x03	; 3
-     9e4:	f8 16       	cp	r15, r24
-     9e6:	39 f4       	brne	.+14     	; 0x9f6 <_ZN7HMC588310InitializeEhhhh+0x98>
-     9e8:	07 c0       	rjmp	.+14     	; 0x9f8 <_ZN7HMC588310InitializeEhhhh+0x9a>
-     9ea:	40 e2       	ldi	r20, 0x20	; 32
-     9ec:	06 c0       	rjmp	.+12     	; 0x9fa <_ZN7HMC588310InitializeEhhhh+0x9c>
-     9ee:	40 e0       	ldi	r20, 0x00	; 0
-     9f0:	04 c0       	rjmp	.+8      	; 0x9fa <_ZN7HMC588310InitializeEhhhh+0x9c>
-     9f2:	40 e4       	ldi	r20, 0x40	; 64
-     9f4:	02 c0       	rjmp	.+4      	; 0x9fa <_ZN7HMC588310InitializeEhhhh+0x9c>
-	case SAMPLEAVERAGING_SEL_4:					// if selected 4 samples
-		write_value = SAMPLEAVERAGING_4;		// set correct bits for 4 samples
-		break;
-	case SAMPLEAVERAGING_SEL_8:					// if selected 8 samples
-		write_value = SAMPLEAVERAGING_8;		// set correct bits for 8 samples
-		break;
-     9f6:	ee 24       	eor	r14, r14
-     9f8:	40 e6       	ldi	r20, 0x60	; 96
-	default:									// if an invalid value is specified
-		write_value = SAMPLEAVERANING_SEL_DEFAULT << 5;	// set bits for default value
-		rtn = false;							// set return value to false, indicating failure with selection
-	}
-
-	switch (DataRateSel)						// determine which bits to set for selected data rate setting
-     9fa:	13 30       	cpi	r17, 0x03	; 3
-     9fc:	99 f0       	breq	.+38     	; 0xa24 <_ZN7HMC588310InitializeEhhhh+0xc6>
-     9fe:	14 30       	cpi	r17, 0x04	; 4
-     a00:	28 f4       	brcc	.+10     	; 0xa0c <_ZN7HMC588310InitializeEhhhh+0xae>
-     a02:	11 30       	cpi	r17, 0x01	; 1
-     a04:	59 f0       	breq	.+22     	; 0xa1c <_ZN7HMC588310InitializeEhhhh+0xbe>
-     a06:	12 30       	cpi	r17, 0x02	; 2
-     a08:	58 f4       	brcc	.+22     	; 0xa20 <_ZN7HMC588310InitializeEhhhh+0xc2>
-     a0a:	13 c0       	rjmp	.+38     	; 0xa32 <_ZN7HMC588310InitializeEhhhh+0xd4>
-     a0c:	15 30       	cpi	r17, 0x05	; 5
-     a0e:	71 f0       	breq	.+28     	; 0xa2c <_ZN7HMC588310InitializeEhhhh+0xce>
-     a10:	15 30       	cpi	r17, 0x05	; 5
-     a12:	50 f0       	brcs	.+20     	; 0xa28 <_ZN7HMC588310InitializeEhhhh+0xca>
-     a14:	48 61       	ori	r20, 0x18	; 24
-     a16:	16 30       	cpi	r17, 0x06	; 6
-     a18:	59 f4       	brne	.+22     	; 0xa30 <_ZN7HMC588310InitializeEhhhh+0xd2>
-     a1a:	0b c0       	rjmp	.+22     	; 0xa32 <_ZN7HMC588310InitializeEhhhh+0xd4>
-	{
-	case DATAOUTPUTSEL_0_75HZ:					// if selected 0.75 Hz data rate
-		write_value |= DATAOUTPUTRATE_0_75HZ;	// set correct bits for 0.75 Hz data rate
-		break;
-	case DATAOUTPUTSEL_1_5HZ:					// if selected 1.5 Hz data rate
-		write_value |= DATAOUTPUTRATE_1_5HZ;	// set correct bits for 1.5 Hz data rate
-     a1c:	44 60       	ori	r20, 0x04	; 4
-     a1e:	09 c0       	rjmp	.+18     	; 0xa32 <_ZN7HMC588310InitializeEhhhh+0xd4>
-		break;
-	case DATAOUTPUTSEL_3HZ:						// if selected 3 Hz data rate
-		write_value |= DATAOUTPUTRATE_3HZ;		// set correct bits for 3 Hz data rate
-     a20:	48 60       	ori	r20, 0x08	; 8
-     a22:	07 c0       	rjmp	.+14     	; 0xa32 <_ZN7HMC588310InitializeEhhhh+0xd4>
-		break;
-	case DATAOUTPUTSEL_7_5HZ:					// if selected 7.5 Hz data rate
-		write_value |= DATAOUTPUTRATE_7_5HZ;	// set correct bits for 7.5 Hz data rate
-     a24:	4c 60       	ori	r20, 0x0C	; 12
-     a26:	05 c0       	rjmp	.+10     	; 0xa32 <_ZN7HMC588310InitializeEhhhh+0xd4>
-		break;
-	case DATAOUTPUTSEL_15HZ:					// if selected 15 Hz data rate
-		write_value |= DATAOUTPUTRATE_15HZ;		// set correct bits for 15 Hz data rate
-     a28:	40 61       	ori	r20, 0x10	; 16
-     a2a:	03 c0       	rjmp	.+6      	; 0xa32 <_ZN7HMC588310InitializeEhhhh+0xd4>
-		break;
-	case DATAOUTPUTSEL_30HZ:					// if selected 30 Hz data rate
-		write_value |= DATAOUTPUTRATE_30HZ;		// set correct bits for 30 Hz data rate
-     a2c:	44 61       	ori	r20, 0x14	; 20
-     a2e:	01 c0       	rjmp	.+2      	; 0xa32 <_ZN7HMC588310InitializeEhhhh+0xd4>
-		break;
-	case DATAOUTPUTSEL_75HZ:					// if selected 75 Hz data rate
-		write_value |= DATAOUTPUTRATE_75HZ;		// set correct bits for 75 Hz data rate
-		break;
-	default:									// if an invalid value is specified
-		write_value |= DATAOUTPUTSEL_DEFAULT << 2;	// set bits for default value
-     a30:	ee 24       	eor	r14, r14
-		rtn = false;							// set return value to false, indicating failure with selection
-	}
-
-	switch (MeasBiasSel)						// determine which bits to set for selected measurement configuration bits
-     a32:	81 e0       	ldi	r24, 0x01	; 1
-     a34:	d8 16       	cp	r13, r24
-     a36:	39 f0       	breq	.+14     	; 0xa46 <_ZN7HMC588310InitializeEhhhh+0xe8>
-     a38:	d8 16       	cp	r13, r24
-     a3a:	40 f0       	brcs	.+16     	; 0xa4c <_ZN7HMC588310InitializeEhhhh+0xee>
-     a3c:	82 e0       	ldi	r24, 0x02	; 2
-     a3e:	d8 16       	cp	r13, r24
-     a40:	21 f0       	breq	.+8      	; 0xa4a <_ZN7HMC588310InitializeEhhhh+0xec>
-     a42:	ee 24       	eor	r14, r14
-     a44:	03 c0       	rjmp	.+6      	; 0xa4c <_ZN7HMC588310InitializeEhhhh+0xee>
-	{
-	case NORMALOPERATION_SEL:					// if selected normal operation
-		write_value |= NORMALOPERATION;			// set correct bits for normal operation
-		break;
-	case POSITIVEBIASCONFIG_SEL:				// if selected operation with positive bias
-		write_value |= POSITIVEBIASCONFIG;		// set correct bits for operation with positive bias
-     a46:	41 60       	ori	r20, 0x01	; 1
-     a48:	01 c0       	rjmp	.+2      	; 0xa4c <_ZN7HMC588310InitializeEhhhh+0xee>
-		break;
-	case NEGATIVEBIASCONFIG_SEL:				// if selected operation with negative bias
-		write_value |= NEGATIVEBIASCONFIG;		// set correct bits for operation with negative bias
-     a4a:	42 60       	ori	r20, 0x02	; 2
-	default:									// if invalid value is specified
-		write_value |= BIASSEL_DEFAULT;			// set bits for default value
-		rtn = false;							// set return value to fale, indicating failure with selection
-	}
-
-	write(CONFIGREGA,write_value);				// write specified value in Config Register A
-     a4c:	ce 01       	movw	r24, r28
-     a4e:	60 e0       	ldi	r22, 0x00	; 0
-     a50:	0e 94 56 04 	call	0x8ac	; 0x8ac <_ZN7HMC58835writeEhh>
-	delay(50);									// wait 50 ms
-     a54:	62 e3       	ldi	r22, 0x32	; 50
-     a56:	70 e0       	ldi	r23, 0x00	; 0
-     a58:	80 e0       	ldi	r24, 0x00	; 0
-     a5a:	90 e0       	ldi	r25, 0x00	; 0
-     a5c:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
-
-	// prepare to write selections in config register B
-	switch (MagRangeSel)						// determine which bits to set for magnetic range selection
-     a60:	03 30       	cpi	r16, 0x03	; 3
-     a62:	a1 f0       	breq	.+40     	; 0xa8c <_ZN7HMC588310InitializeEhhhh+0x12e>
-     a64:	04 30       	cpi	r16, 0x04	; 4
-     a66:	28 f4       	brcc	.+10     	; 0xa72 <_ZN7HMC588310InitializeEhhhh+0x114>
-     a68:	01 30       	cpi	r16, 0x01	; 1
-     a6a:	d9 f0       	breq	.+54     	; 0xaa2 <_ZN7HMC588310InitializeEhhhh+0x144>
-     a6c:	02 30       	cpi	r16, 0x02	; 2
-     a6e:	60 f4       	brcc	.+24     	; 0xa88 <_ZN7HMC588310InitializeEhhhh+0x12a>
-     a70:	09 c0       	rjmp	.+18     	; 0xa84 <_ZN7HMC588310InitializeEhhhh+0x126>
-     a72:	05 30       	cpi	r16, 0x05	; 5
-     a74:	79 f0       	breq	.+30     	; 0xa94 <_ZN7HMC588310InitializeEhhhh+0x136>
-     a76:	05 30       	cpi	r16, 0x05	; 5
-     a78:	58 f0       	brcs	.+22     	; 0xa90 <_ZN7HMC588310InitializeEhhhh+0x132>
-     a7a:	06 30       	cpi	r16, 0x06	; 6
-     a7c:	69 f0       	breq	.+26     	; 0xa98 <_ZN7HMC588310InitializeEhhhh+0x13a>
-     a7e:	07 30       	cpi	r16, 0x07	; 7
-     a80:	79 f4       	brne	.+30     	; 0xaa0 <_ZN7HMC588310InitializeEhhhh+0x142>
-     a82:	0c c0       	rjmp	.+24     	; 0xa9c <_ZN7HMC588310InitializeEhhhh+0x13e>
-     a84:	40 e0       	ldi	r20, 0x00	; 0
-     a86:	0e c0       	rjmp	.+28     	; 0xaa4 <_ZN7HMC588310InitializeEhhhh+0x146>
-     a88:	40 e4       	ldi	r20, 0x40	; 64
-     a8a:	0c c0       	rjmp	.+24     	; 0xaa4 <_ZN7HMC588310InitializeEhhhh+0x146>
-	case MAGRANGE_SEL_1_3:						// if selected +-1.3 Gauss full-scale range
-		write_value = MAGRANGE_1_3;				// set correct bits for +-1.3 Gauss full-scale range
-		break;
-	case MAGRANGE_SEL_1_9:						// if selected +-1.9 Gauss full-scale range
-		write_value = MAGRANGE_1_9;				// set correct bits for +-1.9 Gauss full-scale range
-		break;
-     a8c:	40 e6       	ldi	r20, 0x60	; 96
-     a8e:	0a c0       	rjmp	.+20     	; 0xaa4 <_ZN7HMC588310InitializeEhhhh+0x146>
-	case MAGRANGE_SEL_2_5:						// if selected +-2.5 Gauss full-scale range
-		write_value = MAGRANGE_2_5;				// set correct bits for +-2.5 Gauss full-scale range
-		break;
-     a90:	40 e8       	ldi	r20, 0x80	; 128
-     a92:	08 c0       	rjmp	.+16     	; 0xaa4 <_ZN7HMC588310InitializeEhhhh+0x146>
-	case MAGRANGE_SEL_4_0:						// if selected +-4.0 Gauss full-scale range
-		write_value = MAGRANGE_4_0;				// set correct bits for +-4.0 Gauss full-scale range
-		break;
-     a94:	40 ea       	ldi	r20, 0xA0	; 160
-     a96:	06 c0       	rjmp	.+12     	; 0xaa4 <_ZN7HMC588310InitializeEhhhh+0x146>
-	case MAGRANGE_SEL_4_7:						// if selected +-4.7 Gauss full-scale range
-		write_value = MAGRANGE_4_7;				// set correct bits for +-4.7 Gauss full-scale range
-		break;
-     a98:	40 ec       	ldi	r20, 0xC0	; 192
-     a9a:	04 c0       	rjmp	.+8      	; 0xaa4 <_ZN7HMC588310InitializeEhhhh+0x146>
-	case MAGRANGE_SEL_5_6:						// if selected +-5.6 Gauss full-scale range
-		write_value = MAGRANGE_5_6;				// set correct bits for +-5.6 Gauss full-scale range
-		break;
-     a9c:	40 ee       	ldi	r20, 0xE0	; 224
-     a9e:	02 c0       	rjmp	.+4      	; 0xaa4 <_ZN7HMC588310InitializeEhhhh+0x146>
-	case MAGRANGE_SEL_8_1:						// if selected +-8.1 Gauss full-scale range
-		write_value = MAGRANGE_8_1;				// set correct bits for +-8.1 Gauss full-scale range
-		break;
-     aa0:	ee 24       	eor	r14, r14
-     aa2:	40 e2       	ldi	r20, 0x20	; 32
-	default:									// if invalid value is specified
-		write_value = MAGGAIN_SELDEFAULT << 5;	// set bits for default value
-		rtn = false;							// set return value to fale, indicating failure with selection
-}
-
-	write(CONFIGREGB,write_value);				// write specified value in config register B
-     aa4:	ce 01       	movw	r24, r28
-     aa6:	61 e0       	ldi	r22, 0x01	; 1
-     aa8:	0e 94 56 04 	call	0x8ac	; 0x8ac <_ZN7HMC58835writeEhh>
-	delay(50);									// wait 50 ms
-     aac:	62 e3       	ldi	r22, 0x32	; 50
-     aae:	70 e0       	ldi	r23, 0x00	; 0
-     ab0:	80 e0       	ldi	r24, 0x00	; 0
-     ab2:	90 e0       	ldi	r25, 0x00	; 0
-     ab4:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
-
-	// prepare to write selections in mode register
-	write_value = CONTINUOUSCONVERSION;			// set mode to continuous conversion
-	write(MODEREG,write_value);					// write specified value in mode register
-     ab8:	ce 01       	movw	r24, r28
-     aba:	62 e0       	ldi	r22, 0x02	; 2
-     abc:	40 e0       	ldi	r20, 0x00	; 0
-     abe:	0e 94 56 04 	call	0x8ac	; 0x8ac <_ZN7HMC58835writeEhh>
-	delay(50);									// wait 50 ms
-     ac2:	62 e3       	ldi	r22, 0x32	; 50
-     ac4:	70 e0       	ldi	r23, 0x00	; 0
-     ac6:	80 e0       	ldi	r24, 0x00	; 0
-     ac8:	90 e0       	ldi	r25, 0x00	; 0
-     aca:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
-
-	// DRDY is connected to INT 1 on pin D3. Enable interrupt on INT1
-	attachInterrupt(1,HMC5883_data_int,RISING);
-     ace:	81 e0       	ldi	r24, 0x01	; 1
-     ad0:	6f e2       	ldi	r22, 0x2F	; 47
-     ad2:	74 e0       	ldi	r23, 0x04	; 4
-     ad4:	43 e0       	ldi	r20, 0x03	; 3
-     ad6:	50 e0       	ldi	r21, 0x00	; 0
-     ad8:	0e 94 4c 07 	call	0xe98	; 0xe98 <attachInterrupt>
-
-	return rtn;									// return
-}
-     adc:	8e 2d       	mov	r24, r14
-     ade:	df 91       	pop	r29
-     ae0:	cf 91       	pop	r28
-     ae2:	1f 91       	pop	r17
-     ae4:	0f 91       	pop	r16
-     ae6:	ff 90       	pop	r15
-     ae8:	ef 90       	pop	r14
-     aea:	df 90       	pop	r13
-     aec:	08 95       	ret
-
-00000aee <loop>:
-
-// The loop function is called in an endless loop
-void loop()
-{
-//Add your repeated code here
-}
-     aee:	08 95       	ret
-
-00000af0 <setup>:
-
-// Do not remove the include below
-#include "Imu_Kalman.h"
-
-//The setup function is called once at startup of the sketch
-void setup()
-     af0:	ef 92       	push	r14
-     af2:	ff 92       	push	r15
-     af4:	0f 93       	push	r16
-// Add your initialization code here
-
-	Mpu6000.Initialize(	400,
-						SEL_DLPF_DIS,
-						SEL_GYRO_1000,
-						SEL_ACCEL_4);				// initialize MPU6000 with 400 Hz sample rate, no low pass filter, +-1000 dps gyro scale, and +- 4g accel scale
-     af6:	80 ee       	ldi	r24, 0xE0	; 224
-     af8:	91 e0       	ldi	r25, 0x01	; 1
-     afa:	60 e9       	ldi	r22, 0x90	; 144
-     afc:	71 e0       	ldi	r23, 0x01	; 1
-     afe:	40 e0       	ldi	r20, 0x00	; 0
-     b00:	22 e0       	ldi	r18, 0x02	; 2
-     b02:	01 e0       	ldi	r16, 0x01	; 1
-     b04:	0e 94 13 06 	call	0xc26	; 0xc26 <_ZN7MPU600010InitializeEjhhh>
-	Hmc5883.Initialize(	SAMPLEAVERAGING_SEL_8,
-						DATAOUTPUTSEL_75HZ,
-						NORMALOPERATION_SEL,
-						MAGRANGE_SEL_1_3);			// initialize HMC5883 with 8 sample averaging, 75 Hz data rate, normal (no bias) operation, and +-1.3 gauss scale
-     b08:	80 ed       	ldi	r24, 0xD0	; 208
-     b0a:	e8 2e       	mov	r14, r24
-     b0c:	81 e0       	ldi	r24, 0x01	; 1
-     b0e:	f8 2e       	mov	r15, r24
-     b10:	c7 01       	movw	r24, r14
-     b12:	63 e0       	ldi	r22, 0x03	; 3
-     b14:	46 e0       	ldi	r20, 0x06	; 6
-     b16:	20 e0       	ldi	r18, 0x00	; 0
-     b18:	0e 94 af 04 	call	0x95e	; 0x95e <_ZN7HMC588310InitializeEhhhh>
-	Hmc5883.set_offset(	MAG_OFFSET_X,
-						MAG_OFFSET_Y,
-						MAG_OFFSET_Z);				// set magnetic sensor offset values
-     b1c:	c7 01       	movw	r24, r14
-     b1e:	60 e0       	ldi	r22, 0x00	; 0
-     b20:	70 e0       	ldi	r23, 0x00	; 0
-     b22:	40 e0       	ldi	r20, 0x00	; 0
-     b24:	50 e0       	ldi	r21, 0x00	; 0
-     b26:	20 e0       	ldi	r18, 0x00	; 0
-     b28:	30 e0       	ldi	r19, 0x00	; 0
-     b2a:	0e 94 2b 04 	call	0x856	; 0x856 <_ZN7HMC588310set_offsetEiii>
-}
-     b2e:	0f 91       	pop	r16
-     b30:	ff 90       	pop	r15
-     b32:	ef 90       	pop	r14
-     b34:	08 95       	ret
-
-00000b36 <_Z16MPU6000_data_intv>:
+00000854 <_Z16MPU6000_data_intv>:
  * Scope:		public
  * Arguments:	none
  * Description:	Increments counter which tells new data is ready
  */
 void MPU6000::data_int(void) {
 	datacount++;
-     b36:	80 91 fa 01 	lds	r24, 0x01FA
-     b3a:	8f 5f       	subi	r24, 0xFF	; 255
-     b3c:	80 93 fa 01 	sts	0x01FA, r24
+     854:	80 91 ea 01 	lds	r24, 0x01EA
+     858:	8f 5f       	subi	r24, 0xFF	; 255
+     85a:	80 93 ea 01 	sts	0x01EA, r24
  */
  void MPU6000_data_int(void)
  {
 	 Mpu6000.data_int();
 	 return;
  }
-     b40:	08 95       	ret
+     85e:	08 95       	ret
 
-00000b42 <_GLOBAL__I_Mpu6000>:
+00000860 <_GLOBAL__I_Mpu6000>:
  * Scope:		Public
  * Arguments:	None
  * Description:	Constructor for MPU6000 object
  */
 MPU6000::MPU6000(){
 	accelX = 0;							// Initial value of 0.  X-axis acceleration, scale*m/s^2 (full scale range depends on configuration)
-     b42:	10 92 e0 01 	sts	0x01E0, r1
-     b46:	10 92 e1 01 	sts	0x01E1, r1
-     b4a:	10 92 e2 01 	sts	0x01E2, r1
-     b4e:	10 92 e3 01 	sts	0x01E3, r1
+     860:	10 92 d0 01 	sts	0x01D0, r1
+     864:	10 92 d1 01 	sts	0x01D1, r1
+     868:	10 92 d2 01 	sts	0x01D2, r1
+     86c:	10 92 d3 01 	sts	0x01D3, r1
 	accelY = 0;							// Initial value of 0.  Y-axis acceleration, scale*m/s^2 (full scale range depends on configuration)
-     b52:	10 92 e4 01 	sts	0x01E4, r1
-     b56:	10 92 e5 01 	sts	0x01E5, r1
-     b5a:	10 92 e6 01 	sts	0x01E6, r1
-     b5e:	10 92 e7 01 	sts	0x01E7, r1
+     870:	10 92 d4 01 	sts	0x01D4, r1
+     874:	10 92 d5 01 	sts	0x01D5, r1
+     878:	10 92 d6 01 	sts	0x01D6, r1
+     87c:	10 92 d7 01 	sts	0x01D7, r1
 	accelZ = 0;							// Initial value of 0.  Z-axis acceleration, scale*m/s^2 (full scale range depends on configuration)
-     b62:	10 92 e8 01 	sts	0x01E8, r1
-     b66:	10 92 e9 01 	sts	0x01E9, r1
-     b6a:	10 92 ea 01 	sts	0x01EA, r1
-     b6e:	10 92 eb 01 	sts	0x01EB, r1
+     880:	10 92 d8 01 	sts	0x01D8, r1
+     884:	10 92 d9 01 	sts	0x01D9, r1
+     888:	10 92 da 01 	sts	0x01DA, r1
+     88c:	10 92 db 01 	sts	0x01DB, r1
 	gyroX = 0;							// Initial value of 0.  X-axis gyroscopic rate, scale*rad/sec (full scale range depends on configuration)
-     b72:	10 92 ec 01 	sts	0x01EC, r1
-     b76:	10 92 ed 01 	sts	0x01ED, r1
-     b7a:	10 92 ee 01 	sts	0x01EE, r1
-     b7e:	10 92 ef 01 	sts	0x01EF, r1
+     890:	10 92 dc 01 	sts	0x01DC, r1
+     894:	10 92 dd 01 	sts	0x01DD, r1
+     898:	10 92 de 01 	sts	0x01DE, r1
+     89c:	10 92 df 01 	sts	0x01DF, r1
 	gyroY = 0;							// Initial value of 0.  Y-axis gyroscopic rate, scale*rad/sec (full scale range depends on configuration)
-     b82:	10 92 f0 01 	sts	0x01F0, r1
-     b86:	10 92 f1 01 	sts	0x01F1, r1
-     b8a:	10 92 f2 01 	sts	0x01F2, r1
-     b8e:	10 92 f3 01 	sts	0x01F3, r1
+     8a0:	10 92 e0 01 	sts	0x01E0, r1
+     8a4:	10 92 e1 01 	sts	0x01E1, r1
+     8a8:	10 92 e2 01 	sts	0x01E2, r1
+     8ac:	10 92 e3 01 	sts	0x01E3, r1
 	gyroZ = 0;							// Initial value of 0.  Z-axis gyroscopic rate, scale*rad/sec (full scale range depends on configuration)
-     b92:	10 92 f4 01 	sts	0x01F4, r1
-     b96:	10 92 f5 01 	sts	0x01F5, r1
-     b9a:	10 92 f6 01 	sts	0x01F6, r1
-     b9e:	10 92 f7 01 	sts	0x01F7, r1
+     8b0:	10 92 e4 01 	sts	0x01E4, r1
+     8b4:	10 92 e5 01 	sts	0x01E5, r1
+     8b8:	10 92 e6 01 	sts	0x01E6, r1
+     8bc:	10 92 e7 01 	sts	0x01E7, r1
 	temp = 0;							// Initial value of 0.  temperature of MPU6000, degC*2^8
-     ba2:	10 92 f9 01 	sts	0x01F9, r1
-     ba6:	10 92 f8 01 	sts	0x01F8, r1
+     8c0:	10 92 e9 01 	sts	0x01E9, r1
+     8c4:	10 92 e8 01 	sts	0x01E8, r1
 	datacount = 0;						// Initial value of 0.  this counter increments whenever new data is available, and decrements when it is read
-     baa:	10 92 fa 01 	sts	0x01FA, r1
+     8c8:	10 92 ea 01 	sts	0x01EA, r1
 	identity = 0;						// Initial value of 0.  stores the identity code of the MPU6000 processor
-     bae:	10 92 fb 01 	sts	0x01FB, r1
+     8cc:	10 92 eb 01 	sts	0x01EB, r1
 	DLPF_Select = SEL_DLPF_DEFAULT;		// Initial value of default.  stores the Digital Low Pass Filter (DLPF) cutoff frequency selection
-     bb2:	10 92 fc 01 	sts	0x01FC, r1
+     8d0:	10 92 ec 01 	sts	0x01EC, r1
 	Gyro_Select = SEL_GYRO_DEFAULT;		// Initial value of default.  stores the gyroscope scale selection
-     bb6:	82 e0       	ldi	r24, 0x02	; 2
-     bb8:	80 93 fd 01 	sts	0x01FD, r24
+     8d4:	82 e0       	ldi	r24, 0x02	; 2
+     8d6:	80 93 ed 01 	sts	0x01ED, r24
 	Accel_Select = SEL_ACCEL_DEFAULT;	// Initial value of default.  stores the accelerometer scale selection
-     bbc:	81 e0       	ldi	r24, 0x01	; 1
-     bbe:	80 93 fe 01 	sts	0x01FE, r24
+     8da:	81 e0       	ldi	r24, 0x01	; 1
+     8dc:	80 93 ee 01 	sts	0x01EE, r24
  */
  void MPU6000_data_int(void)
  {
 	 Mpu6000.data_int();
 	 return;
  }
-     bc2:	08 95       	ret
+     8e0:	08 95       	ret
 
-00000bc4 <_ZN7MPU60008SPI_readEh>:
+000008e2 <_ZN7MPU60008SPI_readEh>:
  * Function:	SPI_read()
  * Scope:		private
  * Arguments:	byte reg 	- MPU6000 register to write to
  * Description:	reads a register in the MPU6000 using SPI
  */
 byte MPU6000::SPI_read(byte reg){
-     bc4:	1f 93       	push	r17
-     bc6:	16 2f       	mov	r17, r22
+     8e2:	1f 93       	push	r17
+     8e4:	16 2f       	mov	r17, r22
   byte return_value;		// value to return
   byte addr = reg | 0x80; 	// Set most significant bit to signify this is a read operation
-     bc8:	10 68       	ori	r17, 0x80	; 128
+     8e6:	10 68       	ori	r17, 0x80	; 128
 
   digitalWrite(MPU6000_CHIP_SELECT_PIN, LOW);	// set chip select low to enable SPI comms with MPU6000
-     bca:	84 e0       	ldi	r24, 0x04	; 4
-     bcc:	60 e0       	ldi	r22, 0x00	; 0
-     bce:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
+     8e8:	84 e0       	ldi	r24, 0x04	; 4
+     8ea:	60 e0       	ldi	r22, 0x00	; 0
+     8ec:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
 };
 
 extern SPIClass SPI;
 
 byte SPIClass::transfer(byte _data) {
   SPDR = _data;
-     bd2:	1e bd       	out	0x2e, r17	; 46
+     8f0:	1e bd       	out	0x2e, r17	; 46
   while (!(SPSR & _BV(SPIF)))
-     bd4:	0d b4       	in	r0, 0x2d	; 45
-     bd6:	07 fe       	sbrs	r0, 7
-     bd8:	fd cf       	rjmp	.-6      	; 0xbd4 <_ZN7MPU60008SPI_readEh+0x10>
+     8f2:	0d b4       	in	r0, 0x2d	; 45
+     8f4:	07 fe       	sbrs	r0, 7
+     8f6:	fd cf       	rjmp	.-6      	; 0x8f2 <_ZN7MPU60008SPI_readEh+0x10>
     ;
   return SPDR;
-     bda:	8e b5       	in	r24, 0x2e	; 46
+     8f8:	8e b5       	in	r24, 0x2e	; 46
 };
 
 extern SPIClass SPI;
 
 byte SPIClass::transfer(byte _data) {
   SPDR = _data;
-     bdc:	1e bc       	out	0x2e, r1	; 46
+     8fa:	1e bc       	out	0x2e, r1	; 46
   while (!(SPSR & _BV(SPIF)))
-     bde:	0d b4       	in	r0, 0x2d	; 45
-     be0:	07 fe       	sbrs	r0, 7
-     be2:	fd cf       	rjmp	.-6      	; 0xbde <_ZN7MPU60008SPI_readEh+0x1a>
+     8fc:	0d b4       	in	r0, 0x2d	; 45
+     8fe:	07 fe       	sbrs	r0, 7
+     900:	fd cf       	rjmp	.-6      	; 0x8fc <_ZN7MPU60008SPI_readEh+0x1a>
     ;
   return SPDR;
-     be4:	1e b5       	in	r17, 0x2e	; 46
+     902:	1e b5       	in	r17, 0x2e	; 46
   SPI.transfer(addr);							// first transmit the register to write to
   return_value = SPI.transfer(0);				// then receive the data from that register
   digitalWrite(MPU6000_CHIP_SELECT_PIN, HIGH);	// return chip select high to disable SPI comms with MPU6000
-     be6:	84 e0       	ldi	r24, 0x04	; 4
-     be8:	61 e0       	ldi	r22, 0x01	; 1
-     bea:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
+     904:	84 e0       	ldi	r24, 0x04	; 4
+     906:	61 e0       	ldi	r22, 0x01	; 1
+     908:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
   return(return_value);
 }
-     bee:	81 2f       	mov	r24, r17
-     bf0:	1f 91       	pop	r17
-     bf2:	08 95       	ret
+     90c:	81 2f       	mov	r24, r17
+     90e:	1f 91       	pop	r17
+     910:	08 95       	ret
 
-00000bf4 <_ZN7MPU60009SPI_writeEhh>:
+00000912 <_ZN7MPU60009SPI_writeEhh>:
  * Scope:		private
  * Arguments:	byte reg 	- MPU6000 register to write to
  * 				byte data	- data to write in that register
  * Description:	Writes to a register in the MPU6000 using SPI
  */
 void MPU6000::SPI_write(byte reg, byte data){
-     bf4:	0f 93       	push	r16
-     bf6:	1f 93       	push	r17
-     bf8:	16 2f       	mov	r17, r22
-     bfa:	04 2f       	mov	r16, r20
+     912:	0f 93       	push	r16
+     914:	1f 93       	push	r17
+     916:	16 2f       	mov	r17, r22
+     918:	04 2f       	mov	r16, r20
 	  digitalWrite(MPU6000_CHIP_SELECT_PIN, LOW);	// set chip select low to enable SPI comms with MPU6000
-     bfc:	84 e0       	ldi	r24, 0x04	; 4
-     bfe:	60 e0       	ldi	r22, 0x00	; 0
-     c00:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
+     91a:	84 e0       	ldi	r24, 0x04	; 4
+     91c:	60 e0       	ldi	r22, 0x00	; 0
+     91e:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
 };
 
 extern SPIClass SPI;
 
 byte SPIClass::transfer(byte _data) {
   SPDR = _data;
-     c04:	1e bd       	out	0x2e, r17	; 46
+     922:	1e bd       	out	0x2e, r17	; 46
   while (!(SPSR & _BV(SPIF)))
-     c06:	0d b4       	in	r0, 0x2d	; 45
-     c08:	07 fe       	sbrs	r0, 7
-     c0a:	fd cf       	rjmp	.-6      	; 0xc06 <_ZN7MPU60009SPI_writeEhh+0x12>
+     924:	0d b4       	in	r0, 0x2d	; 45
+     926:	07 fe       	sbrs	r0, 7
+     928:	fd cf       	rjmp	.-6      	; 0x924 <_ZN7MPU60009SPI_writeEhh+0x12>
     ;
   return SPDR;
-     c0c:	8e b5       	in	r24, 0x2e	; 46
+     92a:	8e b5       	in	r24, 0x2e	; 46
 };
 
 extern SPIClass SPI;
 
 byte SPIClass::transfer(byte _data) {
   SPDR = _data;
-     c0e:	0e bd       	out	0x2e, r16	; 46
+     92c:	0e bd       	out	0x2e, r16	; 46
   while (!(SPSR & _BV(SPIF)))
-     c10:	0d b4       	in	r0, 0x2d	; 45
-     c12:	07 fe       	sbrs	r0, 7
-     c14:	fd cf       	rjmp	.-6      	; 0xc10 <_ZN7MPU60009SPI_writeEhh+0x1c>
+     92e:	0d b4       	in	r0, 0x2d	; 45
+     930:	07 fe       	sbrs	r0, 7
+     932:	fd cf       	rjmp	.-6      	; 0x92e <_ZN7MPU60009SPI_writeEhh+0x1c>
     ;
   return SPDR;
-     c16:	8e b5       	in	r24, 0x2e	; 46
+     934:	8e b5       	in	r24, 0x2e	; 46
 	  SPI.transfer(reg);						// first transmit the register to write to
 	  SPI.transfer(data);					// then transmit the data to write
 	  digitalWrite(MPU6000_CHIP_SELECT_PIN, HIGH);	// return chip select high to disable SPI comms with MPU6000
-     c18:	84 e0       	ldi	r24, 0x04	; 4
-     c1a:	61 e0       	ldi	r22, 0x01	; 1
-     c1c:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
+     936:	84 e0       	ldi	r24, 0x04	; 4
+     938:	61 e0       	ldi	r22, 0x01	; 1
+     93a:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
 	  return;
 }
-     c20:	1f 91       	pop	r17
-     c22:	0f 91       	pop	r16
-     c24:	08 95       	ret
+     93e:	1f 91       	pop	r17
+     940:	0f 91       	pop	r16
+     942:	08 95       	ret
 
-00000c26 <_ZN7MPU600010InitializeEjhhh>:
+00000944 <_ZN7MPU600010InitializeEjhhh>:
  * 												SEL_ACCEL_8 - Full Scale range of +- 8g.
  * 												SEL_ACCEL_16 - Full Scale range of +- 16g.
  * 												anything else - sets full scale range of +- 4g and returns false.
  * Description:	This function initializes the MPU6000 object using settings supplied in argument
  */
 boolean MPU6000::Initialize(unsigned int SampleRate, byte DLPFSelect, byte GyroScaleSelect, byte AccelScaleSelect){
-     c26:	cf 92       	push	r12
-     c28:	df 92       	push	r13
-     c2a:	ef 92       	push	r14
-     c2c:	ff 92       	push	r15
-     c2e:	0f 93       	push	r16
-     c30:	1f 93       	push	r17
-     c32:	cf 93       	push	r28
-     c34:	df 93       	push	r29
-     c36:	ec 01       	movw	r28, r24
-     c38:	7b 01       	movw	r14, r22
-     c3a:	14 2f       	mov	r17, r20
-     c3c:	d2 2e       	mov	r13, r18
-     c3e:	c0 2e       	mov	r12, r16
+     944:	cf 92       	push	r12
+     946:	df 92       	push	r13
+     948:	ef 92       	push	r14
+     94a:	ff 92       	push	r15
+     94c:	0f 93       	push	r16
+     94e:	1f 93       	push	r17
+     950:	cf 93       	push	r28
+     952:	df 93       	push	r29
+     954:	ec 01       	movw	r28, r24
+     956:	7b 01       	movw	r14, r22
+     958:	14 2f       	mov	r17, r20
+     95a:	d2 2e       	mov	r13, r18
+     95c:	c0 2e       	mov	r12, r16
 	boolean rtn = true;	// value to return at end
 	byte SmplRtDiv;		// Sample Rate Divisor value to be stored in MPUREG_SMPLRT_DIV register
 
 	DLPF_Select = DLPFSelect;				// store value of DLPF cutoff
-     c40:	4c 8f       	std	Y+28, r20	; 0x1c
+     95e:	4c 8f       	std	Y+28, r20	; 0x1c
 	Gyro_Select = GyroScaleSelect;			// store value of gyroscope scale
-     c42:	2d 8f       	std	Y+29, r18	; 0x1d
+     960:	2d 8f       	std	Y+29, r18	; 0x1d
 	Accel_Select = AccelScaleSelect;		// store value of accelerometer scale
-     c44:	0e 8f       	std	Y+30, r16	; 0x1e
+     962:	0e 8f       	std	Y+30, r16	; 0x1e
 
 	// MPU6000 chip select setup
 	pinMode(MPU6000_CHIP_SELECT_PIN, OUTPUT);
-     c46:	84 e0       	ldi	r24, 0x04	; 4
-     c48:	61 e0       	ldi	r22, 0x01	; 1
-     c4a:	0e 94 b4 08 	call	0x1168	; 0x1168 <pinMode>
+     964:	84 e0       	ldi	r24, 0x04	; 4
+     966:	61 e0       	ldi	r22, 0x01	; 1
+     968:	0e 94 b4 08 	call	0x1168	; 0x1168 <pinMode>
 	digitalWrite(MPU6000_CHIP_SELECT_PIN, HIGH);
-     c4e:	84 e0       	ldi	r24, 0x04	; 4
-     c50:	61 e0       	ldi	r22, 0x01	; 1
-     c52:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
+     96c:	84 e0       	ldi	r24, 0x04	; 4
+     96e:	61 e0       	ldi	r22, 0x01	; 1
+     970:	0e 94 f3 08 	call	0x11e6	; 0x11e6 <digitalWrite>
 
 	// SPI initialization
 	SPI.begin();
-     c56:	0e 94 13 04 	call	0x826	; 0x826 <_ZN8SPIClass5beginEv>
+     974:	0e 94 13 04 	call	0x826	; 0x826 <_ZN8SPIClass5beginEv>
 	SPI.setClockDivider(SPI_CLOCK_DIV16);      // SPI at 1Mhz (on 16Mhz clock)
-     c5a:	81 e0       	ldi	r24, 0x01	; 1
-     c5c:	0e 94 02 04 	call	0x804	; 0x804 <_ZN8SPIClass15setClockDividerEh>
+     978:	81 e0       	ldi	r24, 0x01	; 1
+     97a:	0e 94 02 04 	call	0x804	; 0x804 <_ZN8SPIClass15setClockDividerEh>
 	delay(10);
-     c60:	6a e0       	ldi	r22, 0x0A	; 10
-     c62:	70 e0       	ldi	r23, 0x00	; 0
-     c64:	80 e0       	ldi	r24, 0x00	; 0
-     c66:	90 e0       	ldi	r25, 0x00	; 0
-     c68:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     97e:	6a e0       	ldi	r22, 0x0A	; 10
+     980:	70 e0       	ldi	r23, 0x00	; 0
+     982:	80 e0       	ldi	r24, 0x00	; 0
+     984:	90 e0       	ldi	r25, 0x00	; 0
+     986:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 
 	// Chip reset
 	SPI_write(MPUREG_PWR_MGMT_1, BIT_H_RESET);
-     c6c:	ce 01       	movw	r24, r28
-     c6e:	6b e6       	ldi	r22, 0x6B	; 107
-     c70:	40 e8       	ldi	r20, 0x80	; 128
-     c72:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     98a:	ce 01       	movw	r24, r28
+     98c:	6b e6       	ldi	r22, 0x6B	; 107
+     98e:	40 e8       	ldi	r20, 0x80	; 128
+     990:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 	delay(100);
-     c76:	64 e6       	ldi	r22, 0x64	; 100
-     c78:	70 e0       	ldi	r23, 0x00	; 0
-     c7a:	80 e0       	ldi	r24, 0x00	; 0
-     c7c:	90 e0       	ldi	r25, 0x00	; 0
-     c7e:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     994:	64 e6       	ldi	r22, 0x64	; 100
+     996:	70 e0       	ldi	r23, 0x00	; 0
+     998:	80 e0       	ldi	r24, 0x00	; 0
+     99a:	90 e0       	ldi	r25, 0x00	; 0
+     99c:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 
 	// Wake up device and select GyroZ clock (better performance)
 	SPI_write(MPUREG_PWR_MGMT_1, MPU_CLK_SEL_PLLGYROZ);
-     c82:	ce 01       	movw	r24, r28
-     c84:	6b e6       	ldi	r22, 0x6B	; 107
-     c86:	43 e0       	ldi	r20, 0x03	; 3
-     c88:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     9a0:	ce 01       	movw	r24, r28
+     9a2:	6b e6       	ldi	r22, 0x6B	; 107
+     9a4:	43 e0       	ldi	r20, 0x03	; 3
+     9a6:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 	delay(1);
-     c8c:	61 e0       	ldi	r22, 0x01	; 1
-     c8e:	70 e0       	ldi	r23, 0x00	; 0
-     c90:	80 e0       	ldi	r24, 0x00	; 0
-     c92:	90 e0       	ldi	r25, 0x00	; 0
-     c94:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     9aa:	61 e0       	ldi	r22, 0x01	; 1
+     9ac:	70 e0       	ldi	r23, 0x00	; 0
+     9ae:	80 e0       	ldi	r24, 0x00	; 0
+     9b0:	90 e0       	ldi	r25, 0x00	; 0
+     9b2:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 
 	// Disable I2C bus (recommended on datasheet)
 	SPI_write(MPUREG_USER_CTRL, BIT_I2C_IF_DIS);
-     c98:	ce 01       	movw	r24, r28
-     c9a:	6a e6       	ldi	r22, 0x6A	; 106
-     c9c:	40 e1       	ldi	r20, 0x10	; 16
-     c9e:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     9b6:	ce 01       	movw	r24, r28
+     9b8:	6a e6       	ldi	r22, 0x6A	; 106
+     9ba:	40 e1       	ldi	r20, 0x10	; 16
+     9bc:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 	delay(1);
-     ca2:	61 e0       	ldi	r22, 0x01	; 1
-     ca4:	70 e0       	ldi	r23, 0x00	; 0
-     ca6:	80 e0       	ldi	r24, 0x00	; 0
-     ca8:	90 e0       	ldi	r25, 0x00	; 0
-     caa:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     9c0:	61 e0       	ldi	r22, 0x01	; 1
+     9c2:	70 e0       	ldi	r23, 0x00	; 0
+     9c4:	80 e0       	ldi	r24, 0x00	; 0
+     9c6:	90 e0       	ldi	r25, 0x00	; 0
+     9c8:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 
 	// Get identity of the device, 'cause why not.  Note this identifier is only really used for I2C comms which we aren't using.  But here it is.
 	identity = (SPI_read(MPUREG_WHOAMI) & 0x7E);
-     cae:	ce 01       	movw	r24, r28
-     cb0:	65 e7       	ldi	r22, 0x75	; 117
-     cb2:	0e 94 e2 05 	call	0xbc4	; 0xbc4 <_ZN7MPU60008SPI_readEh>
-     cb6:	8e 77       	andi	r24, 0x7E	; 126
-     cb8:	8b 8f       	std	Y+27, r24	; 0x1b
+     9cc:	ce 01       	movw	r24, r28
+     9ce:	65 e7       	ldi	r22, 0x75	; 117
+     9d0:	0e 94 71 04 	call	0x8e2	; 0x8e2 <_ZN7MPU60008SPI_readEh>
+     9d4:	8e 77       	andi	r24, 0x7E	; 126
+     9d6:	8b 8f       	std	Y+27, r24	; 0x1b
 
 	// Set No External Sync, and select appropriate DLPF cutoff frequency
 	switch (DLPFSelect)
-     cba:	13 30       	cpi	r17, 0x03	; 3
-     cbc:	f1 f0       	breq	.+60     	; 0xcfa <_ZN7MPU600010InitializeEjhhh+0xd4>
-     cbe:	14 30       	cpi	r17, 0x04	; 4
-     cc0:	28 f4       	brcc	.+10     	; 0xccc <_ZN7MPU600010InitializeEjhhh+0xa6>
-     cc2:	11 30       	cpi	r17, 0x01	; 1
-     cc4:	91 f0       	breq	.+36     	; 0xcea <_ZN7MPU600010InitializeEjhhh+0xc4>
-     cc6:	12 30       	cpi	r17, 0x02	; 2
-     cc8:	a0 f4       	brcc	.+40     	; 0xcf2 <_ZN7MPU600010InitializeEjhhh+0xcc>
-     cca:	07 c0       	rjmp	.+14     	; 0xcda <_ZN7MPU600010InitializeEjhhh+0xb4>
-     ccc:	15 30       	cpi	r17, 0x05	; 5
-     cce:	e9 f0       	breq	.+58     	; 0xd0a <_ZN7MPU600010InitializeEjhhh+0xe4>
-     cd0:	15 30       	cpi	r17, 0x05	; 5
-     cd2:	b8 f0       	brcs	.+46     	; 0xd02 <_ZN7MPU600010InitializeEjhhh+0xdc>
-     cd4:	16 30       	cpi	r17, 0x06	; 6
-     cd6:	a1 f5       	brne	.+104    	; 0xd40 <_ZN7MPU600010InitializeEjhhh+0x11a>
-     cd8:	1c c0       	rjmp	.+56     	; 0xd12 <_ZN7MPU600010InitializeEjhhh+0xec>
+     9d8:	13 30       	cpi	r17, 0x03	; 3
+     9da:	f1 f0       	breq	.+60     	; 0xa18 <_ZN7MPU600010InitializeEjhhh+0xd4>
+     9dc:	14 30       	cpi	r17, 0x04	; 4
+     9de:	28 f4       	brcc	.+10     	; 0x9ea <_ZN7MPU600010InitializeEjhhh+0xa6>
+     9e0:	11 30       	cpi	r17, 0x01	; 1
+     9e2:	91 f0       	breq	.+36     	; 0xa08 <_ZN7MPU600010InitializeEjhhh+0xc4>
+     9e4:	12 30       	cpi	r17, 0x02	; 2
+     9e6:	a0 f4       	brcc	.+40     	; 0xa10 <_ZN7MPU600010InitializeEjhhh+0xcc>
+     9e8:	07 c0       	rjmp	.+14     	; 0x9f8 <_ZN7MPU600010InitializeEjhhh+0xb4>
+     9ea:	15 30       	cpi	r17, 0x05	; 5
+     9ec:	e9 f0       	breq	.+58     	; 0xa28 <_ZN7MPU600010InitializeEjhhh+0xe4>
+     9ee:	15 30       	cpi	r17, 0x05	; 5
+     9f0:	b8 f0       	brcs	.+46     	; 0xa20 <_ZN7MPU600010InitializeEjhhh+0xdc>
+     9f2:	16 30       	cpi	r17, 0x06	; 6
+     9f4:	a1 f5       	brne	.+104    	; 0xa5e <_ZN7MPU600010InitializeEjhhh+0x11a>
+     9f6:	1c c0       	rjmp	.+56     	; 0xa30 <_ZN7MPU600010InitializeEjhhh+0xec>
 	{
 	case SEL_DLPF_DIS:	// DLPF disabled, GyroOutRate = 8 kHz.  Also, calculate sample rate divisor value using SmplRtDiv= GyroOutRate/SampleRate - 1.
 		SPI_write(MPUREG_CONFIG, MPU_NO_EXT_SYNC | BITS_DLPF_CFG_256HZ_NOLPF);	// set bits of config register
-     cda:	ce 01       	movw	r24, r28
-     cdc:	6a e1       	ldi	r22, 0x1A	; 26
-     cde:	40 e0       	ldi	r20, 0x00	; 0
-     ce0:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     9f8:	ce 01       	movw	r24, r28
+     9fa:	6a e1       	ldi	r22, 0x1A	; 26
+     9fc:	40 e0       	ldi	r20, 0x00	; 0
+     9fe:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 		SmplRtDiv = (byte)constrain((unsigned int)8000/SampleRate,1,255) - 1;	// calculate sample rate divisor value
-     ce4:	80 e4       	ldi	r24, 0x40	; 64
-     ce6:	9f e1       	ldi	r25, 0x1F	; 31
-     ce8:	1b c0       	rjmp	.+54     	; 0xd20 <_ZN7MPU600010InitializeEjhhh+0xfa>
+     a02:	80 e4       	ldi	r24, 0x40	; 64
+     a04:	9f e1       	ldi	r25, 0x1F	; 31
+     a06:	1b c0       	rjmp	.+54     	; 0xa3e <_ZN7MPU600010InitializeEjhhh+0xfa>
 		break;
 	case SEL_DLPF_188:	// DLPF cutoff 188 Hz, GyroOutRate = 1 kHz.
 		SPI_write(MPUREG_CONFIG, MPU_NO_EXT_SYNC | BITS_DLPF_CFG_188HZ);		// set bits of config register
-     cea:	ce 01       	movw	r24, r28
-     cec:	6a e1       	ldi	r22, 0x1A	; 26
-     cee:	41 e0       	ldi	r20, 0x01	; 1
-     cf0:	13 c0       	rjmp	.+38     	; 0xd18 <_ZN7MPU600010InitializeEjhhh+0xf2>
+     a08:	ce 01       	movw	r24, r28
+     a0a:	6a e1       	ldi	r22, 0x1A	; 26
+     a0c:	41 e0       	ldi	r20, 0x01	; 1
+     a0e:	13 c0       	rjmp	.+38     	; 0xa36 <_ZN7MPU600010InitializeEjhhh+0xf2>
 		SmplRtDiv = (byte)constrain((unsigned int)1000/SampleRate,1,255) - 1;	// calculate sample rate divisor value
 		break;
 	case SEL_DLPF_98:	// DLPF cutoff 98 Hz, GyroOutRate = 1 kHz.
 		SPI_write(MPUREG_CONFIG, MPU_NO_EXT_SYNC | BITS_DLPF_CFG_98HZ);			// set bits of config register
-     cf2:	ce 01       	movw	r24, r28
-     cf4:	6a e1       	ldi	r22, 0x1A	; 26
-     cf6:	42 e0       	ldi	r20, 0x02	; 2
-     cf8:	0f c0       	rjmp	.+30     	; 0xd18 <_ZN7MPU600010InitializeEjhhh+0xf2>
+     a10:	ce 01       	movw	r24, r28
+     a12:	6a e1       	ldi	r22, 0x1A	; 26
+     a14:	42 e0       	ldi	r20, 0x02	; 2
+     a16:	0f c0       	rjmp	.+30     	; 0xa36 <_ZN7MPU600010InitializeEjhhh+0xf2>
 		SmplRtDiv = (byte)constrain((unsigned int)1000/SampleRate,1,255) - 1;	// calculate sample rate divisor value
 		break;
 	case SEL_DLPF_42:	// DLPF cutoff 42 Hz, GyroOutRate = 1 kHz.
 		SPI_write(MPUREG_CONFIG, MPU_NO_EXT_SYNC | BITS_DLPF_CFG_42HZ);			// set bits of config register
-     cfa:	ce 01       	movw	r24, r28
-     cfc:	6a e1       	ldi	r22, 0x1A	; 26
-     cfe:	43 e0       	ldi	r20, 0x03	; 3
-     d00:	0b c0       	rjmp	.+22     	; 0xd18 <_ZN7MPU600010InitializeEjhhh+0xf2>
+     a18:	ce 01       	movw	r24, r28
+     a1a:	6a e1       	ldi	r22, 0x1A	; 26
+     a1c:	43 e0       	ldi	r20, 0x03	; 3
+     a1e:	0b c0       	rjmp	.+22     	; 0xa36 <_ZN7MPU600010InitializeEjhhh+0xf2>
 		SmplRtDiv = (byte)constrain((unsigned int)1000/SampleRate,1,255) - 1;	// calculate sample rate divisor value
 		break;
 	case SEL_DLPF_20:	// DLPF cutoff 20 Hz, GyroOutRate = 1 kHz.
 		SPI_write(MPUREG_CONFIG, MPU_NO_EXT_SYNC | BITS_DLPF_CFG_20HZ);			// set bits of config register
-     d02:	ce 01       	movw	r24, r28
-     d04:	6a e1       	ldi	r22, 0x1A	; 26
-     d06:	44 e0       	ldi	r20, 0x04	; 4
-     d08:	07 c0       	rjmp	.+14     	; 0xd18 <_ZN7MPU600010InitializeEjhhh+0xf2>
+     a20:	ce 01       	movw	r24, r28
+     a22:	6a e1       	ldi	r22, 0x1A	; 26
+     a24:	44 e0       	ldi	r20, 0x04	; 4
+     a26:	07 c0       	rjmp	.+14     	; 0xa36 <_ZN7MPU600010InitializeEjhhh+0xf2>
 		SmplRtDiv = (byte)constrain((unsigned int)1000/SampleRate,1,255) - 1;	// calculate sample rate divisor value
 		break;
 	case SEL_DLPF_10:	// DLPF cutoff 10 Hz, GyroOutRate = 1 kHz.
 		SPI_write(MPUREG_CONFIG, MPU_NO_EXT_SYNC | BITS_DLPF_CFG_10HZ);			// set bits of config register
-     d0a:	ce 01       	movw	r24, r28
-     d0c:	6a e1       	ldi	r22, 0x1A	; 26
-     d0e:	45 e0       	ldi	r20, 0x05	; 5
-     d10:	03 c0       	rjmp	.+6      	; 0xd18 <_ZN7MPU600010InitializeEjhhh+0xf2>
+     a28:	ce 01       	movw	r24, r28
+     a2a:	6a e1       	ldi	r22, 0x1A	; 26
+     a2c:	45 e0       	ldi	r20, 0x05	; 5
+     a2e:	03 c0       	rjmp	.+6      	; 0xa36 <_ZN7MPU600010InitializeEjhhh+0xf2>
 		SmplRtDiv = (byte)constrain((unsigned int)1000/SampleRate,1,255) - 1;	// calculate sample rate divisor value
 		break;
 	case SEL_DLPF_5:	// DLPF cutoff 5 Hz, GyroOutRate = 1 kHz.
 		SPI_write(MPUREG_CONFIG, MPU_NO_EXT_SYNC | BITS_DLPF_CFG_5HZ);			// set bits of config register
-     d12:	ce 01       	movw	r24, r28
-     d14:	6a e1       	ldi	r22, 0x1A	; 26
-     d16:	46 e0       	ldi	r20, 0x06	; 6
-     d18:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     a30:	ce 01       	movw	r24, r28
+     a32:	6a e1       	ldi	r22, 0x1A	; 26
+     a34:	46 e0       	ldi	r20, 0x06	; 6
+     a36:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 		SmplRtDiv = (byte)constrain((unsigned int)1000/SampleRate,1,255) - 1;	// calculate sample rate divisor value
-     d1c:	88 ee       	ldi	r24, 0xE8	; 232
-     d1e:	93 e0       	ldi	r25, 0x03	; 3
-     d20:	b7 01       	movw	r22, r14
-     d22:	0e 94 47 09 	call	0x128e	; 0x128e <__udivmodhi4>
-     d26:	61 15       	cp	r22, r1
-     d28:	71 05       	cpc	r23, r1
-     d2a:	21 f1       	breq	.+72     	; 0xd74 <_ZN7MPU600010InitializeEjhhh+0x14e>
-     d2c:	6f 3f       	cpi	r22, 0xFF	; 255
-     d2e:	71 05       	cpc	r23, r1
-     d30:	19 f0       	breq	.+6      	; 0xd38 <_ZN7MPU600010InitializeEjhhh+0x112>
-     d32:	10 f0       	brcs	.+4      	; 0xd38 <_ZN7MPU600010InitializeEjhhh+0x112>
-     d34:	6f ef       	ldi	r22, 0xFF	; 255
-     d36:	70 e0       	ldi	r23, 0x00	; 0
-     d38:	16 2f       	mov	r17, r22
-     d3a:	11 50       	subi	r17, 0x01	; 1
-     d3c:	01 e0       	ldi	r16, 0x01	; 1
-     d3e:	1c c0       	rjmp	.+56     	; 0xd78 <_ZN7MPU600010InitializeEjhhh+0x152>
+     a3a:	88 ee       	ldi	r24, 0xE8	; 232
+     a3c:	93 e0       	ldi	r25, 0x03	; 3
+     a3e:	b7 01       	movw	r22, r14
+     a40:	0e 94 47 09 	call	0x128e	; 0x128e <__udivmodhi4>
+     a44:	61 15       	cp	r22, r1
+     a46:	71 05       	cpc	r23, r1
+     a48:	21 f1       	breq	.+72     	; 0xa92 <_ZN7MPU600010InitializeEjhhh+0x14e>
+     a4a:	6f 3f       	cpi	r22, 0xFF	; 255
+     a4c:	71 05       	cpc	r23, r1
+     a4e:	19 f0       	breq	.+6      	; 0xa56 <_ZN7MPU600010InitializeEjhhh+0x112>
+     a50:	10 f0       	brcs	.+4      	; 0xa56 <_ZN7MPU600010InitializeEjhhh+0x112>
+     a52:	6f ef       	ldi	r22, 0xFF	; 255
+     a54:	70 e0       	ldi	r23, 0x00	; 0
+     a56:	16 2f       	mov	r17, r22
+     a58:	11 50       	subi	r17, 0x01	; 1
+     a5a:	01 e0       	ldi	r16, 0x01	; 1
+     a5c:	1c c0       	rjmp	.+56     	; 0xa96 <_ZN7MPU600010InitializeEjhhh+0x152>
 		break;
 	default:			// DLPF disabled, GyroOutRate = 8 kHz.  return false.
 		SPI_write(MPUREG_CONFIG, MPU_NO_EXT_SYNC | SEL_DLPF_DEFAULT );	// set bits of config register
-     d40:	ce 01       	movw	r24, r28
-     d42:	6a e1       	ldi	r22, 0x1A	; 26
-     d44:	40 e0       	ldi	r20, 0x00	; 0
-     d46:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     a5e:	ce 01       	movw	r24, r28
+     a60:	6a e1       	ldi	r22, 0x1A	; 26
+     a62:	40 e0       	ldi	r20, 0x00	; 0
+     a64:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 		SmplRtDiv = (byte)constrain((unsigned int)(SEL_DLPF_DEFAULT == SEL_DLPF_DIS ? 8000:1000)/SampleRate,1,255) - 1;	// calculate sample rate divisor value
-     d4a:	80 e4       	ldi	r24, 0x40	; 64
-     d4c:	9f e1       	ldi	r25, 0x1F	; 31
-     d4e:	b7 01       	movw	r22, r14
-     d50:	0e 94 47 09 	call	0x128e	; 0x128e <__udivmodhi4>
-     d54:	61 15       	cp	r22, r1
-     d56:	71 05       	cpc	r23, r1
-     d58:	11 f4       	brne	.+4      	; 0xd5e <_ZN7MPU600010InitializeEjhhh+0x138>
-     d5a:	10 e0       	ldi	r17, 0x00	; 0
-     d5c:	08 c0       	rjmp	.+16     	; 0xd6e <_ZN7MPU600010InitializeEjhhh+0x148>
-     d5e:	6f 3f       	cpi	r22, 0xFF	; 255
-     d60:	71 05       	cpc	r23, r1
-     d62:	19 f0       	breq	.+6      	; 0xd6a <_ZN7MPU600010InitializeEjhhh+0x144>
-     d64:	10 f0       	brcs	.+4      	; 0xd6a <_ZN7MPU600010InitializeEjhhh+0x144>
-     d66:	6f ef       	ldi	r22, 0xFF	; 255
-     d68:	70 e0       	ldi	r23, 0x00	; 0
-     d6a:	16 2f       	mov	r17, r22
-     d6c:	11 50       	subi	r17, 0x01	; 1
+     a68:	80 e4       	ldi	r24, 0x40	; 64
+     a6a:	9f e1       	ldi	r25, 0x1F	; 31
+     a6c:	b7 01       	movw	r22, r14
+     a6e:	0e 94 47 09 	call	0x128e	; 0x128e <__udivmodhi4>
+     a72:	61 15       	cp	r22, r1
+     a74:	71 05       	cpc	r23, r1
+     a76:	11 f4       	brne	.+4      	; 0xa7c <_ZN7MPU600010InitializeEjhhh+0x138>
+     a78:	10 e0       	ldi	r17, 0x00	; 0
+     a7a:	08 c0       	rjmp	.+16     	; 0xa8c <_ZN7MPU600010InitializeEjhhh+0x148>
+     a7c:	6f 3f       	cpi	r22, 0xFF	; 255
+     a7e:	71 05       	cpc	r23, r1
+     a80:	19 f0       	breq	.+6      	; 0xa88 <_ZN7MPU600010InitializeEjhhh+0x144>
+     a82:	10 f0       	brcs	.+4      	; 0xa88 <_ZN7MPU600010InitializeEjhhh+0x144>
+     a84:	6f ef       	ldi	r22, 0xFF	; 255
+     a86:	70 e0       	ldi	r23, 0x00	; 0
+     a88:	16 2f       	mov	r17, r22
+     a8a:	11 50       	subi	r17, 0x01	; 1
 		DLPF_Select = SEL_DLPF_DEFAULT;
-     d6e:	1c 8e       	std	Y+28, r1	; 0x1c
-     d70:	00 e0       	ldi	r16, 0x00	; 0
-     d72:	02 c0       	rjmp	.+4      	; 0xd78 <_ZN7MPU600010InitializeEjhhh+0x152>
-     d74:	01 e0       	ldi	r16, 0x01	; 1
-     d76:	10 e0       	ldi	r17, 0x00	; 0
+     a8c:	1c 8e       	std	Y+28, r1	; 0x1c
+     a8e:	00 e0       	ldi	r16, 0x00	; 0
+     a90:	02 c0       	rjmp	.+4      	; 0xa96 <_ZN7MPU600010InitializeEjhhh+0x152>
+     a92:	01 e0       	ldi	r16, 0x01	; 1
+     a94:	10 e0       	ldi	r17, 0x00	; 0
 		rtn = false;
 	}
 	delay(1);
-     d78:	61 e0       	ldi	r22, 0x01	; 1
-     d7a:	70 e0       	ldi	r23, 0x00	; 0
-     d7c:	80 e0       	ldi	r24, 0x00	; 0
-     d7e:	90 e0       	ldi	r25, 0x00	; 0
-     d80:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     a96:	61 e0       	ldi	r22, 0x01	; 1
+     a98:	70 e0       	ldi	r23, 0x00	; 0
+     a9a:	80 e0       	ldi	r24, 0x00	; 0
+     a9c:	90 e0       	ldi	r25, 0x00	; 0
+     a9e:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 
 	// SAMPLE RATE
 	SPI_write(MPUREG_SMPLRT_DIV,SmplRtDiv);     // Set desired sample rate
-     d84:	ce 01       	movw	r24, r28
-     d86:	69 e1       	ldi	r22, 0x19	; 25
-     d88:	41 2f       	mov	r20, r17
-     d8a:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     aa2:	ce 01       	movw	r24, r28
+     aa4:	69 e1       	ldi	r22, 0x19	; 25
+     aa6:	41 2f       	mov	r20, r17
+     aa8:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 	delay(1);
-     d8e:	61 e0       	ldi	r22, 0x01	; 1
-     d90:	70 e0       	ldi	r23, 0x00	; 0
-     d92:	80 e0       	ldi	r24, 0x00	; 0
-     d94:	90 e0       	ldi	r25, 0x00	; 0
-     d96:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     aac:	61 e0       	ldi	r22, 0x01	; 1
+     aae:	70 e0       	ldi	r23, 0x00	; 0
+     ab0:	80 e0       	ldi	r24, 0x00	; 0
+     ab2:	90 e0       	ldi	r25, 0x00	; 0
+     ab4:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 
 	// Set Gyroscope Scale and ensure it is not in self-test mode
 	switch (GyroScaleSelect)
-     d9a:	81 e0       	ldi	r24, 0x01	; 1
-     d9c:	d8 16       	cp	r13, r24
-     d9e:	69 f0       	breq	.+26     	; 0xdba <_ZN7MPU600010InitializeEjhhh+0x194>
-     da0:	d8 16       	cp	r13, r24
-     da2:	38 f0       	brcs	.+14     	; 0xdb2 <_ZN7MPU600010InitializeEjhhh+0x18c>
-     da4:	82 e0       	ldi	r24, 0x02	; 2
-     da6:	d8 16       	cp	r13, r24
-     da8:	71 f0       	breq	.+28     	; 0xdc6 <_ZN7MPU600010InitializeEjhhh+0x1a0>
-     daa:	83 e0       	ldi	r24, 0x03	; 3
-     dac:	d8 16       	cp	r13, r24
-     dae:	99 f4       	brne	.+38     	; 0xdd6 <_ZN7MPU600010InitializeEjhhh+0x1b0>
-     db0:	0e c0       	rjmp	.+28     	; 0xdce <_ZN7MPU600010InitializeEjhhh+0x1a8>
+     ab8:	81 e0       	ldi	r24, 0x01	; 1
+     aba:	d8 16       	cp	r13, r24
+     abc:	69 f0       	breq	.+26     	; 0xad8 <_ZN7MPU600010InitializeEjhhh+0x194>
+     abe:	d8 16       	cp	r13, r24
+     ac0:	38 f0       	brcs	.+14     	; 0xad0 <_ZN7MPU600010InitializeEjhhh+0x18c>
+     ac2:	82 e0       	ldi	r24, 0x02	; 2
+     ac4:	d8 16       	cp	r13, r24
+     ac6:	71 f0       	breq	.+28     	; 0xae4 <_ZN7MPU600010InitializeEjhhh+0x1a0>
+     ac8:	83 e0       	ldi	r24, 0x03	; 3
+     aca:	d8 16       	cp	r13, r24
+     acc:	99 f4       	brne	.+38     	; 0xaf4 <_ZN7MPU600010InitializeEjhhh+0x1b0>
+     ace:	0e c0       	rjmp	.+28     	; 0xaec <_ZN7MPU600010InitializeEjhhh+0x1a8>
 	{
 	case SEL_GYRO_250: 	// Gyro scale +-250º/s
 		SPI_write(MPUREG_GYRO_CONFIG, BITS_GYRO_NOSELFTEST | BITS_GFS_250DPS);  // Set bits of MPUREG_GYRO_CONFIG register to disable self-test and apply Gyro scale 250º/s
-     db2:	ce 01       	movw	r24, r28
-     db4:	6b e1       	ldi	r22, 0x1B	; 27
-     db6:	40 e0       	ldi	r20, 0x00	; 0
-     db8:	03 c0       	rjmp	.+6      	; 0xdc0 <_ZN7MPU600010InitializeEjhhh+0x19a>
+     ad0:	ce 01       	movw	r24, r28
+     ad2:	6b e1       	ldi	r22, 0x1B	; 27
+     ad4:	40 e0       	ldi	r20, 0x00	; 0
+     ad6:	03 c0       	rjmp	.+6      	; 0xade <_ZN7MPU600010InitializeEjhhh+0x19a>
 		break;
 	case SEL_GYRO_500:	// Gyro scale +-500º/s
 		SPI_write(MPUREG_GYRO_CONFIG, BITS_GYRO_NOSELFTEST | BITS_GFS_500DPS);  // Set bits of MPUREG_GYRO_CONFIG register to disable self-test and apply Gyro scale 500º/s
-     dba:	ce 01       	movw	r24, r28
-     dbc:	6b e1       	ldi	r22, 0x1B	; 27
-     dbe:	48 e0       	ldi	r20, 0x08	; 8
-     dc0:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
-     dc4:	10 c0       	rjmp	.+32     	; 0xde6 <_ZN7MPU600010InitializeEjhhh+0x1c0>
+     ad8:	ce 01       	movw	r24, r28
+     ada:	6b e1       	ldi	r22, 0x1B	; 27
+     adc:	48 e0       	ldi	r20, 0x08	; 8
+     ade:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
+     ae2:	10 c0       	rjmp	.+32     	; 0xb04 <_ZN7MPU600010InitializeEjhhh+0x1c0>
 		break;
 	case SEL_GYRO_1000:	// Gyro scale +-1000º/s
 		SPI_write(MPUREG_GYRO_CONFIG, BITS_GYRO_NOSELFTEST | BITS_GFS_1000DPS);  // Set bits of MPUREG_GYRO_CONFIG register to disable self-test and apply Gyro scale 1000º/s
-     dc6:	ce 01       	movw	r24, r28
-     dc8:	6b e1       	ldi	r22, 0x1B	; 27
-     dca:	40 e1       	ldi	r20, 0x10	; 16
-     dcc:	f9 cf       	rjmp	.-14     	; 0xdc0 <_ZN7MPU600010InitializeEjhhh+0x19a>
+     ae4:	ce 01       	movw	r24, r28
+     ae6:	6b e1       	ldi	r22, 0x1B	; 27
+     ae8:	40 e1       	ldi	r20, 0x10	; 16
+     aea:	f9 cf       	rjmp	.-14     	; 0xade <_ZN7MPU600010InitializeEjhhh+0x19a>
 		break;
 	case SEL_GYRO_2000:	// Gyro scale +-2000º/s
 		SPI_write(MPUREG_GYRO_CONFIG, BITS_GYRO_NOSELFTEST | BITS_GFS_2000DPS);  // Set bits of MPUREG_GYRO_CONFIG register to disable self-test and apply Gyro scale 2000º/s
-     dce:	ce 01       	movw	r24, r28
-     dd0:	6b e1       	ldi	r22, 0x1B	; 27
-     dd2:	48 e1       	ldi	r20, 0x18	; 24
-     dd4:	f5 cf       	rjmp	.-22     	; 0xdc0 <_ZN7MPU600010InitializeEjhhh+0x19a>
+     aec:	ce 01       	movw	r24, r28
+     aee:	6b e1       	ldi	r22, 0x1B	; 27
+     af0:	48 e1       	ldi	r20, 0x18	; 24
+     af2:	f5 cf       	rjmp	.-22     	; 0xade <_ZN7MPU600010InitializeEjhhh+0x19a>
 		break;
 	default:			// Gyro scale +-1000º/s and return false
 		SPI_write(MPUREG_GYRO_CONFIG, BITS_GYRO_NOSELFTEST | (SEL_GYRO_DEFAULT<<3));  // Set bits of MPUREG_GYRO_CONFIG register to disable self-test and apply Gyro scale 1000º/s
-     dd6:	ce 01       	movw	r24, r28
-     dd8:	6b e1       	ldi	r22, 0x1B	; 27
-     dda:	40 e1       	ldi	r20, 0x10	; 16
-     ddc:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     af4:	ce 01       	movw	r24, r28
+     af6:	6b e1       	ldi	r22, 0x1B	; 27
+     af8:	40 e1       	ldi	r20, 0x10	; 16
+     afa:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 		Gyro_Select = SEL_GYRO_DEFAULT;		// store default selection
-     de0:	82 e0       	ldi	r24, 0x02	; 2
-     de2:	8d 8f       	std	Y+29, r24	; 0x1d
-     de4:	00 e0       	ldi	r16, 0x00	; 0
+     afe:	82 e0       	ldi	r24, 0x02	; 2
+     b00:	8d 8f       	std	Y+29, r24	; 0x1d
+     b02:	00 e0       	ldi	r16, 0x00	; 0
 		rtn = false;
 	}
 	delay(1);
-     de6:	61 e0       	ldi	r22, 0x01	; 1
-     de8:	70 e0       	ldi	r23, 0x00	; 0
-     dea:	80 e0       	ldi	r24, 0x00	; 0
-     dec:	90 e0       	ldi	r25, 0x00	; 0
-     dee:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     b04:	61 e0       	ldi	r22, 0x01	; 1
+     b06:	70 e0       	ldi	r23, 0x00	; 0
+     b08:	80 e0       	ldi	r24, 0x00	; 0
+     b0a:	90 e0       	ldi	r25, 0x00	; 0
+     b0c:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 
 	// Set Accelerometer Scale and nsure it is not in self-test mode
 	switch (AccelScaleSelect)
-     df2:	81 e0       	ldi	r24, 0x01	; 1
-     df4:	c8 16       	cp	r12, r24
-     df6:	69 f0       	breq	.+26     	; 0xe12 <_ZN7MPU600010InitializeEjhhh+0x1ec>
-     df8:	c8 16       	cp	r12, r24
-     dfa:	38 f0       	brcs	.+14     	; 0xe0a <_ZN7MPU600010InitializeEjhhh+0x1e4>
-     dfc:	82 e0       	ldi	r24, 0x02	; 2
-     dfe:	c8 16       	cp	r12, r24
-     e00:	71 f0       	breq	.+28     	; 0xe1e <_ZN7MPU600010InitializeEjhhh+0x1f8>
-     e02:	83 e0       	ldi	r24, 0x03	; 3
-     e04:	c8 16       	cp	r12, r24
-     e06:	99 f4       	brne	.+38     	; 0xe2e <_ZN7MPU600010InitializeEjhhh+0x208>
-     e08:	0e c0       	rjmp	.+28     	; 0xe26 <_ZN7MPU600010InitializeEjhhh+0x200>
+     b10:	81 e0       	ldi	r24, 0x01	; 1
+     b12:	c8 16       	cp	r12, r24
+     b14:	69 f0       	breq	.+26     	; 0xb30 <_ZN7MPU600010InitializeEjhhh+0x1ec>
+     b16:	c8 16       	cp	r12, r24
+     b18:	38 f0       	brcs	.+14     	; 0xb28 <_ZN7MPU600010InitializeEjhhh+0x1e4>
+     b1a:	82 e0       	ldi	r24, 0x02	; 2
+     b1c:	c8 16       	cp	r12, r24
+     b1e:	71 f0       	breq	.+28     	; 0xb3c <_ZN7MPU600010InitializeEjhhh+0x1f8>
+     b20:	83 e0       	ldi	r24, 0x03	; 3
+     b22:	c8 16       	cp	r12, r24
+     b24:	99 f4       	brne	.+38     	; 0xb4c <_ZN7MPU600010InitializeEjhhh+0x208>
+     b26:	0e c0       	rjmp	.+28     	; 0xb44 <_ZN7MPU600010InitializeEjhhh+0x200>
 	{
 	case SEL_ACCEL_2:	// Accel scale +-2g
 		SPI_write(MPUREG_ACCEL_CONFIG, BITS_ACCEL_NOSELFTEST | BITS_AFS_2G);      // Set bits of MPUREG_ACCEL_CONFIG register to disable self-test and apply Accel scale 2g
-     e0a:	ce 01       	movw	r24, r28
-     e0c:	6c e1       	ldi	r22, 0x1C	; 28
-     e0e:	40 e0       	ldi	r20, 0x00	; 0
-     e10:	03 c0       	rjmp	.+6      	; 0xe18 <_ZN7MPU600010InitializeEjhhh+0x1f2>
+     b28:	ce 01       	movw	r24, r28
+     b2a:	6c e1       	ldi	r22, 0x1C	; 28
+     b2c:	40 e0       	ldi	r20, 0x00	; 0
+     b2e:	03 c0       	rjmp	.+6      	; 0xb36 <_ZN7MPU600010InitializeEjhhh+0x1f2>
 		break;
 	case SEL_ACCEL_4:	// Accel scale +-4g
 		SPI_write(MPUREG_ACCEL_CONFIG, BITS_ACCEL_NOSELFTEST | BITS_AFS_4G);      // Set bits of MPUREG_ACCEL_CONFIG register to disable self-test and apply Accel scale 4g
-     e12:	ce 01       	movw	r24, r28
-     e14:	6c e1       	ldi	r22, 0x1C	; 28
-     e16:	48 e0       	ldi	r20, 0x08	; 8
-     e18:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
-     e1c:	10 c0       	rjmp	.+32     	; 0xe3e <_ZN7MPU600010InitializeEjhhh+0x218>
+     b30:	ce 01       	movw	r24, r28
+     b32:	6c e1       	ldi	r22, 0x1C	; 28
+     b34:	48 e0       	ldi	r20, 0x08	; 8
+     b36:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
+     b3a:	10 c0       	rjmp	.+32     	; 0xb5c <_ZN7MPU600010InitializeEjhhh+0x218>
 		break;
 	case SEL_ACCEL_8:	// Accel scale +-8g
 		SPI_write(MPUREG_ACCEL_CONFIG, BITS_ACCEL_NOSELFTEST | BITS_AFS_8G);      // Set bits of MPUREG_ACCEL_CONFIG register to disable self-test and apply Accel scale 8g
-     e1e:	ce 01       	movw	r24, r28
-     e20:	6c e1       	ldi	r22, 0x1C	; 28
-     e22:	40 e1       	ldi	r20, 0x10	; 16
-     e24:	f9 cf       	rjmp	.-14     	; 0xe18 <_ZN7MPU600010InitializeEjhhh+0x1f2>
+     b3c:	ce 01       	movw	r24, r28
+     b3e:	6c e1       	ldi	r22, 0x1C	; 28
+     b40:	40 e1       	ldi	r20, 0x10	; 16
+     b42:	f9 cf       	rjmp	.-14     	; 0xb36 <_ZN7MPU600010InitializeEjhhh+0x1f2>
 		break;
 	case SEL_ACCEL_16:	// Accel scale +-16g
 		SPI_write(MPUREG_ACCEL_CONFIG, BITS_ACCEL_NOSELFTEST | BITS_AFS_16G);      // Set bits of MPUREG_ACCEL_CONFIG register to disable self-test and apply Accel scale 16g
-     e26:	ce 01       	movw	r24, r28
-     e28:	6c e1       	ldi	r22, 0x1C	; 28
-     e2a:	48 e1       	ldi	r20, 0x18	; 24
-     e2c:	f5 cf       	rjmp	.-22     	; 0xe18 <_ZN7MPU600010InitializeEjhhh+0x1f2>
+     b44:	ce 01       	movw	r24, r28
+     b46:	6c e1       	ldi	r22, 0x1C	; 28
+     b48:	48 e1       	ldi	r20, 0x18	; 24
+     b4a:	f5 cf       	rjmp	.-22     	; 0xb36 <_ZN7MPU600010InitializeEjhhh+0x1f2>
 		break;
 	default:			// Accel scale +-4g and return false
 		SPI_write(MPUREG_ACCEL_CONFIG, BITS_ACCEL_NOSELFTEST | (SEL_ACCEL_DEFAULT<<3));      // Set bits of MPUREG_ACCEL_CONFIG register to disable self-test and apply Accel scale 4g
-     e2e:	ce 01       	movw	r24, r28
-     e30:	6c e1       	ldi	r22, 0x1C	; 28
-     e32:	48 e0       	ldi	r20, 0x08	; 8
-     e34:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     b4c:	ce 01       	movw	r24, r28
+     b4e:	6c e1       	ldi	r22, 0x1C	; 28
+     b50:	48 e0       	ldi	r20, 0x08	; 8
+     b52:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 		Accel_Select = SEL_ACCEL_DEFAULT;	// store default selection
-     e38:	81 e0       	ldi	r24, 0x01	; 1
-     e3a:	8e 8f       	std	Y+30, r24	; 0x1e
-     e3c:	00 e0       	ldi	r16, 0x00	; 0
+     b56:	81 e0       	ldi	r24, 0x01	; 1
+     b58:	8e 8f       	std	Y+30, r24	; 0x1e
+     b5a:	00 e0       	ldi	r16, 0x00	; 0
 		rtn = false;
 	}
 	delay(1);
-     e3e:	61 e0       	ldi	r22, 0x01	; 1
-     e40:	70 e0       	ldi	r23, 0x00	; 0
-     e42:	80 e0       	ldi	r24, 0x00	; 0
-     e44:	90 e0       	ldi	r25, 0x00	; 0
-     e46:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     b5c:	61 e0       	ldi	r22, 0x01	; 1
+     b5e:	70 e0       	ldi	r23, 0x00	; 0
+     b60:	80 e0       	ldi	r24, 0x00	; 0
+     b62:	90 e0       	ldi	r25, 0x00	; 0
+     b64:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 
 	// INT CFG => Interrupt on Data Ready
 	SPI_write(MPUREG_INT_ENABLE,BIT_RAW_RDY_EN);         // INT: Raw data ready
-     e4a:	ce 01       	movw	r24, r28
-     e4c:	68 e3       	ldi	r22, 0x38	; 56
-     e4e:	41 e0       	ldi	r20, 0x01	; 1
-     e50:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     b68:	ce 01       	movw	r24, r28
+     b6a:	68 e3       	ldi	r22, 0x38	; 56
+     b6c:	41 e0       	ldi	r20, 0x01	; 1
+     b6e:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 	delay(1);
-     e54:	61 e0       	ldi	r22, 0x01	; 1
-     e56:	70 e0       	ldi	r23, 0x00	; 0
-     e58:	80 e0       	ldi	r24, 0x00	; 0
-     e5a:	90 e0       	ldi	r25, 0x00	; 0
-     e5c:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     b72:	61 e0       	ldi	r22, 0x01	; 1
+     b74:	70 e0       	ldi	r23, 0x00	; 0
+     b76:	80 e0       	ldi	r24, 0x00	; 0
+     b78:	90 e0       	ldi	r25, 0x00	; 0
+     b7a:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 	SPI_write(MPUREG_INT_PIN_CFG,BIT_INT_ANYRD_2CLEAR);  // INT: Clear on any read
-     e60:	ce 01       	movw	r24, r28
-     e62:	67 e3       	ldi	r22, 0x37	; 55
-     e64:	40 e1       	ldi	r20, 0x10	; 16
-     e66:	0e 94 fa 05 	call	0xbf4	; 0xbf4 <_ZN7MPU60009SPI_writeEhh>
+     b7e:	ce 01       	movw	r24, r28
+     b80:	67 e3       	ldi	r22, 0x37	; 55
+     b82:	40 e1       	ldi	r20, 0x10	; 16
+     b84:	0e 94 89 04 	call	0x912	; 0x912 <_ZN7MPU60009SPI_writeEhh>
 	delay(1);
-     e6a:	61 e0       	ldi	r22, 0x01	; 1
-     e6c:	70 e0       	ldi	r23, 0x00	; 0
-     e6e:	80 e0       	ldi	r24, 0x00	; 0
-     e70:	90 e0       	ldi	r25, 0x00	; 0
-     e72:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+     b88:	61 e0       	ldi	r22, 0x01	; 1
+     b8a:	70 e0       	ldi	r23, 0x00	; 0
+     b8c:	80 e0       	ldi	r24, 0x00	; 0
+     b8e:	90 e0       	ldi	r25, 0x00	; 0
+     b90:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
 
 	// MPU_INT is connected to INT 0. Enable interrupt on INT0
 	attachInterrupt(0,MPU6000_data_int,RISING);
-     e76:	80 e0       	ldi	r24, 0x00	; 0
-     e78:	6b e9       	ldi	r22, 0x9B	; 155
-     e7a:	75 e0       	ldi	r23, 0x05	; 5
-     e7c:	43 e0       	ldi	r20, 0x03	; 3
-     e7e:	50 e0       	ldi	r21, 0x00	; 0
-     e80:	0e 94 4c 07 	call	0xe98	; 0xe98 <attachInterrupt>
+     b94:	80 e0       	ldi	r24, 0x00	; 0
+     b96:	6a e2       	ldi	r22, 0x2A	; 42
+     b98:	74 e0       	ldi	r23, 0x04	; 4
+     b9a:	43 e0       	ldi	r20, 0x03	; 3
+     b9c:	50 e0       	ldi	r21, 0x00	; 0
+     b9e:	0e 94 4c 07 	call	0xe98	; 0xe98 <attachInterrupt>
 
 	return rtn;
 }
-     e84:	80 2f       	mov	r24, r16
-     e86:	df 91       	pop	r29
-     e88:	cf 91       	pop	r28
-     e8a:	1f 91       	pop	r17
-     e8c:	0f 91       	pop	r16
-     e8e:	ff 90       	pop	r15
-     e90:	ef 90       	pop	r14
-     e92:	df 90       	pop	r13
-     e94:	cf 90       	pop	r12
+     ba2:	80 2f       	mov	r24, r16
+     ba4:	df 91       	pop	r29
+     ba6:	cf 91       	pop	r28
+     ba8:	1f 91       	pop	r17
+     baa:	0f 91       	pop	r16
+     bac:	ff 90       	pop	r15
+     bae:	ef 90       	pop	r14
+     bb0:	df 90       	pop	r13
+     bb2:	cf 90       	pop	r12
+     bb4:	08 95       	ret
+
+00000bb6 <_GLOBAL__I_XAxisGyroKalman>:
+     bb6:	08 95       	ret
+
+00000bb8 <_ZN7HMC588310set_offsetEiii>:
+ */
+void HMC5883::set_offset(int offset_x, int offset_y, int offset_z)
+{
+	offsetx = offset_x;
+	offsetx = offset_y;
+	offsetx = offset_z;
+     bb8:	fc 01       	movw	r30, r24
+     bba:	34 83       	std	Z+4, r19	; 0x04
+     bbc:	23 83       	std	Z+3, r18	; 0x03
+}
+     bbe:	08 95       	ret
+
+00000bc0 <_Z16HMC5883_data_intv>:
+ * Scope:		public
+ * Arguments:	none
+ * Description:	Increments counter which tells new data is ready
+ */
+void HMC5883::data_int(void) {
+	datacount++;
+     bc0:	80 91 fe 01 	lds	r24, 0x01FE
+     bc4:	8f 5f       	subi	r24, 0xFF	; 255
+     bc6:	80 93 fe 01 	sts	0x01FE, r24
+ */
+ void HMC5883_data_int(void)
+ {
+	 Hmc5883.data_int();
+	 return;
+ }
+     bca:	08 95       	ret
+
+00000bcc <_GLOBAL__I_Hmc5883>:
+ * Scope:		Public
+ * Arguments:	None
+ * Description:	Constructor for HMC5883 object
+ */
+HMC5883::HMC5883(void) {
+	identity[0] = 0;					// initialize to zero.  first byte of identifier of device.  must be ascii H when read
+     bcc:	10 92 ef 01 	sts	0x01EF, r1
+	identity[1] = 0;					// initialize to zero.  second byte of identifier of device.  must be ascii 4 when read
+     bd0:	10 92 f0 01 	sts	0x01F0, r1
+	identity[2] = 0;					// initialize to zero.  third byte of identifier of device.  must be ascii 3 when read
+     bd4:	10 92 f1 01 	sts	0x01F1, r1
+	offsetx = 0;						// initialize to zero.  offset for x-axis reading
+     bd8:	10 92 f3 01 	sts	0x01F3, r1
+     bdc:	10 92 f2 01 	sts	0x01F2, r1
+	offsety = 0;						// initialize to zero.  offset for y-axis reading
+     be0:	10 92 f5 01 	sts	0x01F5, r1
+     be4:	10 92 f4 01 	sts	0x01F4, r1
+	offsetz = 0;						// initialize to zero.  offset for z-axis reading
+     be8:	10 92 f7 01 	sts	0x01F7, r1
+     bec:	10 92 f6 01 	sts	0x01F6, r1
+	magx_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
+     bf0:	10 92 f9 01 	sts	0x01F9, r1
+     bf4:	10 92 f8 01 	sts	0x01F8, r1
+	magy_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
+     bf8:	10 92 fb 01 	sts	0x01FB, r1
+     bfc:	10 92 fa 01 	sts	0x01FA, r1
+	magz_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
+     c00:	10 92 fd 01 	sts	0x01FD, r1
+     c04:	10 92 fc 01 	sts	0x01FC, r1
+	datacount = 0;						// Initial value of 0.  this counter increments whenever new data is available, and decrements when it is read
+     c08:	10 92 fe 01 	sts	0x01FE, r1
+ */
+ void HMC5883_data_int(void)
+ {
+	 Hmc5883.data_int();
+	 return;
+ }
+     c0c:	08 95       	ret
+
+00000c0e <_ZN7HMC58835writeEhh>:
+ * Function:	write()
+ * Scope:		private
+ * Arguments:	None
+ * Description:	This function writes the specified data at the specified address of the HMC5883
+ */
+void HMC5883::write(byte addr, byte data) {
+     c0e:	ef 92       	push	r14
+     c10:	ff 92       	push	r15
+     c12:	0f 93       	push	r16
+     c14:	1f 93       	push	r17
+     c16:	16 2f       	mov	r17, r22
+     c18:	04 2f       	mov	r16, r20
+	Wire.beginTransmission(COMPASS_WRITE);	// Begin I2C transmission with the magnetometer
+     c1a:	84 ec       	ldi	r24, 0xC4	; 196
+     c1c:	e8 2e       	mov	r14, r24
+     c1e:	81 e0       	ldi	r24, 0x01	; 1
+     c20:	f8 2e       	mov	r15, r24
+     c22:	c7 01       	movw	r24, r14
+     c24:	6c e3       	ldi	r22, 0x3C	; 60
+     c26:	70 e0       	ldi	r23, 0x00	; 0
+     c28:	0e 94 1d 03 	call	0x63a	; 0x63a <_ZN7TwoWire17beginTransmissionEi>
+	Wire.write(addr);							// Tell magnetometer which register we are writing to
+     c2c:	c7 01       	movw	r24, r14
+     c2e:	61 2f       	mov	r22, r17
+     c30:	0e 94 9f 03 	call	0x73e	; 0x73e <_ZN7TwoWire5writeEh>
+	Wire.write(data);							// write specified value to register
+     c34:	c7 01       	movw	r24, r14
+     c36:	60 2f       	mov	r22, r16
+     c38:	0e 94 9f 03 	call	0x73e	; 0x73e <_ZN7TwoWire5writeEh>
+	Wire.endTransmission();						// end transmission
+     c3c:	c7 01       	movw	r24, r14
+     c3e:	0e 94 e2 03 	call	0x7c4	; 0x7c4 <_ZN7TwoWire15endTransmissionEv>
+	return;
+}
+     c42:	1f 91       	pop	r17
+     c44:	0f 91       	pop	r16
+     c46:	ff 90       	pop	r15
+     c48:	ef 90       	pop	r14
+     c4a:	08 95       	ret
+
+00000c4c <_ZN7HMC58834readEhhPh>:
+ * Scope:		private
+ * Arguments:	None
+ * Description:	This function reads the specified number of bytes, starting from the specified
+ * 				address of the HMC5883.  It places this data in the specified databuffer.
+ */
+boolean HMC5883::read(byte startaddr, byte numbytes, byte * databuffer) {
+     c4c:	0f 93       	push	r16
+     c4e:	1f 93       	push	r17
+     c50:	cf 93       	push	r28
+     c52:	df 93       	push	r29
+     c54:	16 2f       	mov	r17, r22
+     c56:	04 2f       	mov	r16, r20
+     c58:	e9 01       	movw	r28, r18
+	boolean rtn = true;	// value to return (true or false for success or failure)
+	byte i = 0;			// initialize index used for counting received bytes
+
+	Wire.beginTransmission(COMPASS_WRITE);			// Begin I2C transmission with the magnetometer
+     c5a:	84 ec       	ldi	r24, 0xC4	; 196
+     c5c:	91 e0       	ldi	r25, 0x01	; 1
+     c5e:	6c e3       	ldi	r22, 0x3C	; 60
+     c60:	70 e0       	ldi	r23, 0x00	; 0
+     c62:	0e 94 1d 03 	call	0x63a	; 0x63a <_ZN7TwoWire17beginTransmissionEi>
+	Wire.write(startaddr);							// send starting address to read from
+     c66:	84 ec       	ldi	r24, 0xC4	; 196
+     c68:	91 e0       	ldi	r25, 0x01	; 1
+     c6a:	61 2f       	mov	r22, r17
+     c6c:	0e 94 9f 03 	call	0x73e	; 0x73e <_ZN7TwoWire5writeEh>
+	Wire.endTransmission();							// end I2C transmission
+     c70:	84 ec       	ldi	r24, 0xC4	; 196
+     c72:	91 e0       	ldi	r25, 0x01	; 1
+     c74:	0e 94 e2 03 	call	0x7c4	; 0x7c4 <_ZN7TwoWire15endTransmissionEv>
+
+	Wire.requestFrom((byte)COMPASS_READ,numbytes);		// request specified number of bytes from HMC5883
+     c78:	84 ec       	ldi	r24, 0xC4	; 196
+     c7a:	91 e0       	ldi	r25, 0x01	; 1
+     c7c:	6d e3       	ldi	r22, 0x3D	; 61
+     c7e:	40 2f       	mov	r20, r16
+     c80:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <_ZN7TwoWire11requestFromEhh>
+     c84:	10 e0       	ldi	r17, 0x00	; 0
+     c86:	09 c0       	rjmp	.+18     	; 0xc9a <_ZN7HMC58834readEhhPh+0x4e>
+	while(Wire.available())							// while data is available on I2C bus
+	{
+		*(databuffer+i) = Wire.read();				// receive one byte
+     c88:	84 ec       	ldi	r24, 0xC4	; 196
+     c8a:	91 e0       	ldi	r25, 0x01	; 1
+     c8c:	0e 94 30 03 	call	0x660	; 0x660 <_ZN7TwoWire4readEv>
+     c90:	fe 01       	movw	r30, r28
+     c92:	e1 0f       	add	r30, r17
+     c94:	f1 1d       	adc	r31, r1
+     c96:	80 83       	st	Z, r24
+		i++;										// increment counter of received bytes
+     c98:	1f 5f       	subi	r17, 0xFF	; 255
+	Wire.beginTransmission(COMPASS_WRITE);			// Begin I2C transmission with the magnetometer
+	Wire.write(startaddr);							// send starting address to read from
+	Wire.endTransmission();							// end I2C transmission
+
+	Wire.requestFrom((byte)COMPASS_READ,numbytes);		// request specified number of bytes from HMC5883
+	while(Wire.available())							// while data is available on I2C bus
+     c9a:	84 ec       	ldi	r24, 0xC4	; 196
+     c9c:	91 e0       	ldi	r25, 0x01	; 1
+     c9e:	0e 94 27 03 	call	0x64e	; 0x64e <_ZN7TwoWire9availableEv>
+     ca2:	89 2b       	or	r24, r25
+     ca4:	89 f7       	brne	.-30     	; 0xc88 <_ZN7HMC58834readEhhPh+0x3c>
+	{
+		*(databuffer+i) = Wire.read();				// receive one byte
+		i++;										// increment counter of received bytes
+	}
+	Wire.endTransmission();							// end I2C transmission
+     ca6:	84 ec       	ldi	r24, 0xC4	; 196
+     ca8:	91 e0       	ldi	r25, 0x01	; 1
+     caa:	0e 94 e2 03 	call	0x7c4	; 0x7c4 <_ZN7TwoWire15endTransmissionEv>
+     cae:	80 e0       	ldi	r24, 0x00	; 0
+     cb0:	10 17       	cp	r17, r16
+     cb2:	09 f4       	brne	.+2      	; 0xcb6 <_ZN7HMC58834readEhhPh+0x6a>
+     cb4:	81 e0       	ldi	r24, 0x01	; 1
+	if (i != numbytes)								// if number of bytes received does not match request
+	{
+		rtn = false;								// set return to false to indicate failure
+	}
+	return rtn;										// return
+} // end of read()
+     cb6:	df 91       	pop	r29
+     cb8:	cf 91       	pop	r28
+     cba:	1f 91       	pop	r17
+     cbc:	0f 91       	pop	r16
+     cbe:	08 95       	ret
+
+00000cc0 <_ZN7HMC588310InitializeEhhhh>:
+ * Function:	Initialize()
+ * Scope:		Public
+ * Arguments:	None
+ * Description:	This function initializes the HMC5883 device
+ */
+boolean HMC5883::Initialize(byte SampleAvgSel, byte DataRateSel, byte MeasBiasSel, byte MagRangeSel) {
+     cc0:	df 92       	push	r13
+     cc2:	ef 92       	push	r14
+     cc4:	ff 92       	push	r15
+     cc6:	0f 93       	push	r16
+     cc8:	1f 93       	push	r17
+     cca:	cf 93       	push	r28
+     ccc:	df 93       	push	r29
+     cce:	ec 01       	movw	r28, r24
+     cd0:	f6 2e       	mov	r15, r22
+     cd2:	14 2f       	mov	r17, r20
+     cd4:	d2 2e       	mov	r13, r18
+	boolean rtn = true;							// value to return at end of function
+	byte	write_value;						// this byte temporarily stores info to transmit to magnetometer
+
+	Wire.begin();								// initialize and begin the I2C communications line
+     cd6:	84 ec       	ldi	r24, 0xC4	; 196
+     cd8:	91 e0       	ldi	r25, 0x01	; 1
+     cda:	0e 94 f7 03 	call	0x7ee	; 0x7ee <_ZN7TwoWire5beginEv>
+	delay(10);									// wait 10 ms
+     cde:	6a e0       	ldi	r22, 0x0A	; 10
+     ce0:	70 e0       	ldi	r23, 0x00	; 0
+     ce2:	80 e0       	ldi	r24, 0x00	; 0
+     ce4:	90 e0       	ldi	r25, 0x00	; 0
+     ce6:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+
+	// read the identifier letters
+	if (!read(IDENTREGA,3,(byte*)&identity))	// read identity bytes from HMC3883
+     cea:	ce 01       	movw	r24, r28
+     cec:	6a e0       	ldi	r22, 0x0A	; 10
+     cee:	43 e0       	ldi	r20, 0x03	; 3
+     cf0:	9e 01       	movw	r18, r28
+     cf2:	0e 94 26 06 	call	0xc4c	; 0xc4c <_ZN7HMC58834readEhhPh>
+     cf6:	68 2f       	mov	r22, r24
+	{
+		rtn = false;							// if failed to succesfully read, set return value to false, indicating failure
+	}
+
+	// check to ensure identifier bytes match expected values for the HMC3883
+	if (	(identity[0] != 'H') |				// if the first identifier byte is not 'H'
+     cf8:	90 e0       	ldi	r25, 0x00	; 0
+     cfa:	88 81       	ld	r24, Y
+     cfc:	88 34       	cpi	r24, 0x48	; 72
+     cfe:	09 f0       	breq	.+2      	; 0xd02 <_ZN7HMC588310InitializeEhhhh+0x42>
+     d00:	91 e0       	ldi	r25, 0x01	; 1
+     d02:	20 e0       	ldi	r18, 0x00	; 0
+     d04:	89 81       	ldd	r24, Y+1	; 0x01
+     d06:	84 33       	cpi	r24, 0x34	; 52
+     d08:	09 f0       	breq	.+2      	; 0xd0c <_ZN7HMC588310InitializeEhhhh+0x4c>
+     d0a:	21 e0       	ldi	r18, 0x01	; 1
+     d0c:	92 2b       	or	r25, r18
+     d0e:	29 2f       	mov	r18, r25
+     d10:	30 e0       	ldi	r19, 0x00	; 0
+     d12:	40 e0       	ldi	r20, 0x00	; 0
+     d14:	50 e0       	ldi	r21, 0x00	; 0
+     d16:	8a 81       	ldd	r24, Y+2	; 0x02
+     d18:	83 33       	cpi	r24, 0x33	; 51
+     d1a:	11 f0       	breq	.+4      	; 0xd20 <_ZN7HMC588310InitializeEhhhh+0x60>
+     d1c:	41 e0       	ldi	r20, 0x01	; 1
+     d1e:	50 e0       	ldi	r21, 0x00	; 0
+     d20:	24 2b       	or	r18, r20
+     d22:	35 2b       	or	r19, r21
+     d24:	23 2b       	or	r18, r19
+     d26:	11 f0       	breq	.+4      	; 0xd2c <_ZN7HMC588310InitializeEhhhh+0x6c>
+     d28:	ee 24       	eor	r14, r14
+     d2a:	04 c0       	rjmp	.+8      	; 0xd34 <_ZN7HMC588310InitializeEhhhh+0x74>
+     d2c:	86 2f       	mov	r24, r22
+     d2e:	61 11       	cpse	r22, r1
+     d30:	81 e0       	ldi	r24, 0x01	; 1
+     d32:	e8 2e       	mov	r14, r24
+	{
+		rtn = false;							// set return value to false, indicating failure
+	}
+
+	// prepare to write configuration selections in config register A
+	switch (SampleAvgSel)						// determine which bits to set for selected sample average setting
+     d34:	81 e0       	ldi	r24, 0x01	; 1
+     d36:	f8 16       	cp	r15, r24
+     d38:	49 f0       	breq	.+18     	; 0xd4c <_ZN7HMC588310InitializeEhhhh+0x8c>
+     d3a:	f8 16       	cp	r15, r24
+     d3c:	48 f0       	brcs	.+18     	; 0xd50 <_ZN7HMC588310InitializeEhhhh+0x90>
+     d3e:	82 e0       	ldi	r24, 0x02	; 2
+     d40:	f8 16       	cp	r15, r24
+     d42:	41 f0       	breq	.+16     	; 0xd54 <_ZN7HMC588310InitializeEhhhh+0x94>
+     d44:	83 e0       	ldi	r24, 0x03	; 3
+     d46:	f8 16       	cp	r15, r24
+     d48:	39 f4       	brne	.+14     	; 0xd58 <_ZN7HMC588310InitializeEhhhh+0x98>
+     d4a:	07 c0       	rjmp	.+14     	; 0xd5a <_ZN7HMC588310InitializeEhhhh+0x9a>
+     d4c:	40 e2       	ldi	r20, 0x20	; 32
+     d4e:	06 c0       	rjmp	.+12     	; 0xd5c <_ZN7HMC588310InitializeEhhhh+0x9c>
+     d50:	40 e0       	ldi	r20, 0x00	; 0
+     d52:	04 c0       	rjmp	.+8      	; 0xd5c <_ZN7HMC588310InitializeEhhhh+0x9c>
+     d54:	40 e4       	ldi	r20, 0x40	; 64
+     d56:	02 c0       	rjmp	.+4      	; 0xd5c <_ZN7HMC588310InitializeEhhhh+0x9c>
+	case SAMPLEAVERAGING_SEL_4:					// if selected 4 samples
+		write_value = SAMPLEAVERAGING_4;		// set correct bits for 4 samples
+		break;
+	case SAMPLEAVERAGING_SEL_8:					// if selected 8 samples
+		write_value = SAMPLEAVERAGING_8;		// set correct bits for 8 samples
+		break;
+     d58:	ee 24       	eor	r14, r14
+     d5a:	40 e6       	ldi	r20, 0x60	; 96
+	default:									// if an invalid value is specified
+		write_value = SAMPLEAVERANING_SEL_DEFAULT << 5;	// set bits for default value
+		rtn = false;							// set return value to false, indicating failure with selection
+	}
+
+	switch (DataRateSel)						// determine which bits to set for selected data rate setting
+     d5c:	13 30       	cpi	r17, 0x03	; 3
+     d5e:	99 f0       	breq	.+38     	; 0xd86 <_ZN7HMC588310InitializeEhhhh+0xc6>
+     d60:	14 30       	cpi	r17, 0x04	; 4
+     d62:	28 f4       	brcc	.+10     	; 0xd6e <_ZN7HMC588310InitializeEhhhh+0xae>
+     d64:	11 30       	cpi	r17, 0x01	; 1
+     d66:	59 f0       	breq	.+22     	; 0xd7e <_ZN7HMC588310InitializeEhhhh+0xbe>
+     d68:	12 30       	cpi	r17, 0x02	; 2
+     d6a:	58 f4       	brcc	.+22     	; 0xd82 <_ZN7HMC588310InitializeEhhhh+0xc2>
+     d6c:	13 c0       	rjmp	.+38     	; 0xd94 <_ZN7HMC588310InitializeEhhhh+0xd4>
+     d6e:	15 30       	cpi	r17, 0x05	; 5
+     d70:	71 f0       	breq	.+28     	; 0xd8e <_ZN7HMC588310InitializeEhhhh+0xce>
+     d72:	15 30       	cpi	r17, 0x05	; 5
+     d74:	50 f0       	brcs	.+20     	; 0xd8a <_ZN7HMC588310InitializeEhhhh+0xca>
+     d76:	48 61       	ori	r20, 0x18	; 24
+     d78:	16 30       	cpi	r17, 0x06	; 6
+     d7a:	59 f4       	brne	.+22     	; 0xd92 <_ZN7HMC588310InitializeEhhhh+0xd2>
+     d7c:	0b c0       	rjmp	.+22     	; 0xd94 <_ZN7HMC588310InitializeEhhhh+0xd4>
+	{
+	case DATAOUTPUTSEL_0_75HZ:					// if selected 0.75 Hz data rate
+		write_value |= DATAOUTPUTRATE_0_75HZ;	// set correct bits for 0.75 Hz data rate
+		break;
+	case DATAOUTPUTSEL_1_5HZ:					// if selected 1.5 Hz data rate
+		write_value |= DATAOUTPUTRATE_1_5HZ;	// set correct bits for 1.5 Hz data rate
+     d7e:	44 60       	ori	r20, 0x04	; 4
+     d80:	09 c0       	rjmp	.+18     	; 0xd94 <_ZN7HMC588310InitializeEhhhh+0xd4>
+		break;
+	case DATAOUTPUTSEL_3HZ:						// if selected 3 Hz data rate
+		write_value |= DATAOUTPUTRATE_3HZ;		// set correct bits for 3 Hz data rate
+     d82:	48 60       	ori	r20, 0x08	; 8
+     d84:	07 c0       	rjmp	.+14     	; 0xd94 <_ZN7HMC588310InitializeEhhhh+0xd4>
+		break;
+	case DATAOUTPUTSEL_7_5HZ:					// if selected 7.5 Hz data rate
+		write_value |= DATAOUTPUTRATE_7_5HZ;	// set correct bits for 7.5 Hz data rate
+     d86:	4c 60       	ori	r20, 0x0C	; 12
+     d88:	05 c0       	rjmp	.+10     	; 0xd94 <_ZN7HMC588310InitializeEhhhh+0xd4>
+		break;
+	case DATAOUTPUTSEL_15HZ:					// if selected 15 Hz data rate
+		write_value |= DATAOUTPUTRATE_15HZ;		// set correct bits for 15 Hz data rate
+     d8a:	40 61       	ori	r20, 0x10	; 16
+     d8c:	03 c0       	rjmp	.+6      	; 0xd94 <_ZN7HMC588310InitializeEhhhh+0xd4>
+		break;
+	case DATAOUTPUTSEL_30HZ:					// if selected 30 Hz data rate
+		write_value |= DATAOUTPUTRATE_30HZ;		// set correct bits for 30 Hz data rate
+     d8e:	44 61       	ori	r20, 0x14	; 20
+     d90:	01 c0       	rjmp	.+2      	; 0xd94 <_ZN7HMC588310InitializeEhhhh+0xd4>
+		break;
+	case DATAOUTPUTSEL_75HZ:					// if selected 75 Hz data rate
+		write_value |= DATAOUTPUTRATE_75HZ;		// set correct bits for 75 Hz data rate
+		break;
+	default:									// if an invalid value is specified
+		write_value |= DATAOUTPUTSEL_DEFAULT << 2;	// set bits for default value
+     d92:	ee 24       	eor	r14, r14
+		rtn = false;							// set return value to false, indicating failure with selection
+	}
+
+	switch (MeasBiasSel)						// determine which bits to set for selected measurement configuration bits
+     d94:	81 e0       	ldi	r24, 0x01	; 1
+     d96:	d8 16       	cp	r13, r24
+     d98:	39 f0       	breq	.+14     	; 0xda8 <_ZN7HMC588310InitializeEhhhh+0xe8>
+     d9a:	d8 16       	cp	r13, r24
+     d9c:	40 f0       	brcs	.+16     	; 0xdae <_ZN7HMC588310InitializeEhhhh+0xee>
+     d9e:	82 e0       	ldi	r24, 0x02	; 2
+     da0:	d8 16       	cp	r13, r24
+     da2:	21 f0       	breq	.+8      	; 0xdac <_ZN7HMC588310InitializeEhhhh+0xec>
+     da4:	ee 24       	eor	r14, r14
+     da6:	03 c0       	rjmp	.+6      	; 0xdae <_ZN7HMC588310InitializeEhhhh+0xee>
+	{
+	case NORMALOPERATION_SEL:					// if selected normal operation
+		write_value |= NORMALOPERATION;			// set correct bits for normal operation
+		break;
+	case POSITIVEBIASCONFIG_SEL:				// if selected operation with positive bias
+		write_value |= POSITIVEBIASCONFIG;		// set correct bits for operation with positive bias
+     da8:	41 60       	ori	r20, 0x01	; 1
+     daa:	01 c0       	rjmp	.+2      	; 0xdae <_ZN7HMC588310InitializeEhhhh+0xee>
+		break;
+	case NEGATIVEBIASCONFIG_SEL:				// if selected operation with negative bias
+		write_value |= NEGATIVEBIASCONFIG;		// set correct bits for operation with negative bias
+     dac:	42 60       	ori	r20, 0x02	; 2
+	default:									// if invalid value is specified
+		write_value |= BIASSEL_DEFAULT;			// set bits for default value
+		rtn = false;							// set return value to fale, indicating failure with selection
+	}
+
+	write(CONFIGREGA,write_value);				// write specified value in Config Register A
+     dae:	ce 01       	movw	r24, r28
+     db0:	60 e0       	ldi	r22, 0x00	; 0
+     db2:	0e 94 07 06 	call	0xc0e	; 0xc0e <_ZN7HMC58835writeEhh>
+	delay(50);									// wait 50 ms
+     db6:	62 e3       	ldi	r22, 0x32	; 50
+     db8:	70 e0       	ldi	r23, 0x00	; 0
+     dba:	80 e0       	ldi	r24, 0x00	; 0
+     dbc:	90 e0       	ldi	r25, 0x00	; 0
+     dbe:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+
+	// prepare to write selections in config register B
+	switch (MagRangeSel)						// determine which bits to set for magnetic range selection
+     dc2:	03 30       	cpi	r16, 0x03	; 3
+     dc4:	a1 f0       	breq	.+40     	; 0xdee <_ZN7HMC588310InitializeEhhhh+0x12e>
+     dc6:	04 30       	cpi	r16, 0x04	; 4
+     dc8:	28 f4       	brcc	.+10     	; 0xdd4 <_ZN7HMC588310InitializeEhhhh+0x114>
+     dca:	01 30       	cpi	r16, 0x01	; 1
+     dcc:	d9 f0       	breq	.+54     	; 0xe04 <_ZN7HMC588310InitializeEhhhh+0x144>
+     dce:	02 30       	cpi	r16, 0x02	; 2
+     dd0:	60 f4       	brcc	.+24     	; 0xdea <_ZN7HMC588310InitializeEhhhh+0x12a>
+     dd2:	09 c0       	rjmp	.+18     	; 0xde6 <_ZN7HMC588310InitializeEhhhh+0x126>
+     dd4:	05 30       	cpi	r16, 0x05	; 5
+     dd6:	79 f0       	breq	.+30     	; 0xdf6 <_ZN7HMC588310InitializeEhhhh+0x136>
+     dd8:	05 30       	cpi	r16, 0x05	; 5
+     dda:	58 f0       	brcs	.+22     	; 0xdf2 <_ZN7HMC588310InitializeEhhhh+0x132>
+     ddc:	06 30       	cpi	r16, 0x06	; 6
+     dde:	69 f0       	breq	.+26     	; 0xdfa <_ZN7HMC588310InitializeEhhhh+0x13a>
+     de0:	07 30       	cpi	r16, 0x07	; 7
+     de2:	79 f4       	brne	.+30     	; 0xe02 <_ZN7HMC588310InitializeEhhhh+0x142>
+     de4:	0c c0       	rjmp	.+24     	; 0xdfe <_ZN7HMC588310InitializeEhhhh+0x13e>
+     de6:	40 e0       	ldi	r20, 0x00	; 0
+     de8:	0e c0       	rjmp	.+28     	; 0xe06 <_ZN7HMC588310InitializeEhhhh+0x146>
+     dea:	40 e4       	ldi	r20, 0x40	; 64
+     dec:	0c c0       	rjmp	.+24     	; 0xe06 <_ZN7HMC588310InitializeEhhhh+0x146>
+	case MAGRANGE_SEL_1_3:						// if selected +-1.3 Gauss full-scale range
+		write_value = MAGRANGE_1_3;				// set correct bits for +-1.3 Gauss full-scale range
+		break;
+	case MAGRANGE_SEL_1_9:						// if selected +-1.9 Gauss full-scale range
+		write_value = MAGRANGE_1_9;				// set correct bits for +-1.9 Gauss full-scale range
+		break;
+     dee:	40 e6       	ldi	r20, 0x60	; 96
+     df0:	0a c0       	rjmp	.+20     	; 0xe06 <_ZN7HMC588310InitializeEhhhh+0x146>
+	case MAGRANGE_SEL_2_5:						// if selected +-2.5 Gauss full-scale range
+		write_value = MAGRANGE_2_5;				// set correct bits for +-2.5 Gauss full-scale range
+		break;
+     df2:	40 e8       	ldi	r20, 0x80	; 128
+     df4:	08 c0       	rjmp	.+16     	; 0xe06 <_ZN7HMC588310InitializeEhhhh+0x146>
+	case MAGRANGE_SEL_4_0:						// if selected +-4.0 Gauss full-scale range
+		write_value = MAGRANGE_4_0;				// set correct bits for +-4.0 Gauss full-scale range
+		break;
+     df6:	40 ea       	ldi	r20, 0xA0	; 160
+     df8:	06 c0       	rjmp	.+12     	; 0xe06 <_ZN7HMC588310InitializeEhhhh+0x146>
+	case MAGRANGE_SEL_4_7:						// if selected +-4.7 Gauss full-scale range
+		write_value = MAGRANGE_4_7;				// set correct bits for +-4.7 Gauss full-scale range
+		break;
+     dfa:	40 ec       	ldi	r20, 0xC0	; 192
+     dfc:	04 c0       	rjmp	.+8      	; 0xe06 <_ZN7HMC588310InitializeEhhhh+0x146>
+	case MAGRANGE_SEL_5_6:						// if selected +-5.6 Gauss full-scale range
+		write_value = MAGRANGE_5_6;				// set correct bits for +-5.6 Gauss full-scale range
+		break;
+     dfe:	40 ee       	ldi	r20, 0xE0	; 224
+     e00:	02 c0       	rjmp	.+4      	; 0xe06 <_ZN7HMC588310InitializeEhhhh+0x146>
+	case MAGRANGE_SEL_8_1:						// if selected +-8.1 Gauss full-scale range
+		write_value = MAGRANGE_8_1;				// set correct bits for +-8.1 Gauss full-scale range
+		break;
+     e02:	ee 24       	eor	r14, r14
+     e04:	40 e2       	ldi	r20, 0x20	; 32
+	default:									// if invalid value is specified
+		write_value = MAGGAIN_SELDEFAULT << 5;	// set bits for default value
+		rtn = false;							// set return value to fale, indicating failure with selection
+}
+
+	write(CONFIGREGB,write_value);				// write specified value in config register B
+     e06:	ce 01       	movw	r24, r28
+     e08:	61 e0       	ldi	r22, 0x01	; 1
+     e0a:	0e 94 07 06 	call	0xc0e	; 0xc0e <_ZN7HMC58835writeEhh>
+	delay(50);									// wait 50 ms
+     e0e:	62 e3       	ldi	r22, 0x32	; 50
+     e10:	70 e0       	ldi	r23, 0x00	; 0
+     e12:	80 e0       	ldi	r24, 0x00	; 0
+     e14:	90 e0       	ldi	r25, 0x00	; 0
+     e16:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+
+	// prepare to write selections in mode register
+	write_value = CONTINUOUSCONVERSION;			// set mode to continuous conversion
+	write(MODEREG,write_value);					// write specified value in mode register
+     e1a:	ce 01       	movw	r24, r28
+     e1c:	62 e0       	ldi	r22, 0x02	; 2
+     e1e:	40 e0       	ldi	r20, 0x00	; 0
+     e20:	0e 94 07 06 	call	0xc0e	; 0xc0e <_ZN7HMC58835writeEhh>
+	delay(50);									// wait 50 ms
+     e24:	62 e3       	ldi	r22, 0x32	; 50
+     e26:	70 e0       	ldi	r23, 0x00	; 0
+     e28:	80 e0       	ldi	r24, 0x00	; 0
+     e2a:	90 e0       	ldi	r25, 0x00	; 0
+     e2c:	0e 94 20 08 	call	0x1040	; 0x1040 <delay>
+
+	// DRDY is connected to INT 1 on pin D3. Enable interrupt on INT1
+	attachInterrupt(1,HMC5883_data_int,RISING);
+     e30:	81 e0       	ldi	r24, 0x01	; 1
+     e32:	60 ee       	ldi	r22, 0xE0	; 224
+     e34:	75 e0       	ldi	r23, 0x05	; 5
+     e36:	43 e0       	ldi	r20, 0x03	; 3
+     e38:	50 e0       	ldi	r21, 0x00	; 0
+     e3a:	0e 94 4c 07 	call	0xe98	; 0xe98 <attachInterrupt>
+
+	return rtn;									// return
+}
+     e3e:	8e 2d       	mov	r24, r14
+     e40:	df 91       	pop	r29
+     e42:	cf 91       	pop	r28
+     e44:	1f 91       	pop	r17
+     e46:	0f 91       	pop	r16
+     e48:	ff 90       	pop	r15
+     e4a:	ef 90       	pop	r14
+     e4c:	df 90       	pop	r13
+     e4e:	08 95       	ret
+
+00000e50 <loop>:
+
+// The loop function is called in an endless loop
+void loop()
+{
+//Add your repeated code here
+}
+     e50:	08 95       	ret
+
+00000e52 <setup>:
+
+// Do not remove the include below
+#include "Imu_Kalman.h"
+
+//The setup function is called once at startup of the sketch
+void setup()
+     e52:	ef 92       	push	r14
+     e54:	ff 92       	push	r15
+     e56:	0f 93       	push	r16
+// Add your initialization code here
+
+	Mpu6000.Initialize(	400,
+						SEL_DLPF_DIS,
+						SEL_GYRO_1000,
+						SEL_ACCEL_4);				// initialize MPU6000 with 400 Hz sample rate, no low pass filter, +-1000 dps gyro scale, and +- 4g accel scale
+     e58:	80 ed       	ldi	r24, 0xD0	; 208
+     e5a:	91 e0       	ldi	r25, 0x01	; 1
+     e5c:	60 e9       	ldi	r22, 0x90	; 144
+     e5e:	71 e0       	ldi	r23, 0x01	; 1
+     e60:	40 e0       	ldi	r20, 0x00	; 0
+     e62:	22 e0       	ldi	r18, 0x02	; 2
+     e64:	01 e0       	ldi	r16, 0x01	; 1
+     e66:	0e 94 a2 04 	call	0x944	; 0x944 <_ZN7MPU600010InitializeEjhhh>
+	Hmc5883.Initialize(	SAMPLEAVERAGING_SEL_8,
+						DATAOUTPUTSEL_75HZ,
+						NORMALOPERATION_SEL,
+						MAGRANGE_SEL_1_3);			// initialize HMC5883 with 8 sample averaging, 75 Hz data rate, normal (no bias) operation, and +-1.3 gauss scale
+     e6a:	8f ee       	ldi	r24, 0xEF	; 239
+     e6c:	e8 2e       	mov	r14, r24
+     e6e:	81 e0       	ldi	r24, 0x01	; 1
+     e70:	f8 2e       	mov	r15, r24
+     e72:	c7 01       	movw	r24, r14
+     e74:	63 e0       	ldi	r22, 0x03	; 3
+     e76:	46 e0       	ldi	r20, 0x06	; 6
+     e78:	20 e0       	ldi	r18, 0x00	; 0
+     e7a:	0e 94 60 06 	call	0xcc0	; 0xcc0 <_ZN7HMC588310InitializeEhhhh>
+	Hmc5883.set_offset(	MAG_OFFSET_X,
+						MAG_OFFSET_Y,
+						MAG_OFFSET_Z);				// set magnetic sensor offset values
+     e7e:	c7 01       	movw	r24, r14
+     e80:	60 e0       	ldi	r22, 0x00	; 0
+     e82:	70 e0       	ldi	r23, 0x00	; 0
+     e84:	40 e0       	ldi	r20, 0x00	; 0
+     e86:	50 e0       	ldi	r21, 0x00	; 0
+     e88:	20 e0       	ldi	r18, 0x00	; 0
+     e8a:	30 e0       	ldi	r19, 0x00	; 0
+     e8c:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <_ZN7HMC588310set_offsetEiii>
+}
+     e90:	0f 91       	pop	r16
+     e92:	ff 90       	pop	r15
+     e94:	ef 90       	pop	r14
      e96:	08 95       	ret
 
 00000e98 <attachInterrupt>:
@@ -3065,7 +3065,7 @@ int main(void)
 #endif
 	
 	setup();
-     f9a:	0e 94 78 05 	call	0xaf0	; 0xaf0 <setup>
+     f9a:	0e 94 29 07 	call	0xe52	; 0xe52 <setup>
     
 	for (;;) {
 		loop();
@@ -3078,7 +3078,7 @@ int main(void)
     
 	for (;;) {
 		loop();
-     fa2:	0e 94 77 05 	call	0xaee	; 0xaee <loop>
+     fa2:	0e 94 28 07 	call	0xe50	; 0xe50 <loop>
 		if (serialEventRun) serialEventRun();
      fa6:	20 97       	sbiw	r28, 0x00	; 0
      fa8:	e1 f3       	breq	.-8      	; 0xfa2 <main+0x10>
