@@ -4,10 +4,10 @@ Wire/Wire.d Wire/Wire.o: ../Wire/Wire.cpp \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/inttypes.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/stdint.h ../Wire/twi.h \
   ../Wire/Wire.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Print.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Print.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/stdio.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/WString.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/WString.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/ctype.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/pgmspace.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/io.h \
@@ -18,8 +18,8 @@ Wire/Wire.d Wire/Wire.o: ../Wire/Wire.cpp \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/version.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/fuse.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/lock.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Printable.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/new.h
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Printable.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/new.h
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/stdlib.h:
 
@@ -33,13 +33,13 @@ D:\Documents\Arduino\IMU_Kalman\avr_includes/stdint.h:
 
 ../Wire/Wire.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Print.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Print.h:
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/stdio.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/WString.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/WString.h:
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/ctype.h:
 
@@ -61,6 +61,6 @@ D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/fuse.h:
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/lock.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Printable.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Printable.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/new.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/new.h:

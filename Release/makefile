@@ -75,7 +75,7 @@ all: IMU_Kalman.elf secondary-outputs
 IMU_Kalman.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C++ Linker'
-	avr-gcc -Os -Wl,--gc-sections  -L"D:\Documents\Arduino\Arduino_Duemilanove_w__ATmega328/Release" -L"D:\Documents\Arduino\IMU_Kalman\avrfix" -mmcu=atmega328p  -o"IMU_Kalman.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm
+	avr-gcc -Os -Wl,--gc-sections  -Wl,-Map,"IMU_Kalman.map",--cref --export-all-symbols -L"D:\Documents\Arduino\IMU_Kalman\avrfix" -L"D:\Documents\Arduino\IMU_Kalman\Board_Support_Library" -mmcu=atmega328p  -o"IMU_Kalman.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -2,10 +2,10 @@ HMC5883/HMC5883.d HMC5883/HMC5883.o: ../HMC5883/HMC5883.cpp \
   ../HMC5883/HMC5883.h D:\Documents\Arduino\IMU_Kalman\Wire/Wire.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/inttypes.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/stdint.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Print.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Print.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/stdio.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/WString.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/WString.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/stdlib.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/string.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/ctype.h \
@@ -18,16 +18,16 @@ HMC5883/HMC5883.d HMC5883/HMC5883.o: ../HMC5883/HMC5883.cpp \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/version.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/fuse.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/lock.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Printable.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/new.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Arduino.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Printable.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/new.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Arduino.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/math.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/interrupt.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/binary.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/WCharacter.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/HardwareSerial.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\variants\standard/pins_arduino.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/binary.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/WCharacter.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/HardwareSerial.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h \
+  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\standard/pins_arduino.h \
   D:\Documents\Arduino\IMU_Kalman\avrfix/avrfix.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/signal.h
 
@@ -39,13 +39,13 @@ D:\Documents\Arduino\IMU_Kalman\avr_includes/inttypes.h:
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/stdint.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Print.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Print.h:
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/stdio.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/WString.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/WString.h:
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/stdlib.h:
 
@@ -71,25 +71,25 @@ D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/fuse.h:
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/lock.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Printable.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Printable.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/new.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/new.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Arduino.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Arduino.h:
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/math.h:
 
 D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/interrupt.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/binary.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/binary.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/WCharacter.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/WCharacter.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/HardwareSerial.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/HardwareSerial.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h:
 
-C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\variants\standard/pins_arduino.h:
+D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\standard/pins_arduino.h:
 
 D:\Documents\Arduino\IMU_Kalman\avrfix/avrfix.h:
 

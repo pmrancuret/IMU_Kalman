@@ -346,6 +346,7 @@ boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 mag
  * 				type implies this number is times 2^24.
  */
 _lAccum HMC5883::Calc_Heading(_lAccum roll, _lAccum pitch){					// calculates heading
+#if 1
 	_lAccum Head_X;											// x-component of magnetic field, when compensated for by roll and pitch
 	_lAccum Head_Y;											// y-component of magnetic field, when compensated for by roll and pitch
 	_lAccum cos_roll;										// cosine of roll angle
@@ -366,7 +367,7 @@ _lAccum HMC5883::Calc_Heading(_lAccum roll, _lAccum pitch){					// calculates he
 	Head_Y = lmullk(magY,cos_roll) - lmullk(magZ,sin_roll);
 	// Magnetic Heading
 	heading = latan2lk(-Head_Y,Head_X) - magnetic_declination; // calculate heading, corrected for magnetic declination
-
+#endif
 	return heading;
 }
 
