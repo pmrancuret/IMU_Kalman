@@ -29,9 +29,30 @@ HMC5883::HMC5883(void) {
 	offsetx = 0;						// initialize to zero.  offset for x-axis reading
 	offsety = 0;						// initialize to zero.  offset for y-axis reading
 	offsetz = 0;						// initialize to zero.  offset for z-axis reading
-	magx_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
-	magy_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
-	magz_counts = 0;					// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
+	magX = 0;							// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
+	magY = 0;							// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
+	magZ = 0;							// initialize to zero.  magnetic reading in x-axis, in ADC reading counts
+	magnetic_declination = 0;			// initialize to zero.  magnetic declination, in radians.  This is the difference between magnetic and true north, where a positive value indicates that magnetic north is east of true north.   The _lAccum data type implies this number is times 2^24.
+	heading = 0;						// magnetic heading, in radians.  A heading of zero indicates due north, while a heading of pi indicates due south.
+#if MAGGAIN_SELDEFAULT == MAGRANGE_SEL_0_88	// if default range is set to +-0.88Ga
+	Gauss_per_LSb = GAUSSPERLSB_0_88;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_1_3// if default range is set to +-1.3Ga
+	Gauss_per_LSb = GAUSSPERLSB_1_3;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_1_9// if default range is set to +-1.9Ga
+	Gauss_per_LSb = GAUSSPERLSB_1_9;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_2_5// if default range is set to +-2.5Ga
+	Gauss_per_LSb = GAUSSPERLSB_2_5;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_4_0// if default range is set to +-4.0Ga
+	Gauss_per_LSb = GAUSSPERLSB_4_0;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_4_7// if default range is set to +-4.7Ga
+	Gauss_per_LSb = GAUSSPERLSB_4_7;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_5_6// if default range is set to +-5.6Ga
+	Gauss_per_LSb = GAUSSPERLSB_5_6;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_8_1// if default range is set to +-8.1Ga
+	Gauss_per_LSb = GAUSSPERLSB_8_1;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#else										// if default range isn't a valid value
+	Gauss_per_LSb = 0;						// set zero scale factor - no measurement.  This would imply the user set an invalid default value and an invalid initialization setting
+#endif
 	datacount = 0;						// Initial value of 0.  this counter increments whenever new data is available, and decrements when it is read
 	return;
 }
@@ -150,30 +171,57 @@ boolean HMC5883::Initialize(byte SampleAvgSel, byte DataRateSel, byte MeasBiasSe
 	{
 	case MAGRANGE_SEL_0_88:						// if selected +-0.88 Gauss full-scale range
 		write_value = MAGRANGE_0_88;			// set correct bits for +-0.88 Gauss full-scale range
+		Gauss_per_LSb = GAUSSPERLSB_0_88;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
 		break;
 	case MAGRANGE_SEL_1_3:						// if selected +-1.3 Gauss full-scale range
 		write_value = MAGRANGE_1_3;				// set correct bits for +-1.3 Gauss full-scale range
+		Gauss_per_LSb = GAUSSPERLSB_1_3;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
 		break;
 	case MAGRANGE_SEL_1_9:						// if selected +-1.9 Gauss full-scale range
 		write_value = MAGRANGE_1_9;				// set correct bits for +-1.9 Gauss full-scale range
+		Gauss_per_LSb = GAUSSPERLSB_1_9;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
 		break;
 	case MAGRANGE_SEL_2_5:						// if selected +-2.5 Gauss full-scale range
 		write_value = MAGRANGE_2_5;				// set correct bits for +-2.5 Gauss full-scale range
+		Gauss_per_LSb = GAUSSPERLSB_2_5;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
 		break;
 	case MAGRANGE_SEL_4_0:						// if selected +-4.0 Gauss full-scale range
 		write_value = MAGRANGE_4_0;				// set correct bits for +-4.0 Gauss full-scale range
+		Gauss_per_LSb = GAUSSPERLSB_4_0;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
 		break;
 	case MAGRANGE_SEL_4_7:						// if selected +-4.7 Gauss full-scale range
 		write_value = MAGRANGE_4_7;				// set correct bits for +-4.7 Gauss full-scale range
+		Gauss_per_LSb = GAUSSPERLSB_4_7;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
 		break;
 	case MAGRANGE_SEL_5_6:						// if selected +-5.6 Gauss full-scale range
 		write_value = MAGRANGE_5_6;				// set correct bits for +-5.6 Gauss full-scale range
+		Gauss_per_LSb = GAUSSPERLSB_5_6;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
 		break;
 	case MAGRANGE_SEL_8_1:						// if selected +-8.1 Gauss full-scale range
 		write_value = MAGRANGE_8_1;				// set correct bits for +-8.1 Gauss full-scale range
+		Gauss_per_LSb = GAUSSPERLSB_8_1;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
 		break;
 	default:									// if invalid value is specified
 		write_value = MAGGAIN_SELDEFAULT << 5;	// set bits for default value
+#if MAGGAIN_SELDEFAULT == MAGRANGE_SEL_0_88		// if default range is set to +-0.88Ga
+		Gauss_per_LSb = GAUSSPERLSB_0_88;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_1_3	// if default range is set to +-1.3Ga
+		Gauss_per_LSb = GAUSSPERLSB_1_3;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_1_9	// if default range is set to +-1.9Ga
+		Gauss_per_LSb = GAUSSPERLSB_1_9;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_2_5	// if default range is set to +-2.5Ga
+		Gauss_per_LSb = GAUSSPERLSB_2_5;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_4_0	// if default range is set to +-4.0Ga
+		Gauss_per_LSb = GAUSSPERLSB_4_0;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_4_7	// if default range is set to +-4.7Ga
+		Gauss_per_LSb = GAUSSPERLSB_4_7;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_5_6	// if default range is set to +-5.6Ga
+		Gauss_per_LSb = GAUSSPERLSB_5_6;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#elif MAGGAIN_SELDEFAULT == MAGRANGE_SEL_8_1	// if default range is set to +-8.1Ga
+		Gauss_per_LSb = GAUSSPERLSB_8_1;		// set correct scale factor of Gauss per LSb (least significant bit).  The _lAccum data type implies it is times 2^24
+#else											// if default range isn't a valid value
+		Gauss_per_LSb = 0;						// set zero scale factor - no measurement.  This would imply the user set an invalid default value and an invalid initialization setting
+#endif
 		rtn = false;							// set return value to fale, indicating failure with selection
 }
 
@@ -210,12 +258,28 @@ void HMC5883::data_int(void) {
  * Arguments:	none
  * Description:	Sets offset values for magnetometer
  */
-void HMC5883::set_offset(int offset_x, int offset_y, int offset_z)
+void HMC5883::set_offset(_lAccum offset_x, _lAccum offset_y, _lAccum offset_z)
 {
 	offsetx = offset_x;
 	offsetx = offset_y;
 	offsetx = offset_z;
 }
+
+/*
+ * Class:		HMC5883
+ * Function:	set_mag_declination()
+ * Scope:		public
+ * Arguments:	none
+ * Description:	Sets the magnetic declination, in radians.  This is the difference
+ * 				between magnetic and true north, where a positive value indicates
+ * 				that magnetic north is east of true north.   The _lAccum data type
+ * 				implies this number is times 2^24.
+ */
+void HMC5883::set_mag_declination (_lAccum magdec){
+	magnetic_declination = magdec;					// set the magnetic declination as proscribed
+	return;
+}
+
 
 /*
  * Class:		HMC5883
@@ -227,6 +291,7 @@ void HMC5883::set_offset(int offset_x, int offset_y, int offset_z)
 boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 magnetometer
 	boolean rtn = true;								// value to return at end - initialize to true
 	byte databuffer[6];								// buffer to store measured data in
+	int mag_counts;									// temporary int holds digital (unscaled) counts from x-axis magnetic measurement
 
 	if (!read(DATAOUTXMSB,6,&databuffer[0]))		// read data
 	{
@@ -234,14 +299,200 @@ boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 mag
 	}
 	else
 	{
-		magx_counts = (( ((int)databuffer[0]) << 8 | databuffer[1] ) * MAG_XAXIS_SIGN + offsetx);	// read x-axis adc counts
-		magy_counts = (( ((int)databuffer[2]) << 8 | databuffer[3] ) * MAG_YAXIS_SIGN + offsety);	// read y-axis adc counts
-		magz_counts = (( ((int)databuffer[4]) << 8 | databuffer[5] ) * MAG_ZAXIS_SIGN + offsetz);	// read z-axis adc counts
+		mag_counts = ( ((int)databuffer[0]) << 8 | databuffer[1] ) * MAG_XAXIS_SIGN;	// read x-axis adc counts
+		if ((mag_counts > 2047) | (mag_counts < -2048))		// if ADC counts fall outside ADC valid range (this happens for saturation)
+		{
+			rtn = false;									// set return value to false, indicating measurement didn't take place correctly
+		}
+		else												// if ADC counts are in normal range
+		{
+			magX = mag_counts * Gauss_per_LSb + offsetx;	// calculate x-axis magnetic field, in Gauss
+		}
+
+		mag_counts = (( ((int)databuffer[2]) << 8 | databuffer[3] ) * MAG_YAXIS_SIGN + offsety);	// read y-axis adc counts
+		if ((mag_counts > 2047) | (mag_counts < -2048))		// if ADC counts fall outside ADC valid range (this happens for saturation)
+		{
+			rtn = false;									// set return value to false, indicating measurement didn't take place correctly
+		}
+		else												// if ADC counts are in normal range
+		{
+			magY = mag_counts * Gauss_per_LSb + offsety;	// calculate y-axis magnetic field, in Gauss
+		}
+
+		mag_counts = (( ((int)databuffer[4]) << 8 | databuffer[5] ) * MAG_ZAXIS_SIGN + offsetz);	// read z-axis adc counts
+		if ((mag_counts > 2047) | (mag_counts < -2048))		// if ADC counts fall outside ADC valid range (this happens for saturation)
+		{
+			rtn = false;									// set return value to false, indicating measurement didn't take place correctly
+		}
+		else												// if ADC counts are in normal range
+		{
+			magZ = mag_counts * Gauss_per_LSb + offsetz;	// calculate y-axis magnetic field, in Gauss
+		}
+
 		if (datacount > 0) datacount--;	// decrement data counter
 	}
 
 	return rtn;
 }
+
+/*
+ * Class:		HMC5883
+ * Function:	Calc_Heading()
+ * Scope:		public
+ * Arguments:	_lAccum	roll	- roll angle of craft (about x axis), in radians.  Defined with positive value meaning roll right.
+ * 				_lAccum pitch	- pitch angle of craft (about y axis), in radians.  Defined with positive value meaning pitch up.
+ * Description:	This function calculates and returns the heading, in radians.  A heading of zero
+ * 				indicates due north, while a heading of pi indicates due south.   The _lAccum data
+ * 				type implies this number is times 2^24.
+ */
+_lAccum HMC5883::Calc_Heading(_lAccum roll, _lAccum pitch){					// calculates heading
+	_lAccum Head_X;											// x-component of magnetic field, when compensated for by roll and pitch
+	_lAccum Head_Y;											// y-component of magnetic field, when compensated for by roll and pitch
+	_lAccum cos_roll;										// cosine of roll angle
+	_lAccum sin_roll;										// sin of roll angle
+	_lAccum cos_pitch;										// cosine of pitch angle
+	_lAccum sin_pitch;										// sin of pitch angle
+	_lAccum sin_roll_x_magY;								// sin of roll angle times y-axis magnetic measurement
+	_lAccum cos_roll_x_magZ;								// cosine of roll angle times z-axis magnetic measurement
+
+	sin_roll = lsincoslk(roll,&cos_roll);					// calculate sin and cos of roll angle
+	sin_pitch = lsincoslk(pitch,&cos_pitch);				// calculate sin and cos of pitch angle
+	sin_roll_x_magY = lmullk(sin_roll,magY);				// calculate sin of roll angle times y-axis magnetic measurement
+	cos_roll_x_magZ = lmullk(cos_roll,magZ);				// calculate cosine of roll angle times z-axis magnetic measurement
+
+	// Tilt compensated Magnetic field X component:
+	Head_X = lmullk(magX,cos_pitch) + lmullk(sin_roll_x_magY,sin_pitch) + lmullk(cos_roll_x_magZ,sin_pitch);
+	// Tilt compensated Magnetic field Y component:
+	Head_Y = lmullk(magY,cos_roll) - lmullk(magZ,sin_roll);
+	// Magnetic Heading
+	heading = latan2lk(-Head_Y,Head_X) - magnetic_declination; // calculate heading, corrected for magnetic declination
+
+	return heading;
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	Read_Mag_Data_And_Calc_Heading()
+ * Scope:		public
+ * Arguments:	_lAccum	roll	- roll angle of craft (about x axis), in radians.  Defined with positive value meaning roll right.
+ * 				_lAccum pitch	- pitch angle of craft (about y axis), in radians.  Defined with positive value meaning pitch up.
+ * Description:	read magnetic data and calculates and returns the heading.  returns invalid value
+ * 				of -128 radians if error occurred while reading data.
+ */
+_lAccum HMC5883::Read_Mag_Data_And_Calc_Heading(_lAccum roll, _lAccum pitch){// read magnetic data and calculates and returns the heading.  returns invalid value of -128 radians if error occurred while reading data.
+
+	if (Read_Mag_Data())				// read magnetic data
+	{
+		return Calc_Heading(roll, pitch);			// if data read successfully, calculate and return the heading
+	}
+	else
+	{
+		return (_lAccum)MINUS128LK;					// if data read failed, return invalid heading
+	}
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	GetIdentity1()
+ * Scope:		public
+ * Arguments:	None
+ * Description: returns first character of device identifier
+ */
+char HMC5883::GetIdentity1(void){
+	return identity[0];
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	GetIdentity2()
+ * Scope:		public
+ * Arguments:	None
+ * Description: returns second character of device identifier
+ */
+char HMC5883::GetIdentity2(void){
+	return identity[1];
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	GetIdentity3()
+ * Scope:		public
+ * Arguments:	None
+ * Description: returns third character of device identifier
+ */
+char HMC5883::GetIdentity3(void){
+	return identity[2];
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	GetMagX()
+ * Scope:		public
+ * Arguments:	None
+ * Description: returns the magnetic reading in x-axis, in Gauss.  The _lAccum data type implies this number is times 2^24.
+ */
+_lAccum HMC5883::GetMagX(void){
+	return magX;
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	GetMagY()
+ * Scope:		public
+ * Arguments:	None
+ * Description: returns the magnetic reading in y-axis, in Gauss.  The _lAccum data type implies this number is times 2^24.
+ */
+_lAccum HMC5883::GetMagY(void){
+	return magY;
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	GetMagZ()
+ * Scope:		public
+ * Arguments:	None
+ * Description: returns the magnetic reading in z-axis, in Gauss.  The _lAccum data type implies this number is times 2^24.
+ */
+_lAccum HMC5883::GetMagZ(void){
+	return magZ;
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	GetHeading()
+ * Scope:		public
+ * Arguments:	None
+ * Description: returns the heading, in radians.  A heading of zero indicates due north, while a heading of pi indicates
+ * 				due south.   The _lAccum data type implies this number is times 2^24.
+ */
+_lAccum HMC5883::GetHeading(void){
+	return heading;
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	GetMagDeclination()
+ * Scope:		public
+ * Arguments:	None
+ * Description: returns the magnetic declination, in radians.  This is the difference between magnetic and true north,
+ * 				where a positive value indicates that magnetic north is east of true north.   The _lAccum data type
+ * 				implies this number is times 2^24.
+ */
+_lAccum HMC5883::GetMagDeclination(void){
+	return magnetic_declination;
+}
+
+/*
+ * Class:		HMC5883
+ * Function:	GetDataCount()
+ * Scope:		public
+ * Arguments:	None
+ * Description: returns the number of unread data items awaiting in the HMC5883.
+ */
+byte HMC5883::GetDataCount(void){
+	return datacount;
+}
+
 
 // HMC5883 private functions
 

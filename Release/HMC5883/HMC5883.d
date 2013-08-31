@@ -27,7 +27,9 @@ HMC5883/HMC5883.d HMC5883/HMC5883.o: ../HMC5883/HMC5883.cpp \
   C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/WCharacter.h \
   C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/HardwareSerial.h \
   C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h \
-  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\variants\standard/pins_arduino.h
+  C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\variants\standard/pins_arduino.h \
+  D:\Documents\Arduino\IMU_Kalman\avrfix/avrfix.h \
+  D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/signal.h
 
 ../HMC5883/HMC5883.h:
 
@@ -88,3 +90,7 @@ C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/HardwareSe
 C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h:
 
 C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\variants\standard/pins_arduino.h:
+
+D:\Documents\Arduino\IMU_Kalman\avrfix/avrfix.h:
+
+D:\Documents\Arduino\IMU_Kalman\avr_includes/avr/signal.h:

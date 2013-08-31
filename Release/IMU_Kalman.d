@@ -33,7 +33,8 @@ IMU_Kalman.d IMU_Kalman.o: ../IMU_Kalman.cpp ../Imu_Kalman.h \
   D:\Documents\Arduino\IMU_Kalman\HMC5883/HMC5883.h \
   D:\Documents\Arduino\IMU_Kalman\Wire/Wire.h \
   C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h \
-  D:\Documents\Arduino\IMU_Kalman\Kalman_Filters/GyroKalman.h
+  D:\Documents\Arduino\IMU_Kalman\Kalman_Filters/GyroKalman.h \
+  ../GlobalVariables.h
 
 ../Imu_Kalman.h:
 
@@ -106,3 +107,5 @@ D:\Documents\Arduino\IMU_Kalman\Wire/Wire.h:
 C:\arduino-1.0.4-windows\arduino-1.0.4\hardware\arduino\cores\arduino/Stream.h:
 
 D:\Documents\Arduino\IMU_Kalman\Kalman_Filters/GyroKalman.h:
+
+../GlobalVariables.h:

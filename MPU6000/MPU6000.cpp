@@ -26,13 +26,18 @@ MPU6000::MPU6000(){
 	accelX = 0;							// Initial value of 0.  X-axis acceleration, scale*m/s^2 (full scale range depends on configuration)
 	accelY = 0;							// Initial value of 0.  Y-axis acceleration, scale*m/s^2 (full scale range depends on configuration)
 	accelZ = 0;							// Initial value of 0.  Z-axis acceleration, scale*m/s^2 (full scale range depends on configuration)
+	accelXoffset = 0;					// Initial value of 0.  X-axis acceleration offset, m/s^2.  The data type _lAccum implies it is stored with a factor of 2^24.
+	accelYoffset = 0;					// Initial value of 0.  Y-axis acceleration offset, m/s^2.  The data type _lAccum implies it is stored with a factor of 2^24.
+	accelZoffset = 0;					// Initial value of 0.  Z-axis acceleration offset, m/s^2.  The data type _lAccum implies it is stored with a factor of 2^24.
 	gyroX = 0;							// Initial value of 0.  X-axis gyroscopic rate, scale*rad/sec (full scale range depends on configuration)
 	gyroY = 0;							// Initial value of 0.  Y-axis gyroscopic rate, scale*rad/sec (full scale range depends on configuration)
 	gyroZ = 0;							// Initial value of 0.  Z-axis gyroscopic rate, scale*rad/sec (full scale range depends on configuration)
+	gyroXoffset = 0;					// Initial value of 0.  X-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
+	gyroYoffset = 0;					// Initial value of 0.  Y-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
+	gyroZoffset = 0;					// Initial value of 0.  Z-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	temp = 0;							// Initial value of 0.  temperature of MPU6000, degC*2^8
 	datacount = 0;						// Initial value of 0.  this counter increments whenever new data is available, and decrements when it is read
 	identity = 0;						// Initial value of 0.  stores the identity code of the MPU6000 processor
-	DLPF_Select = SEL_DLPF_DEFAULT;		// Initial value of default.  stores the Digital Low Pass Filter (DLPF) cutoff frequency selection
 	Gyro_Select = SEL_GYRO_DEFAULT;		// Initial value of default.  stores the gyroscope scale selection
 	Accel_Select = SEL_ACCEL_DEFAULT;	// Initial value of default.  stores the accelerometer scale selection
 	return;
@@ -96,7 +101,6 @@ boolean MPU6000::Initialize(unsigned int SampleRate, byte DLPFSelect, byte GyroS
 	boolean rtn = true;	// value to return at end
 	byte SmplRtDiv;		// Sample Rate Divisor value to be stored in MPUREG_SMPLRT_DIV register
 
-	DLPF_Select = DLPFSelect;				// store value of DLPF cutoff
 	Gyro_Select = GyroScaleSelect;			// store value of gyroscope scale
 	Accel_Select = AccelScaleSelect;		// store value of accelerometer scale
 
@@ -158,7 +162,6 @@ boolean MPU6000::Initialize(unsigned int SampleRate, byte DLPFSelect, byte GyroS
 	default:			// DLPF disabled, GyroOutRate = 8 kHz.  return false.
 		SPI_write(MPUREG_CONFIG, MPU_NO_EXT_SYNC | SEL_DLPF_DEFAULT );	// set bits of config register
 		SmplRtDiv = (byte)constrain((unsigned int)(SEL_DLPF_DEFAULT == SEL_DLPF_DIS ? 8000:1000)/SampleRate,1,255) - 1;	// calculate sample rate divisor value
-		DLPF_Select = SEL_DLPF_DEFAULT;
 		rtn = false;
 	}
 	delay(1);
@@ -225,65 +228,45 @@ boolean MPU6000::Initialize(unsigned int SampleRate, byte DLPFSelect, byte GyroS
 
 /*
  * Class:		MPU6000
+ * Function:	Set_Gyro_Offsets()
+ * Scope:		public
+ * Arguments:	none
+ * Description:	This function sets offsets for the x, y, and z gyroscope measurements
+ */
+void MPU6000::Set_Gyro_Offsets(_lAccum offsetX,_lAccum offsetY,_lAccum offsetZ){
+	gyroXoffset = offsetX;		// set x-axis offset
+	gyroYoffset = offsetY;		// set y-axis offset
+	gyroZoffset = offsetZ;		// set z-axis offset
+	return;
+}
+
+/*
+ * Class:		MPU6000
+ * Function:	Set_Accel_Offsets()
+ * Scope:		public
+ * Arguments:	none
+ * Description:	This function sets offsets for the x, y, and z gyroscope measurements
+ */
+void MPU6000::Set_Accel_Offsets(_lAccum offsetX,_lAccum offsetY,_lAccum offsetZ){
+	accelXoffset = offsetX;		// set x-axis offset
+	accelYoffset = offsetY;		// set y-axis offset
+	accelZoffset = offsetZ;		// set z-axis offset
+	return;
+}
+
+/*
+ * Class:		MPU6000
  * Function:	Read_Accel_and_Gyro()
  * Scope:		public
  * Arguments:	none
  * Description:	This function reads all accelerometer and gyro data
  */
 void MPU6000::Read_Accel_and_Gyro(void){
-	int byte_H;
-	int byte_L;
+	Read_Accel();		// read accelerometer data
+	datacount++;		// increment datacount, since the above function decremented it but the function below will decrement it
 
-	// Read AccelX
-	byte_H = SPI_read(MPUREG_ACCEL_XOUT_H);
-	byte_L = SPI_read(MPUREG_ACCEL_XOUT_L);
-	if (Accel_Select == SEL_ACCEL_16)	// if using the largest scale, the measurement needs to be constrained
-	{
-		accelX = (_lAccum)((constrain((long)(int)((byte_H<<8)| byte_L),-26730,26730))*((long)MAX_MPS2PCNT_LK));
-	}
-	else
-	{
-		accelX = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
-	}
-
-	// Read AccelY
-	byte_H = SPI_read(MPUREG_ACCEL_YOUT_H);
-	byte_L = SPI_read(MPUREG_ACCEL_YOUT_L);
-	if (Accel_Select == SEL_ACCEL_16)	// if using the largest scale, the measurement needs to be constrained
-	{
-		accelY = (_lAccum)((constrain((long)(int)((byte_H<<8)| byte_L),-26730,26730))*((long)MAX_MPS2PCNT_LK));
-	}
-	else
-	{
-		accelY = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
-	}
-
-	// Read AccelZ
-	byte_H = SPI_read(MPUREG_ACCEL_ZOUT_H);
-	byte_L = SPI_read(MPUREG_ACCEL_ZOUT_L);
-	if (Accel_Select == SEL_ACCEL_16)	// if using the largest scale, the measurement needs to be constrained
-	{
-		accelZ = (_lAccum)((constrain((long)(int)((byte_H<<8)| byte_L),-26730,26730))*((long)MAX_MPS2PCNT_LK));
-	}
-	else
-	{
-		accelZ = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
-	}
-
-	// Read GyroX
-	byte_H = SPI_read(MPUREG_GYRO_XOUT_H);
-	byte_L = SPI_read(MPUREG_GYRO_XOUT_L);
-	gyroX = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
-
-	// Read GyroY
-	byte_H = SPI_read(MPUREG_GYRO_YOUT_H);
-	byte_L = SPI_read(MPUREG_GYRO_YOUT_L);
-	gyroY = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
-
-	// Read GyroZ
-	byte_H = SPI_read(MPUREG_GYRO_ZOUT_H);
-	byte_L = SPI_read(MPUREG_GYRO_ZOUT_L);
-	gyroZ = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
+	Read_Gyro();		// read gyroscope data
+	datacount++;		// increment datacount, since the above function decremented it but the function below will decrement it
 
 	if (datacount > 0) datacount--;	// decrement data counter
 
@@ -306,11 +289,11 @@ void MPU6000::Read_Accel(void){
 	byte_L = SPI_read(MPUREG_ACCEL_XOUT_L);
 	if (Accel_Select == SEL_ACCEL_16)	// if using the largest scale, the measurement needs to be constrained
 	{
-		accelX = (_lAccum)((constrain((long)(int)((byte_H<<8)| byte_L),-26730,26730))*((long)MAX_MPS2PCNT_LK));
+		accelX = (_lAccum)((constrain((long)(((int)byte_H<<8)| byte_L) * ACCEL_XAXIS_SIGN,-26730,26730))*((long)MAX_MPS2PCNT_LK)) + accelXoffset;
 	}
 	else
 	{
-		accelX = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
+		accelX = (_lAccum)(((long)(((int)byte_H<<8)| byte_L) * ACCEL_XAXIS_SIGN)*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select))) + accelXoffset;
 	}
 
 	// Read AccelY
@@ -318,11 +301,11 @@ void MPU6000::Read_Accel(void){
 	byte_L = SPI_read(MPUREG_ACCEL_YOUT_L);
 	if (Accel_Select == SEL_ACCEL_16)	// if using the largest scale, the measurement needs to be constrained
 	{
-		accelY = (_lAccum)((constrain((long)(int)((byte_H<<8)| byte_L),-26730,26730))*((long)MAX_MPS2PCNT_LK));
+		accelY = (_lAccum)((constrain((long)(((int)byte_H<<8)| byte_L) * ACCEL_YAXIS_SIGN,-26730,26730))*((long)MAX_MPS2PCNT_LK)) + accelYoffset;
 	}
 	else
 	{
-		accelY = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
+		accelY = (_lAccum)(((long)(((int)byte_H<<8)| byte_L) * ACCEL_YAXIS_SIGN)*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select))) + accelYoffset;
 	}
 
 	// Read AccelZ
@@ -330,11 +313,11 @@ void MPU6000::Read_Accel(void){
 	byte_L = SPI_read(MPUREG_ACCEL_ZOUT_L);
 	if (Accel_Select == SEL_ACCEL_16)	// if using the largest scale, the measurement needs to be constrained
 	{
-		accelZ = (_lAccum)((constrain((long)(int)((byte_H<<8)| byte_L),-26730,26730))*((long)MAX_MPS2PCNT_LK));
+		accelZ = (_lAccum)((constrain((long)(((int)byte_H<<8)| byte_L) * ACCEL_ZAXIS_SIGN,-26730,26730))*((long)MAX_MPS2PCNT_LK)) + accelZoffset;
 	}
 	else
 	{
-		accelZ = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
+		accelZ = (_lAccum)(((long)(((int)byte_H<<8)| byte_L) * ACCEL_ZAXIS_SIGN)*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select))) + accelZoffset;
 	}
 
 	if (datacount > 0) datacount--;	// decrement data counter
@@ -356,17 +339,17 @@ void MPU6000::Read_Gyro(void){
 	// Read GyroX
 	byte_H = SPI_read(MPUREG_GYRO_XOUT_H);
 	byte_L = SPI_read(MPUREG_GYRO_XOUT_L);
-	gyroX = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
+	gyroX = (_lAccum)(((long)(((int)byte_H<<8)| byte_L) * GYRO_XAXIS_SIGN)*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select))) + gyroXoffset;
 
 	// Read GyroY
 	byte_H = SPI_read(MPUREG_GYRO_YOUT_H);
 	byte_L = SPI_read(MPUREG_GYRO_YOUT_L);
-	gyroY = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
+	gyroY = (_lAccum)(((long)(((int)byte_H<<8)| byte_L) * GYRO_YAXIS_SIGN)*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select))) + gyroYoffset;
 
 	// Read GyroZ
 	byte_H = SPI_read(MPUREG_GYRO_ZOUT_H);
 	byte_L = SPI_read(MPUREG_GYRO_ZOUT_L);
-	gyroZ = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
+	gyroZ = (_lAccum)(((long)(((int)byte_H<<8)| byte_L) * GYRO_ZAXIS_SIGN)*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select))) + gyroZoffset;
 
 	if (datacount > 0) datacount--;	// decrement data counter
 
@@ -381,66 +364,13 @@ void MPU6000::Read_Gyro(void){
  * Description:	This function reads all accelerometer, gyro, and temperature data
  */
 void MPU6000::Read_All_Data(void){
-	int byte_H;
-	int byte_L;
-	int32_t	temp32int;
+	Read_Temp();		// read temp data
 
-	// Read AccelX
-	byte_H = SPI_read(MPUREG_ACCEL_XOUT_H);
-	byte_L = SPI_read(MPUREG_ACCEL_XOUT_L);
-	if (Accel_Select == SEL_ACCEL_16)	// if using the largest scale, the measurement needs to be constrained
-	{
-		accelX = (_lAccum)((constrain((long)(int)((byte_H<<8)| byte_L),-26730,26730))*((long)MAX_MPS2PCNT_LK));
-	}
-	else
-	{
-		accelX = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
-	}
+	Read_Accel();		// read accelerometer data
+	datacount++;		// increment datacount, since the above function decremented it but the function below will decrement it
 
-	// Read AccelY
-	byte_H = SPI_read(MPUREG_ACCEL_YOUT_H);
-	byte_L = SPI_read(MPUREG_ACCEL_YOUT_L);
-	if (Accel_Select == SEL_ACCEL_16)	// if using the largest scale, the measurement needs to be constrained
-	{
-		accelY = (_lAccum)((constrain((long)(int)((byte_H<<8)| byte_L),-26730,26730))*((long)MAX_MPS2PCNT_LK));
-	}
-	else
-	{
-		accelY = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
-	}
-
-	// Read AccelZ
-	byte_H = SPI_read(MPUREG_ACCEL_ZOUT_H);
-	byte_L = SPI_read(MPUREG_ACCEL_ZOUT_L);
-	if (Accel_Select == SEL_ACCEL_16)	// if using the largest scale, the measurement needs to be constrained
-	{
-		accelZ = (_lAccum)((constrain((long)(int)((byte_H<<8)| byte_L),-26730,26730))*((long)MAX_MPS2PCNT_LK));
-	}
-	else
-	{
-		accelZ = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select)));
-	}
-
-	// Read GyroX
-	byte_H = SPI_read(MPUREG_GYRO_XOUT_H);
-	byte_L = SPI_read(MPUREG_GYRO_XOUT_L);
-	gyroX = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
-
-	// Read GyroY
-	byte_H = SPI_read(MPUREG_GYRO_YOUT_H);
-	byte_L = SPI_read(MPUREG_GYRO_YOUT_L);
-	gyroY = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
-
-	// Read GyroZ
-	byte_H = SPI_read(MPUREG_GYRO_ZOUT_H);
-	byte_L = SPI_read(MPUREG_GYRO_ZOUT_L);
-	gyroZ = (_lAccum)(((long)(int)((byte_H<<8)| byte_L))*((long)MAX_RADPSPCNT_LK>>(SEL_GYRO_2000-Gyro_Select)));
-
-    // Read Temp
-    byte_H = SPI_read(MPUREG_TEMP_OUT_H);
-    byte_L = SPI_read(MPUREG_TEMP_OUT_L);
-    temp32int = constrain((int32_t)((byte_H<<8)| byte_L),-32767,31098);
-    temp = (_sAccum)((temp32int * 1542)>>11) + 9352;	// temp in degC*256 = temp32int*256/340 +  256*36.53.  = temp32int*1542/2048 + 9352.   From datasheet
+	Read_Gyro();		// read gyroscope data
+	datacount++;		// increment datacount, since the above function decremented it but the function below will decrement it
 
 	if (datacount > 0) datacount--;	// decrement data counter
 

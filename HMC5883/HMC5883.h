@@ -10,6 +10,12 @@
 
 #include <Wire.h>
 #include <Arduino.h>
+#include "avrfix.h"
+
+// Sensor Sign directions
+#define MAG_XAXIS_SIGN			-1		// x-axis magnetic sign convention.  setting to 1 gives default, setting to -1 gives negative
+#define MAG_YAXIS_SIGN			1		// y-axis magnetic sign convention.  setting to 1 gives default, setting to -1 gives negative
+#define MAG_ZAXIS_SIGN			1		// z-axis magnetic sign convention.  setting to 1 gives default, setting to -1 gives negative
 
 // sample averaging selection options.  DO NOT CHANGE THESE except maybe the default
 #define SAMPLEAVERAGING_SEL_1	0		// this selection value chooses to take one sample per measurement
@@ -44,11 +50,6 @@
 #define MAGRANGE_SEL_5_6		6		// this selection value chooses the 5.6 Gauss full-scale range
 #define MAGRANGE_SEL_8_1		7		// this selection value chooses the 8.1 Gauss full-scale range
 #define MAGGAIN_SELDEFAULT		MAGRANGE_SEL_1_3	// Default selection value for magnetic range
-
-// Sensor Sign directions
-#define MAG_XAXIS_SIGN			-1		// x-axis magnetic sign convention.  setting to 1 gives default, setting to -1 gives negative
-#define MAG_YAXIS_SIGN			-1		// y-axis magnetic sign convention.  setting to 1 gives default, setting to -1 gives negative
-#define MAG_ZAXIS_SIGN			-1		// z-axis magnetic sign convention.  setting to 1 gives default, setting to -1 gives negative
 
 // Address Definitions
 #define COMPASS_ADDRESS			0x1E	// I2C address of the magnetometer
@@ -98,10 +99,23 @@
 #define MAGRANGE_5_6			0xC0	// this bit-mask in the config register B causes the device to have a full-scale range of +- 5.6 Gauss
 #define MAGRANGE_8_1			0xE0	// this bit-mask in the config register B causes the device to have a full-scale range of +- 8.1 Gauss
 
+// define Gauss_per_LSb for each scale range
+#define GAUSSPERLSB_0_88		12246	// Number of Gauss per LSb (least significant bit) of magnetic reading from the ADC with scale range of +-0.88 Ga.  The _lAccum data type implies it is times 2^24.
+#define GAUSSPERLSB_1_3			15391	// Number of Gauss per LSb (least significant bit) of magnetic reading from the ADC with scale range of +-1.3 Ga.  The _lAccum data type implies it is times 2^24.
+#define GAUSSPERLSB_1_9			20460	// Number of Gauss per LSb (least significant bit) of magnetic reading from the ADC with scale range of +-1.9 Ga.  The _lAccum data type implies it is times 2^24.
+#define GAUSSPERLSB_2_5			25420	// Number of Gauss per LSb (least significant bit) of magnetic reading from the ADC with scale range of +-2.5 Ga.  The _lAccum data type implies it is times 2^24.
+#define GAUSSPERLSB_4_0			38130	// Number of Gauss per LSb (least significant bit) of magnetic reading from the ADC with scale range of +-4.0 Ga.  The _lAccum data type implies it is times 2^24.
+#define GAUSSPERLSB_4_7			43018	// Number of Gauss per LSb (least significant bit) of magnetic reading from the ADC with scale range of +-4.7 Ga.  The _lAccum data type implies it is times 2^24.
+#define GAUSSPERLSB_5_6			50840	// Number of Gauss per LSb (least significant bit) of magnetic reading from the ADC with scale range of +-5.6 Ga.  The _lAccum data type implies it is times 2^24.
+#define GAUSSPERLSB_8_1			72944	// Number of Gauss per LSb (least significant bit) of magnetic reading from the ADC with scale range of +-8.1 Ga.  The _lAccum data type implies it is times 2^24.
+
 // ModeRegister valid modes
 #define CONTINUOUSCONVERSION	0x00	// Setting this value in the Mode register causes the magnetometer to sample continuously
 #define SINGLECONVERSION		0x01	// Setting this value in the mode register causes the magnetometer to take measurements one-at-a-time
 #define IDLEMODE				0x02	// Setting this value in the mode register puts the magnetometer in idle mode
+
+// constant definitions
+#define MINUS128LK				0x8000	// This value represents the minimum number (-128) that can be represented using the _lAccum data type
 
 // MPU6000 Class Definition
 /*
@@ -115,12 +129,15 @@
 class HMC5883 {
 private:
 	char			identity[3];				// 3-byte identifier of device.  must be ascii H43
-	int				offsetx;					// offset for x-axis reading
-	int				offsety;					// offset for y-axis reading
-	int				offsetz;					// offset for z-axis reading
-	int				magx_counts;				// magnetic reading in x-axis, in ADC reading counts
-	int				magy_counts;				// magnetic reading in x-axis, in ADC reading counts
-	int				magz_counts;				// magnetic reading in x-axis, in ADC reading counts
+	_lAccum			magX;						// magnetic reading in x-axis, in Gauss.  The _lAccum data type implies this number is times 2^24.
+	_lAccum			magY;						// magnetic reading in y-axis, in Gauss.  The _lAccum data type implies this number is times 2^24.
+	_lAccum			magZ;						// magnetic reading in z-axis, in Gauss.  The _lAccum data type implies this number is times 2^24.
+	_lAccum			offsetx;					// offset for x-axis magnetic reading, in Gauss.    The _lAccum data type implies this number is times 2^24.
+	_lAccum			offsety;					// offset for y-axis magnetic reading, in Gauss.    The _lAccum data type implies this number is times 2^24.
+	_lAccum			offsetz;					// offset for z-axis magnetic reading, in Gauss.    The _lAccum data type implies this number is times 2^24.
+	_lAccum			Gauss_per_LSb;				// this variable holds the scale of Gauss/LSb (least significant bit) of the ADC reading.  This number is based on the scale selection.
+	_lAccum			heading;					// heading, in radians.  A heading of zero indicates due north, while a heading of pi indicates due south.   The _lAccum data type implies this number is times 2^24.
+	_lAccum			magnetic_declination;		// magnetic declination, in radians.  This is the difference between magnetic and true north, where a positive value indicates that magnetic north is east of true north.   The _lAccum data type implies this number is times 2^24.
 	volatile byte 	datacount;					// this counter increments whenever new data is available, and decrements when it is read
 
 	boolean read(	byte startaddr,
@@ -136,10 +153,22 @@ public:
 						byte MeasBiasSel,
 						byte MagRangeSel);		// This function initializes the HMC5883 defice with specified settings
 	void data_int(void);						// On Interrupt, increments counter which tells new data is ready
-	void set_offset(	int offset_x,
-						int offset_y,
-						int offset_z);			// Sets offset values for magnetometer
+	void set_offset(	_lAccum offset_x,
+						_lAccum offset_y,
+						_lAccum offset_z);		// Sets offset values for magnetometer
+	void set_mag_declination (_lAccum magdec);	// Sets the magnetic declination, in radians.  This is the difference between magnetic and true north, where a positive value indicates that magnetic north is east of true north.   The _lAccum data type implies this number is times 2^24.
 	boolean Read_Mag_Data(void);				// reads magnetic data from HMC5883 magnetometer
+	_lAccum Calc_Heading(_lAccum roll, _lAccum pitch);					// This function calculates and returns the heading, in radians.  A heading of zero indicates due north, while a heading of pi indicates due south.   The _lAccum data type implies this number is times 2^24.
+	_lAccum Read_Mag_Data_And_Calc_Heading(_lAccum roll, _lAccum pitch);// read magnetic data and calculates and returns the heading.  returns invalid value of -128 radians if error occurred while reading data.
+	char GetIdentity1(void);					// returns first character of device identifier
+	char GetIdentity2(void);					// returns second character of device identifier
+	char GetIdentity3(void);					// returns third character of device identifier
+	_lAccum GetMagX(void);						// returns the magnetic reading in x-axis, in Gauss.  The _lAccum data type implies this number is times 2^24.
+	_lAccum GetMagY(void);						// returns the magnetic reading in y-axis, in Gauss.  The _lAccum data type implies this number is times 2^24.
+	_lAccum GetMagZ(void);						// returns the magnetic reading in z-axis, in Gauss.  The _lAccum data type implies this number is times 2^24.
+	_lAccum GetHeading(void);					// returns the heading, in radians.  A heading of zero indicates due north, while a heading of pi indicates due south.   The _lAccum data type implies this number is times 2^24.
+	_lAccum GetMagDeclination(void);			// returns the magnetic declination, in radians.  This is the difference between magnetic and true north, where a positive value indicates that magnetic north is east of true north.   The _lAccum data type implies this number is times 2^24.
+	byte GetDataCount(void);					// returns the number of unread data items awaiting in the HMC5883.
 
 };	// end of class HMC5883
 

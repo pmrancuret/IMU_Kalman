@@ -14,6 +14,16 @@
 
 #define MPU6000_CHIP_SELECT_PIN 	4  // MPU6000 CHIP SELECT
 
+// Gyro Sensor Sign directions
+#define GYRO_XAXIS_SIGN				1		// x-axis gyroscope sign convention.  setting to 1 gives default, setting to -1 gives negative
+#define GYRO_YAXIS_SIGN				-1		// y-axis gyroscope sign convention.  setting to 1 gives default, setting to -1 gives negative
+#define GYRO_ZAXIS_SIGN				-1		// z-axis gyroscope sign convention.  setting to 1 gives default, setting to -1 gives negative
+
+// Accel Sensor Sign directions
+#define ACCEL_XAXIS_SIGN			1		// x-axis accelerometer sign convention.  setting to 1 gives default, setting to -1 gives negative
+#define ACCEL_YAXIS_SIGN			-1		// y-axis accelerometer sign convention.  setting to 1 gives default, setting to -1 gives negative
+#define ACCEL_ZAXIS_SIGN			-1		// z-axis accelerometer sign convention.  setting to 1 gives default, setting to -1 gives negative
+
 // Default Sample Time
 #define SAMPLETIME_DEFAULT			400		// default sample time, in Hz
 
@@ -113,13 +123,18 @@ private:
 	_lAccum			accelX;					// X-axis acceleration, m/s^2.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_lAccum 		accelY;					// Y-axis acceleration, m/s^2.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_lAccum 		accelZ;					// Z-axis acceleration, m/s^2.  The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum			accelXoffset;			// X-axis acceleration offset, m/s^2.  The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum			accelYoffset;			// Y-axis acceleration offset, m/s^2.  The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum			accelZoffset;			// Z-axis acceleration offset, m/s^2.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_lAccum 		gyroX;					// X-axis gyroscopic rate, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_lAccum 		gyroY;					// Y-axis gyroscopic rate, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_lAccum 		gyroZ;					// Z-axis gyroscopic rate, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum 		gyroXoffset;			// X-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum 		gyroYoffset;			// Y-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum 		gyroZoffset;			// Z-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_sAccum			temp;					// temperature of MPU6000, deg C.  The data type _sAccum implies it is stored with a factor of 2^8.
 	volatile byte 	datacount;				// this counter increments whenever new data is available, and decrements when it is read
 	byte 			identity;				// stores the identity code of the MPU6000 processor
-	byte			DLPF_Select;			// stores the Digital Low Pass Filter (DLPF) cutoff frequency selection
 	byte			Gyro_Select;			// stores the gyroscope scale selection
 	byte			Accel_Select;			// stores the accelerometer scale selection
 
@@ -133,6 +148,12 @@ public:
 						byte DLPFSelect,
 						byte GyroScaleSelect,
 						byte AccelScaleSelect);		// This function initializes the MPU6000 object using settings supplied in argument
+	void Set_Gyro_Offsets(	_lAccum offsetX,
+							_lAccum offsetY,
+							_lAccum offsetZ);	// This function sets offsets for the x, y, and z gyroscope measurements
+	void Set_Accel_Offsets(	_lAccum offsetX,
+							_lAccum offsetY,
+							_lAccum offsetZ);	// This function sets offsets for the x, y, and z accelerometer measurements
 	void Read_Accel_and_Gyro(void);			// This function reads all accelerometer and gyro data
 	void Read_Accel(void);					// This function reads all accelerometer data
 	void Read_Gyro(void);					// This function reads all gyroscope data

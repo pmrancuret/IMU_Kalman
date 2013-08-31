@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../GlobalVariables.cpp \
 ../IMU_Kalman.cpp 
 
 OBJS += \
+./GlobalVariables.o \
 ./IMU_Kalman.o 
 
 CPP_DEPS += \
+./GlobalVariables.d \
 ./IMU_Kalman.d 
 
 
