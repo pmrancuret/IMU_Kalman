@@ -34,7 +34,7 @@ IMU_Kalman.d IMU_Kalman.o: ../IMU_Kalman.cpp ../Imu_Kalman.h \
   D:\Documents\Arduino\IMU_Kalman\Wire/Wire.h \
   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h \
   D:\Documents\Arduino\IMU_Kalman\Kalman_Filters/GyroKalman.h \
-  ../GlobalVariables.h
+  ../GlobalVariables.h ../IMU_Kalman.h
 
 ../Imu_Kalman.h:
 
@@ -109,3 +109,5 @@ D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h:
 D:\Documents\Arduino\IMU_Kalman\Kalman_Filters/GyroKalman.h:
 
 ../GlobalVariables.h:
+
+../IMU_Kalman.h:

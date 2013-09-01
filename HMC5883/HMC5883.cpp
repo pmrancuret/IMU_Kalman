@@ -309,7 +309,7 @@ boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 mag
 			magX = mag_counts * Gauss_per_LSb + offsetx;	// calculate x-axis magnetic field, in Gauss
 		}
 
-		mag_counts = (( ((int)databuffer[2]) << 8 | databuffer[3] ) * MAG_YAXIS_SIGN + offsety);	// read y-axis adc counts
+		mag_counts = (( ((int)databuffer[4]) << 8 | databuffer[5] ) * MAG_YAXIS_SIGN + offsety);	// read y-axis adc counts
 		if ((mag_counts > 2047) | (mag_counts < -2048))		// if ADC counts fall outside ADC valid range (this happens for saturation)
 		{
 			rtn = false;									// set return value to false, indicating measurement didn't take place correctly
@@ -319,7 +319,7 @@ boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 mag
 			magY = mag_counts * Gauss_per_LSb + offsety;	// calculate y-axis magnetic field, in Gauss
 		}
 
-		mag_counts = (( ((int)databuffer[4]) << 8 | databuffer[5] ) * MAG_ZAXIS_SIGN + offsetz);	// read z-axis adc counts
+		mag_counts = (( ((int)databuffer[2]) << 8 | databuffer[3] ) * MAG_ZAXIS_SIGN + offsetz);	// read z-axis adc counts
 		if ((mag_counts > 2047) | (mag_counts < -2048))		// if ADC counts fall outside ADC valid range (this happens for saturation)
 		{
 			rtn = false;									// set return value to false, indicating measurement didn't take place correctly
@@ -329,8 +329,9 @@ boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 mag
 			magZ = mag_counts * Gauss_per_LSb + offsetz;	// calculate y-axis magnetic field, in Gauss
 		}
 
-		if (datacount > 0) datacount--;	// decrement data counter
 	}
+
+	if (datacount > 0) datacount--;	// decrement data counter
 
 	return rtn;
 }
@@ -346,7 +347,6 @@ boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 mag
  * 				type implies this number is times 2^24.
  */
 _lAccum HMC5883::Calc_Heading(_lAccum roll, _lAccum pitch){					// calculates heading
-#if 1
 	_lAccum Head_X;											// x-component of magnetic field, when compensated for by roll and pitch
 	_lAccum Head_Y;											// y-component of magnetic field, when compensated for by roll and pitch
 	_lAccum cos_roll;										// cosine of roll angle
@@ -365,9 +365,20 @@ _lAccum HMC5883::Calc_Heading(_lAccum roll, _lAccum pitch){					// calculates he
 	Head_X = lmullk(magX,cos_pitch) + lmullk(sin_roll_x_magY,sin_pitch) + lmullk(cos_roll_x_magZ,sin_pitch);
 	// Tilt compensated Magnetic field Y component:
 	Head_Y = lmullk(magY,cos_roll) - lmullk(magZ,sin_roll);
+
 	// Magnetic Heading
-	heading = latan2lk(-Head_Y,Head_X) - magnetic_declination; // calculate heading, corrected for magnetic declination
-#endif
+	if (Head_X >= 0)					// if x-axis component of heading is positive (heading north between 270 and 90 degrees)
+	{
+		heading = latan2lk(Head_X,-Head_Y) - magnetic_declination; // calculate heading, corrected for magnetic declination
+	}
+	else								// if x-axis component of heading is negative (heading south between 90 and 270 degrees)
+	{
+		heading = latan2lk(-Head_X,Head_Y) + PILK - magnetic_declination; // calculate heading, corrected for magnetic declination
+	}
+
+	if (heading < -PILK) heading += TWOPILK;			// angle normalization
+	else if (heading > PILK) heading -= TWOPILK;	// angle normalization
+
 	return heading;
 }
 
@@ -509,11 +520,11 @@ boolean HMC5883::read(byte startaddr, byte numbytes, byte * databuffer) {
 	boolean rtn = true;	// value to return (true or false for success or failure)
 	byte i = 0;			// initialize index used for counting received bytes
 
-	Wire.beginTransmission(COMPASS_WRITE);			// Begin I2C transmission with the magnetometer
+	Wire.beginTransmission(COMPASS_ADDRESS);			// Begin I2C transmission with the magnetometer
 	Wire.write(startaddr);							// send starting address to read from
 	Wire.endTransmission();							// end I2C transmission
 
-	Wire.requestFrom((byte)COMPASS_READ,numbytes);		// request specified number of bytes from HMC5883
+	Wire.requestFrom((byte)COMPASS_ADDRESS,numbytes);		// request specified number of bytes from HMC5883
 	while(Wire.available())							// while data is available on I2C bus
 	{
 		*(databuffer+i) = Wire.read();				// receive one byte
@@ -536,7 +547,7 @@ boolean HMC5883::read(byte startaddr, byte numbytes, byte * databuffer) {
  * Description:	This function writes the specified data at the specified address of the HMC5883
  */
 void HMC5883::write(byte addr, byte data) {
-	Wire.beginTransmission(COMPASS_WRITE);	// Begin I2C transmission with the magnetometer
+	Wire.beginTransmission(COMPASS_ADDRESS);	// Begin I2C transmission with the magnetometer
 	Wire.write(addr);							// Tell magnetometer which register we are writing to
 	Wire.write(data);							// write specified value to register
 	Wire.endTransmission();						// end transmission

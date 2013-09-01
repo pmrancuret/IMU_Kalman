@@ -60,10 +60,10 @@
 #define MODEREG					0x02	// Mode Register
 #define DATAOUTXMSB				0x03	// X-axis data output register -  Most significant bit
 #define DATAOUTXLSB				0x04	// X-axis data output register -  Least significant bit
-#define DATAOUTYMSB				0x05	// Y-axis data output register -  Most significant bit
-#define DATAOUTYLSB				0x06	// Y-axis data output register -  Least significant bit
-#define DATAOUTZMSB				0x07	// Z-axis data output register -  Most significant bit
-#define DATAOUTZLSB				0x08	// Z-axis data output register -  Least significant bit
+#define DATAOUTYMSB				0x07	// Y-axis data output register -  Most significant bit
+#define DATAOUTYLSB				0x08	// Y-axis data output register -  Least significant bit
+#define DATAOUTZMSB				0x05	// Z-axis data output register -  Most significant bit
+#define DATAOUTZLSB				0x06	// Z-axis data output register -  Least significant bit
 #define STATUSREG				0x09	// Status register
 #define IDENTREGA				0x0A	// Identification Register A
 #define IDENTREGB				0x0B	// Identification Register B
@@ -116,6 +116,9 @@
 
 // constant definitions
 #define MINUS128LK				0x8000	// This value represents the minimum number (-128) that can be represented using the _lAccum data type
+#define PIOVER2LK				26353589	// This value represents pi/2 in the _lAccum data type (*2^24)
+#define PILK					52707178	// This value represents pi in the _lAccum data type (*2^24)
+#define TWOPILK					105414357	// This value represents 2*pi in the _lAccum data type (*2^24)
 
 // MPU6000 Class Definition
 /*

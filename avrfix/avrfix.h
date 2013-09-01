@@ -28,6 +28,11 @@
 #include <avr/pgmspace.h>
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /* Only two datatypes are used from the ISO/IEC standard:
  * short _Accum with s7.8 bit format
  *       _Accum with s15.16 bit format
@@ -292,6 +297,10 @@ extern _lAccum lloglk(_lAccum);
 #define llog2lk(x) (ldivlk(lloglk((x)), LOG2lk))
 #define llog10lk(x) (ldivlk(lloglk((x)), LOG10lk))
 #define llogalk(a, x) (ldivlk(lloglk((x)), lloglk((a))))
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _AVRFIX_H */
 

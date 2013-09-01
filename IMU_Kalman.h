@@ -29,7 +29,9 @@ void setup();
 
 //add your function definitions for the project IMU_Kalman here
 
-#define FASTLOOP_TIME_US 500000	// fast loop sample rate, in microseconds.
+#define SERIAL_DATARATE 38400	// serial line datarate, baud
+
+#define FASTLOOP_TIME_US 1000000	// fast loop sample rate, in microseconds.
 
 // offsets for gyroscope
 #define GYRO_OFFSET_X	0	// gyroscope x-axis offset (in rad/s * 2^24)
@@ -45,7 +47,7 @@ void setup();
 #define MAG_OFFSET_X	0	// magnetic sensor x-axis offset (in Gauss * 2^24)
 #define MAG_OFFSET_Y	0	// magnetic sensor y-axis offset (in Gauss * 2^24)
 #define MAG_OFFSET_Z	0	// magnetic sensor z-axis offset (in Gauss * 2^24)
-#define MAG_DECLINATION -1327440	// magnetic declination (radians * 2^24).  In Indianapolis, this is -1327440, corresponding to -4.5333333 degrees
+#define MAG_DECLINATION 0//-1327440	// magnetic declination (radians * 2^24).  In Indianapolis, this is -1327440, corresponding to -4.5333333 degrees
 
 //Do not add code below this line
 #endif /* IMU_Kalman_H_ */

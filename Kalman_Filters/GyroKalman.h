@@ -20,6 +20,12 @@
  */
 class GyroKalman {
 private:
+	_lAccum angle_pred;				// predicted angle (radians*2^24) at current time, based only on past information
+	_lAccum angle_est;				// estimated angle (radians*2^24) at current time, updated with latest measurements
+	_lAccum angle_est_last;			// previous estimated angle (radians*2^24)
+	_lAccum angular_vel_pred;		// predicted angular velocity (radians/sec * 2^24) at current time, based only on past information
+	_lAccum angular_vel_est;		// estimated angular velocity (radians/sec * 2^24), updated with latest measurements
+	_lAccum angular_vel_est_last;	// previous estimated angular velocity (radians/sec * 2^24)
 
 
 public:
