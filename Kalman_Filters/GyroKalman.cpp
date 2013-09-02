@@ -46,8 +46,223 @@ GyroKalman::GyroKalman(void) {
 
 /*
  * Class:		GyroKalman
- * Function:	Predict()
+ * Function:	Initialize()
  * Scope:		Public
+ * Arguments:	_lAccum	angleprocnoisevar	- Variance of process noise affecting angle, rad^2 *2^24.
+ * 				_lAccum rateprocnoisevar	- Variance of process noise affecting rate, rad^2/sec^2 *2^24.
+ * 				_lAccum angleobsnoisevar	- Variance of observation noise affecting angle, rad^2 *2^24.
+ * 				_lAccum rateobsnoisevar		- Variance of observation noise affecting rate, rad^2/sec^2 *2^24.
+ * 				_lAccum InitialAngle		- Initial angle estimate, rad *2^24
+ * 				_lAccum InitialRate			- Initial rate estimate, rad/sec *2^24
+ * 				_lAccum InitialAngleEstVar	- Initial angle estimate variance, rad^2 *2^24.
+ * 				_lAccum InitialRateEstVar	- Initial rate estimate variance, rad^2/sec^2 *2^24.
+ * Description:	Initializes the Kalman Filter with specified variances, state estimates, and estimate variances
+ */
+void GyroKalman::Initialize(	_lAccum angleprocnoisevar,
+								_lAccum rateprocnoisevar,
+								_lAccum angleobsnoisevar,
+								_lAccum rateobsnoisevar,
+								_lAccum InitialAngle,
+								_lAccum InitialRate,
+								_lAccum InitialAngleEstVar,
+								_lAccum InitialRateEstVar){
+	rate_proc_noise_var = rateprocnoisevar;			// variance in process noise affecting angular rate (rad^2/s^2*2^24).  In the case of an aircraft, this could be noise such as wind.
+	rate_obs_noise_var = rateobsnoisevar;			// variance in observation noise affecting rate measurement (rad^2/s^2*2^24).  This is the variance of the gyroscope signal noise.
+	angle_proc_noise_var = angleprocnoisevar;		// variance in process noise affecting angle (rad^2 * 2^24).
+	angle_obs_noise_var = angleobsnoisevar;			// variance in observation noise affecting angle (rad^2 * 2^24).  This is the variance of the compass signal noise.
+	angle_pred = InitialAngle;						// predicted angle (radians*2^24) at current time, based only on past information
+	angle_est = InitialAngle;						// estimated angle (radians*2^24) at current time, updated with latest measurements
+	rate_pred = InitialRate;						// predicted angular velocity (radians/sec * 2^24) at current time, based only on past information
+	rate_est = InitialRate;							// estimated angular velocity (radians/sec * 2^24), updated with latest measurements
+	est_cov_apriori[0] = InitialAngleEstVar;		// a-priori estimate covariance matrix (calculated after prediction step, befure updating with measurements)
+	est_cov_apriori[1] = 0;							// a-priori estimate covariance matrix (calculated after prediction step, befure updating with measurements)
+	est_cov_apriori[2] = 0;							// a-priori estimate covariance matrix (calculated after prediction step, befure updating with measurements)
+	est_cov_apriori[3] = InitialRateEstVar;			// a-priori estimate covariance matrix (calculated after prediction step, befure updating with measurements)
+	est_cov_aposteriori[0] = InitialAngleEstVar;	// a-posteriori estimate covariance matrix (calculated after estimates are updated with measurements)
+	est_cov_aposteriori[1] = 0;						// a-posteriori estimate covariance matrix (calculated after estimates are updated with measurements)
+	est_cov_aposteriori[2] = 0;						// a-posteriori estimate covariance matrix (calculated after estimates are updated with measurements)
+	est_cov_aposteriori[3] = InitialRateEstVar;		// a-posteriori estimate covariance matrix (calculated after estimates are updated with measurements)
+	return;
+} // end of Initialize()
+
+/*
+ * Class:		GyroKalman
+ * Function:	SetAngleProcNoiseVar()
+ * Scope:		Public
+ * Arguments:	_lAccum	angleprocnoisevar	- Variance of process noise affecting angle, rad^2 *2^24.
+ * Description:	Sets Variance of process noise affecting angle, rad^2 *2^24.
+ */
+void GyroKalman::SetAngleProcNoiseVar(_lAccum angleprocnoisevar){
+	angle_proc_noise_var = angleprocnoisevar;		// variance in process noise affecting angle (rad^2 * 2^24).
+	return;
+} // end of SetAngleProcNoiseVar()
+
+/*
+ * Class:		GyroKalman
+ * Function:	SetRateProcNoiseVar()
+ * Scope:		Public
+ * Arguments:	_lAccum rateprocnoisevar	- Variance of process noise affecting rate, rad^2/sec^2 *2^24.
+ * Description:	Sets Variance of process noise affecting rate, rad^2/sec^2 *2^24.
+ */
+void GyroKalman::SetRateProcNoiseVar(_lAccum rateprocnoisevar){
+	rate_proc_noise_var = rateprocnoisevar;			// variance in process noise affecting angular rate (rad^2/s^2*2^24).  In the case of an aircraft, this could be noise such as wind.
+	return;
+} // end of SetRateProcNoiseVar()
+
+/*
+ * Class:		GyroKalman
+ * Function:	SetAngleObsNoiseVar()
+ * Scope:		Public
+ * Arguments:	_lAccum angleobsnoisevar	- Variance of observation noise affecting angle, rad^2 *2^24.
+ * Description:	Sets variance in observation noise affecting angle (rad^2 * 2^24).  This is the variance of the compass signal noise.
+ */
+void GyroKalman::SetAngleObsNoiseVar(_lAccum angleobsnoisevar){
+	angle_obs_noise_var = angleobsnoisevar;			// variance in observation noise affecting angle (rad^2 * 2^24).  This is the variance of the compass signal noise.
+	return;
+} // end of SetAngleObsNoiseVar()
+
+/*
+ * Class:		GyroKalman
+ * Function:	SetRateObsNoiseVar()
+ * Scope:		Public
+ * Arguments:	_lAccum rateobsnoisevar		- Variance of observation noise affecting rate, rad^2/sec^2 *2^24.
+ * Description:	Sets variance in observation noise affecting rate measurement (rad^2/s^2*2^24).  This is the variance of the gyroscope signal noise.
+ */
+void GyroKalman::SetRateObsNoiseVar(_lAccum rateobsnoisevar){
+	rate_obs_noise_var = rateobsnoisevar;			// variance in observation noise affecting rate measurement (rad^2/s^2*2^24).  This is the variance of the gyroscope signal noise.
+	return;
+} // end of SetRateObsNoiseVar()
+
+/*
+ * Class:		GyroKalman
+ * Function:	Est_NoCtrl_NoMeas()
+ * Scope:		Public
+ * Arguments:	long	StepTime_us		- step time taken between this prediction and last estimation step, in microseconds
+ * Description:	Performs estimation step with no known control inputs and no measured states
+ */
+void GyroKalman::Est_NoCtrl_NoMeas(long StepTime_us){
+	Predict(StepTime_us);						// predict state estimates and estimate covariances based on past data alone
+	Update_with_NoData();						// update state estimates and covariances with new measurements (none in this case)
+	return;
+} // end of Est_NoCtrl_NoMeas()
+
+/*
+ * Class:		GyroKalman
+ * Function:	Est_NoCtrl_MeasAngle()
+ * Scope:		Public
+ * Arguments:	long	StepTime_us		- step time taken between this prediction and last estimation step, in microseconds
+ * 				_lAccum	angle			- angle measured at this time step, in radians *2^24
+ * Description:	Performs estimation step with no known control inputs and measured angle (but no measured rate)
+ */
+void GyroKalman::Est_NoCtrl_MeasAngle(long StepTime_us,_lAccum angle){
+	Predict(StepTime_us);						// predict state estimates and estimate covariances based on past data alone
+	Update_with_Angle(angle);					// update state estimates and covariances with new measurements (angle measurement in this case)
+	return;
+} // end of Est_NoCtrl_MeasAngle()
+
+/*
+ * Class:		GyroKalman
+ * Function:	Est_NoCtrl_MeasRate()
+ * Scope:		Public
+ * Arguments:	long	StepTime_us		- step time taken between this prediction and last estimation step, in microseconds
+ * 				_lAccum	rate			- rate measured at this time step, in radians/sec *2^24
+ * Description:	Performs estimation step with no known control inputs and measured rate (but no measured angle)
+ */
+void GyroKalman::Est_NoCtrl_MeasRate(long StepTime_us,_lAccum rate){
+	Predict(StepTime_us);						// predict state estimates and estimate covariances based on past data alone
+	Update_with_Rate(rate);					// update state estimates and covariances with new measurements (rate measurement in this case)
+	return;
+} // end of Est_NoCtrl_MeasRate()
+
+/*
+ * Class:		GyroKalman
+ * Function:	Est_NoCtrl_MeasAngleAndRate()
+ * Scope:		Public
+ * Arguments:	long	StepTime_us		- step time taken between this prediction and last estimation step, in microseconds
+ * 				_lAccum	angle			- angle measured at this time step, in radians *2^24
+ * 				_lAccum	rate			- rate measured at this time step, in radians/sec *2^24
+ * Description:	Performs estimation step with no known control inputs, but with measured angle and rate
+ */
+void GyroKalman::Est_NoCtrl_MeasAngleAndRate(long StepTime_us,
+					_lAccum angle,_lAccum rate){
+	Predict(StepTime_us);						// predict state estimates and estimate covariances based on past data alone
+	Update_with_Angle_and_Rate(angle,rate);		// update state estimates and covariances with new measurements (both angle and rate measurements in this case)
+	return;
+} // end of Est_NoCtrl_MeasAngleAndRate()
+
+/*
+ * Class:		GyroKalman
+ * Function:	Est_Ctrl_NoMeas()
+ * Scope:		Public
+ * Arguments:	long	StepTime_us				- step time taken between this prediction and last estimation step, in microseconds
+ * 				_lAccum	rateActuation_radps2	- known controller's angular acceleration (from torque) input to system at last time interval, in rad/sec^2
+ * Description:	Performs estimation step with known control inputs and no measured states
+ */
+void GyroKalman::Est_Ctrl_NoMeas(long StepTime_us,
+					_lAccum rateActuation_radps2){
+	Predict(StepTime_us,rateActuation_radps2);	// predict state estimates and estimate covariances based on past data, with known control inputs
+	Update_with_NoData();						// update state estimates and covariances with new measurements (none in this case)
+	return;
+} // end of Est_Ctrl_NoMeas()
+
+/*
+ * Class:		GyroKalman
+ * Function:	Est_Ctrl_MeasAngle()
+ * Scope:		Public
+ * Arguments:	long	StepTime_us				- step time taken between this prediction and last estimation step, in microseconds
+ * 				_lAccum	rateActuation_radps2	- known controller's angular acceleration (from torque) input to system at last time interval, in rad/sec^2
+ * 				_lAccum	angle					- angle measured at this time step, in radians *2^24
+ * Description:	Performs estimation step with known control inputs and measured angle (but no measured rate)
+ */
+void GyroKalman::Est_Ctrl_MeasAngle(long StepTime_us,
+					_lAccum rateActuation_radps2,_lAccum angle){
+	Predict(StepTime_us,rateActuation_radps2);	// predict state estimates and estimate covariances based on past data, with known control inputs
+	Update_with_Angle(angle);					// update state estimates and covariances with new measurements (angle measurement in this case)
+	return;
+} // end of Est_Ctrl_MeasAngle()
+
+/*
+ * Class:		GyroKalman
+ * Function:	Est_Ctrl_MeasRate()
+ * Scope:		Public
+ * Arguments:	long	StepTime_us				- step time taken between this prediction and last estimation step, in microseconds
+ * 				_lAccum	rateActuation_radps2	- known controller's angular acceleration (from torque) input to system at last time interval, in rad/sec^2
+ * 				_lAccum	rate					- rate measured at this time step, in radians/sec *2^24
+ * Description:	Performs estimation step with known control inputs and measured rate (but no measured angle)
+ */
+void GyroKalman::Est_Ctrl_MeasRate(long StepTime_us,
+					_lAccum rateActuation_radps2,_lAccum rate){
+	Predict(StepTime_us,rateActuation_radps2);	// predict state estimates and estimate covariances based on past data, with known control inputs
+	Update_with_Rate(rate);					// update state estimates and covariances with new measurements (rate measurement in this case)
+	return;
+} // end of Est_Ctrl_MeasRate
+
+/*
+ * Class:		GyroKalman
+ * Function:	Est_Ctrl_MeasAngleAndRate()
+ * Scope:		Public
+ * Arguments:	long	StepTime_us				- step time taken between this prediction and last estimation step, in microseconds
+ * 				_lAccum	rateActuation_radps2	- known controller's angular acceleration (from torque) input to system at last time interval, in rad/sec^2
+ * 				_lAccum	angle					- angle measured at this time step, in radians *2^24
+ * 				_lAccum	rate					- rate measured at this time step, in radians/sec *2^24
+ * Description:	Performs estimation step with known control inputs, but with measured angle and rate
+ */
+void GyroKalman::Est_Ctrl_MeasAngleAndRate(long StepTime_us,
+					_lAccum rateActuation_radps2,_lAccum angle,
+					_lAccum rate){
+	Predict(StepTime_us,rateActuation_radps2);	// predict state estimates and estimate covariances based on past data, with known control inputs
+	Update_with_Angle_and_Rate(angle,rate);		// update state estimates and covariances with new measurements (both angle and rate measurements in this case)
+	return;
+} // end of Est_Ctrl_MeasAngleAndRate
+
+
+// Private functions in class GyroKalman
+
+
+/*
+ * Class:		GyroKalman
+ * Function:	Predict()
+ * Scope:		private
  * Arguments:	long	StepTime_us		- step time taken between this prediction and last estimation step, in microseconds
  * Description:	performs prediction step based on past information, only knowing time step to take
  */
@@ -59,7 +274,7 @@ void GyroKalman::Predict(long StepTime_us){
 /*
  * Class:		GyroKalman
  * Function:	Predict()
- * Scope:		Public
+ * Scope:		private
  * Arguments:	long	StepTime_us				- step time taken between this prediction and last estimation step, in microseconds.  Limit of 999992 (0.999992 seconds)
  * 				_lAccum	rateActuation_radps2	- known controller's angular acceleration (from torque) input to system at last time interval, in rad/sec^2
  * Description:	performs prediction step based on past information, only knowing time step to take.  Includes optional
@@ -98,7 +313,7 @@ void GyroKalman::Predict(long StepTime_us, _lAccum rateActuation_radps2){
 /*
  * Class:		GyroKalman
  * Function:	Update_with_NoData()
- * Scope:		Public
+ * Scope:		private
  * Arguments:	None
  * Description:	performs update step without any measured data - really just skips the update step and places prediction
  * 				in estimate instead
@@ -120,7 +335,7 @@ void GyroKalman::Update_with_NoData(void){
 /*
  * Class:		GyroKalman
  * Function:	Update_with_Angle()
- * Scope:		Public
+ * Scope:		private
  * Arguments:	_lAccum	angle	- angle measured at this time step, in radians *2^24
  * Description:	performs update step with measured angle data (from compass), but no rate data.
  */
@@ -155,7 +370,7 @@ void GyroKalman::Update_with_Angle(_lAccum angle){
 /*
  * Class:		GyroKalman
  * Function:	Update_with_Rate()
- * Scope:		Public
+ * Scope:		private
  * Arguments:	_lAccum	rate	- rate measured at this time step, in radians/sec *2^24
  * Description:	performs update step with measured rate data (from gyro), but no angle data.
  */
@@ -190,7 +405,7 @@ void GyroKalman::Update_with_Rate(_lAccum rate){
 /*
  * Class:		GyroKalman
  * Function:	Update_with_Angle_and_Rate()
- * Scope:		Public
+ * Scope:		private
  * Arguments:	_lAccum	angle	- angle measured at this time step, in radians *2^24
  * 				_lAccum	rate	- rate measured at this time step, in radians/sec *2^24
  * Description:	performs update step with both measured angle and rate data

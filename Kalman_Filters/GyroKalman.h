@@ -49,10 +49,6 @@ private:
 	_lAccum angle_est;				// estimated angle (radians*2^24) at current time, updated with latest measurements
 	_lAccum rate_est;				// estimated angular velocity (radians/sec * 2^24), updated with latest measurements
 
-
-public:
-	GyroKalman(void);				// Constructor for GyroKalman class
-	void SetAngleObsVar(_lAccum var);								// sets variance in observation noise affecting angle (rad^2 * 2^24).  This is the variance of the compass signal noise. minimum value of one rad^2, max of 128 rad^2
 	void Predict(long StepTime_us);									// performs prediction step based on past information, only knowing time step to take
 	void Predict(long StepTime_us, _lAccum rateActuation_radps2);	// performs prediction step based on past information, only knowing time step to take.  Includes optional controller actuation input (rad/s*2^24), if known.
 	void Update_with_NoData(void);									// performs update step without any measured data - really just skips the update step and places prediction in estimate instead
@@ -60,6 +56,35 @@ public:
 	void Update_with_Rate(_lAccum rate);							// performs update step with measured rate data (from gyro), but no angle data.
 	void Update_with_Angle_and_Rate(_lAccum angle, _lAccum rate);	// performs update step with both measured angle and rate data
 
+public:
+	GyroKalman(void);				// Constructor for GyroKalman class
+	void SetAngleObsVar(_lAccum var);								// sets variance in observation noise affecting angle (rad^2 * 2^24).  This is the variance of the compass signal noise. minimum value of one rad^2, max of 128 rad^2
+	void Initialize(	_lAccum angleprocnoisevar,
+						_lAccum rateprocnoisevar,
+						_lAccum angleobsnoisevar,
+						_lAccum rateobsnoisevar,
+						_lAccum InitialAngle,
+						_lAccum InitialRate,
+						_lAccum InitialAngleEstVar,
+						_lAccum InitialRateEstVar);					// Initializes the Kalman Filter with specified variances, state estimates, and estimate variances
+	void SetAngleProcNoiseVar(_lAccum angleprocnoisevar);			// Sets Variance of process noise affecting angle, rad^2 *2^24.
+	void SetRateProcNoiseVar(_lAccum rateprocnoisevar);				// Sets Variance of process noise affecting rate, rad^2/sec^2 *2^24.
+	void SetAngleObsNoiseVar(_lAccum angleobsnoisevar);				// Sets Variance of observation noise affecting angle, rad^2 *2^24.
+	void SetRateObsNoiseVar(_lAccum rateobsnoisevar);				// Sets Variance of observation noise affecting rate, rad^2/sec^2 *2^24.
+	void Est_NoCtrl_NoMeas(long StepTime_us);						// Performs estimation step with no known control inputs and no measured states
+	void Est_NoCtrl_MeasAngle(long StepTime_us,_lAccum angle);		// Performs estimation step with no known control inputs and measured angle (but no measured rate)
+	void Est_NoCtrl_MeasRate(long StepTime_us,_lAccum rate);		// Performs estimation step with no known control inputs and measured rate (but no measured angle)
+	void Est_NoCtrl_MeasAngleAndRate(long StepTime_us,
+						_lAccum angle,_lAccum rate);				// Performs estimation step with no known control inputs, but with measured angle and rate
+	void Est_Ctrl_NoMeas(long StepTime_us,
+						_lAccum rateActuation_radps2);				// Performs estimation step with known control inputs and no measured states
+	void Est_Ctrl_MeasAngle(long StepTime_us,
+						_lAccum rateActuation_radps2,_lAccum angle);// Performs estimation step with known control inputs and measured angle (but no measured rate)
+	void Est_Ctrl_MeasRate(long StepTime_us,
+						_lAccum rateActuation_radps2,_lAccum rate);	// Performs estimation step with known control inputs and measured rate (but no measured angle)
+	void Est_Ctrl_MeasAngleAndRate(long StepTime_us,
+						_lAccum rateActuation_radps2,_lAccum angle,
+						_lAccum rate);								// Performs estimation step with known control inputs, but with measured angle and rate
 
 };	// end of class GyroKalman
 
