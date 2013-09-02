@@ -85,6 +85,9 @@ public:
 	void Est_Ctrl_MeasAngleAndRate(long StepTime_us,
 						_lAccum rateActuation_radps2,_lAccum angle,
 						_lAccum rate);								// Performs estimation step with known control inputs, but with measured angle and rate
+	_lAccum GetAngle(void);											// returns estimated angle, in radians
+	_lAccum GetRate(void);											// returns estimated rate, in radians/sec
+	_lAccum GetEstCov(byte i);										// returns the desired element of the estimate covariance matrix.
 
 };	// end of class GyroKalman
 

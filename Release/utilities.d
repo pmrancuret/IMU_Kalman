@@ -1,5 +1,4 @@
-GlobalVariables.d GlobalVariables.o: ../GlobalVariables.cpp \
-  ../GlobalVariables.h ../IMU_Kalman.h \
+utilities.d utilities.o: ../utilities.cpp ../utilities.h ../IMU_Kalman.h \
   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Arduino.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/stdlib.h \
   D:\Documents\Arduino\IMU_Kalman\avr_includes/string.h \
@@ -35,9 +34,9 @@ GlobalVariables.d GlobalVariables.o: ../GlobalVariables.cpp \
   D:\Documents\Arduino\IMU_Kalman\Wire/Wire.h \
   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h \
   D:\Documents\Arduino\IMU_Kalman\Kalman_Filters/GyroKalman.h \
-  ../utilities.h
+  ../GlobalVariables.h
 
-../GlobalVariables.h:
+../utilities.h:
 
 ../IMU_Kalman.h:
 
@@ -111,4 +110,4 @@ D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\Arduino/Stream.h:
 
 D:\Documents\Arduino\IMU_Kalman\Kalman_Filters/GyroKalman.h:
 
-../utilities.h:
+../GlobalVariables.h:

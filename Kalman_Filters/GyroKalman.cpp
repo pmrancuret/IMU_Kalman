@@ -255,6 +255,43 @@ void GyroKalman::Est_Ctrl_MeasAngleAndRate(long StepTime_us,
 	return;
 } // end of Est_Ctrl_MeasAngleAndRate
 
+/*
+ * Class:		GyroKalman
+ * Function:	GetAngle()
+ * Scope:		Public
+ * Arguments:	None
+ * Description:	returns estimated angle, in radians
+ */
+_lAccum GyroKalman::GetAngle(void){
+	return angle_est;		// returns estimated angle, in radians
+} // end of GetAngle()
+
+/*
+ * Class:		GyroKalman
+ * Function:	GetRate()
+ * Scope:		Public
+ * Arguments:	None
+ * Description:	returns estimated rate, in radians/sec
+ */
+_lAccum GyroKalman::GetRate(void){
+	return rate_est;		// returns estimated rate, in radians/sec
+} // end of GetRate()
+
+/*
+ * Class:		GyroKalman
+ * Function:	GetEstCov()
+ * Scope:		Public
+ * Arguments:	byte	i	- Desired element of the estimate covariance matrix. Values:
+ * 								0: first row, first column.  This is the variance of angle estimation
+ * 								1: first row, second column.  This is the covariance between angle and rate estimation
+ * 								2: second row, first column.  This is the covariance between rate and angle estimation
+ * 								3: second row, second colunn.  This is the variance of rate estimation
+ * Description:	returns the desired element of the estimate covariance matrix.
+ */
+_lAccum GyroKalman::GetEstCov(byte i){
+	return est_cov_aposteriori[i];		// returns the desired element of the estimate covariance matrix.
+} // end of GetEstCov()
+
 
 // Private functions in class GyroKalman
 

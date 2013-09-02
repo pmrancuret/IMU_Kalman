@@ -185,33 +185,13 @@ Discarded input sections
                 0x00000000        0x0 ./MPU6000/MPU6000.o
  .text._ZN7MPU60008data_intEv
                 0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU60009GetAccelXEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU60009GetAccelYEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU60009GetAccelZEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU60008GetGyroXEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU60008GetGyroYEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU60008GetGyroZEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
  .text._ZN7MPU60007GetTempEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU600012GetDataCountEv
                 0x00000000        0x0 ./MPU6000/MPU6000.o
  .text._ZN7MPU600011GetIdentityEv
                 0x00000000        0x0 ./MPU6000/MPU6000.o
  .text._ZN7MPU60009Read_TempEv
                 0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU60009Read_GyroEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU600010Read_AccelEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
  .text._ZN7MPU600013Read_All_DataEv
-                0x00000000        0x0 ./MPU6000/MPU6000.o
- .text._ZN7MPU600019Read_Accel_and_GyroEv
                 0x00000000        0x0 ./MPU6000/MPU6000.o
  .text._ZN7MPU600010InitializeEv
                 0x00000000        0x0 ./MPU6000/MPU6000.o
@@ -219,8 +199,6 @@ Discarded input sections
  .data          0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .bss           0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .text._ZN10GyroKalmanC2Ev
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman10InitializeEllllllll
                 0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .text._ZN10GyroKalman20SetAngleProcNoiseVarEl
                 0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
@@ -230,33 +208,17 @@ Discarded input sections
                 0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .text._ZN10GyroKalman18SetRateObsNoiseVarEl
                 0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
+ .text._ZN10GyroKalman9GetEstCovEh
+                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .text._ZN10GyroKalman18Update_with_NoDataEv
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman7PredictEll
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman7PredictEl
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman17Est_NoCtrl_NoMeasEl
                 0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .text._ZN10GyroKalman15Est_Ctrl_NoMeasEll
                 0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman26Update_with_Angle_and_RateEll
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .text._ZN10GyroKalman25Est_Ctrl_MeasAngleAndRateEllll
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman27Est_NoCtrl_MeasAngleAndRateElll
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman16Update_with_RateEl
                 0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .text._ZN10GyroKalman17Est_Ctrl_MeasRateElll
                 0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman19Est_NoCtrl_MeasRateEll
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman17Update_with_AngleEl
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .text._ZN10GyroKalman18Est_Ctrl_MeasAngleElll
-                0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
- .text._ZN10GyroKalman20Est_NoCtrl_MeasAngleEll
                 0x00000000        0x0 ./Kalman_Filters/GyroKalman.o
  .text          0x00000000        0x0 ./HMC5883/HMC5883.o
  .data          0x00000000        0x0 ./HMC5883/HMC5883.o
@@ -283,12 +245,6 @@ Discarded input sections
                 0x00000000        0x0 ./HMC5883/HMC5883.o
  .text._ZN7HMC588317GetMagDeclinationEv
                 0x00000000        0x0 ./HMC5883/HMC5883.o
- .text._ZN7HMC588312GetDataCountEv
-                0x00000000        0x0 ./HMC5883/HMC5883.o
- .text._ZN7HMC588313Read_Mag_DataEv
-                0x00000000        0x0 ./HMC5883/HMC5883.o
- .text._ZN7HMC588312Calc_HeadingEll
-                0x00000000        0x0 ./HMC5883/HMC5883.o
  .text._ZN7HMC588330Read_Mag_Data_And_Calc_HeadingEll
                 0x00000000        0x0 ./HMC5883/HMC5883.o
  .text._ZN7HMC588310InitializeEv
@@ -296,8 +252,6 @@ Discarded input sections
  .text          0x00000000        0x0 ./GlobalVariables.o
  .data          0x00000000        0x0 ./GlobalVariables.o
  .bss           0x00000000        0x0 ./GlobalVariables.o
- .bss.heading_rad
-                0x00000000        0x0 ./GlobalVariables.o
  .bss.heading_deg
                 0x00000000        0x0 ./GlobalVariables.o
  .bss.magX_Ga   0x00000000        0x0 ./GlobalVariables.o
@@ -305,23 +259,26 @@ Discarded input sections
  .bss.magZ_Ga   0x00000000        0x0 ./GlobalVariables.o
  .bss.mag_datacount
                 0x00000000        0x0 ./GlobalVariables.o
+ .bss.templAccum1
+                0x00000000        0x0 ./GlobalVariables.o
+ .bss.templAccum2
+                0x00000000        0x0 ./GlobalVariables.o
+ .bss.templAccum3
+                0x00000000        0x0 ./GlobalVariables.o
  .bss.templAccum4
                 0x00000000        0x0 ./GlobalVariables.o
  .text          0x00000000        0x0 ./IMU_Kalman.o
  .bss           0x00000000        0x0 ./IMU_Kalman.o
- .text          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lmullkD.o)
+ .text          0x00000000        0x0 ./utilities.o
+ .bss           0x00000000        0x0 ./utilities.o
  .data          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lmullkD.o)
  .bss           0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lmullkD.o)
  .data          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(ldivlkD.o)
  .bss           0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(ldivlkD.o)
- .text          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lsincoslk.o)
  .data          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lsincoslk.o)
  .bss           0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lsincoslk.o)
- .text          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(latan2lk.o)
  .data          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(latan2lk.o)
  .bss           0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(latan2lk.o)
- .text          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(cordicck.o)
- .data          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(cordicck.o)
  .bss           0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(cordicck.o)
  .text          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
  .data          0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
@@ -353,8 +310,6 @@ Discarded input sections
                 0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
  .text._ZN5Print7printlnERK9Printable
                 0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
- .text._ZN5Print5printEmi
-                0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
  .text._ZN5Print7printlnEmi
                 0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
  .text._ZN5Print5printEji
@@ -366,8 +321,6 @@ Discarded input sections
  .text._ZN5Print7printlnEhi
                 0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
  .text._ZN5Print7printlnEli
-                0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
- .text._ZN5Print5printEii
                 0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
  .text._ZN5Print7printlnEii
                 0x00000000        0x0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
@@ -778,6 +731,7 @@ LOAD ./Kalman_Filters/GyroKalman.o
 LOAD ./HMC5883/HMC5883.o
 LOAD ./GlobalVariables.o
 LOAD ./IMU_Kalman.o
+LOAD ./utilities.o
 LOAD D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a
 LOAD D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a
 LOAD c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libm.a
@@ -875,7 +829,7 @@ LOAD c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/av
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1f08
+.text           0x00000000     0x4302
  *(.vectors)
  .vectors       0x00000000       0x68 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vectors
@@ -977,200 +931,298 @@ LOAD c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/av
                 0x000002ae                twi_reply
                 0x000002be                twi_stop
                 0x00000120                twi_setAddress
- .text          0x0000063c      0x106 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(ldivlkD.o)
-                0x0000063c                ldivlkD
-                0x00000742                . = ALIGN (0x2)
+ .text          0x0000063c      0x18a D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lmullkD.o)
+                0x0000063c                lmullkD
+ .text          0x000007c6      0x106 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(ldivlkD.o)
+                0x000007c6                ldivlkD
+ .text          0x000008cc      0x22c D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lsincoslk.o)
+                0x000008cc                lsincoslk
+ .text          0x00000af8      0x1ac D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(latan2lk.o)
+                0x00000af8                latan2lk
+ .text          0x00000ca4      0x1ac D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(cordicck.o)
+                0x00000ca4                cordicck
+                0x00000e50                . = ALIGN (0x2)
  *(.text.*)
  .text._ZN7TwoWire17beginTransmissionEi
-                0x00000742       0x14 ./Wire/Wire.o
-                0x00000742                TwoWire::beginTransmission(int)
+                0x00000e50       0x14 ./Wire/Wire.o
+                0x00000e50                TwoWire::beginTransmission(int)
  .text._ZN7TwoWire9availableEv
-                0x00000756       0x12 ./Wire/Wire.o
-                0x00000756                TwoWire::available()
+                0x00000e64       0x12 ./Wire/Wire.o
+                0x00000e64                TwoWire::available()
  .text._ZN7TwoWire4readEv
-                0x00000768       0x2a ./Wire/Wire.o
-                0x00000768                TwoWire::read()
+                0x00000e76       0x2a ./Wire/Wire.o
+                0x00000e76                TwoWire::read()
  .text._ZN7TwoWire4peekEv
-                0x00000792       0x22 ./Wire/Wire.o
-                0x00000792                TwoWire::peek()
+                0x00000ea0       0x22 ./Wire/Wire.o
+                0x00000ea0                TwoWire::peek()
  .text._ZN7TwoWire5flushEv
-                0x000007b4        0x2 ./Wire/Wire.o
-                0x000007b4                TwoWire::flush()
+                0x00000ec2        0x2 ./Wire/Wire.o
+                0x00000ec2                TwoWire::flush()
  .text._GLOBAL__I__ZN7TwoWire8rxBufferE
-                0x000007b6       0x2e ./Wire/Wire.o
+                0x00000ec4       0x2e ./Wire/Wire.o
  .text._ZN7TwoWire5writeEPKhj
-                0x000007e4       0x62 ./Wire/Wire.o
-                0x000007e4                TwoWire::write(unsigned char const*, unsigned int)
+                0x00000ef2       0x62 ./Wire/Wire.o
+                0x00000ef2                TwoWire::write(unsigned char const*, unsigned int)
  .text._ZN7TwoWire5writeEh
-                0x00000846       0x60 ./Wire/Wire.o
-                0x00000846                TwoWire::write(unsigned char)
+                0x00000f54       0x60 ./Wire/Wire.o
+                0x00000f54                TwoWire::write(unsigned char)
  .text._ZN7TwoWire15endTransmissionEh
-                0x000008a6       0x26 ./Wire/Wire.o
-                0x000008a6                TwoWire::endTransmission(unsigned char)
+                0x00000fb4       0x26 ./Wire/Wire.o
+                0x00000fb4                TwoWire::endTransmission(unsigned char)
  .text._ZN7TwoWire15endTransmissionEv
-                0x000008cc        0x8 ./Wire/Wire.o
-                0x000008cc                TwoWire::endTransmission()
+                0x00000fda        0x8 ./Wire/Wire.o
+                0x00000fda                TwoWire::endTransmission()
  .text._ZN7TwoWire11requestFromEhhh
-                0x000008d4       0x1a ./Wire/Wire.o
-                0x000008d4                TwoWire::requestFrom(unsigned char, unsigned char, unsigned char)
+                0x00000fe2       0x1a ./Wire/Wire.o
+                0x00000fe2                TwoWire::requestFrom(unsigned char, unsigned char, unsigned char)
  .text._ZN7TwoWire11requestFromEhh
-                0x000008ee        0x8 ./Wire/Wire.o
-                0x000008ee                TwoWire::requestFrom(unsigned char, unsigned char)
+                0x00000ffc        0x8 ./Wire/Wire.o
+                0x00000ffc                TwoWire::requestFrom(unsigned char, unsigned char)
  .text._ZN7TwoWire5beginEv
-                0x000008f6       0x16 ./Wire/Wire.o
-                0x000008f6                TwoWire::begin()
+                0x00001004       0x16 ./Wire/Wire.o
+                0x00001004                TwoWire::begin()
  .text._ZN8SPIClass15setClockDividerEh
-                0x0000090c       0x22 ./SPI/SPI.o
-                0x0000090c                SPIClass::setClockDivider(unsigned char)
+                0x0000101a       0x22 ./SPI/SPI.o
+                0x0000101a                SPIClass::setClockDivider(unsigned char)
  .text._ZN8SPIClass5beginEv
-                0x0000092e       0x2e ./SPI/SPI.o
-                0x0000092e                SPIClass::begin()
+                0x0000103c       0x2e ./SPI/SPI.o
+                0x0000103c                SPIClass::begin()
  .text._ZN7MPU6000C1Ev
-                0x0000095c       0x74 ./MPU6000/MPU6000.o
-                0x0000095c                MPU6000::MPU6000()
+                0x0000106a       0x74 ./MPU6000/MPU6000.o
+                0x0000106a                MPU6000::MPU6000()
  .text._ZN7MPU600016Set_Gyro_OffsetsElll
-                0x000009d0       0x34 ./MPU6000/MPU6000.o
-                0x000009d0                MPU6000::Set_Gyro_Offsets(long, long, long)
+                0x000010de       0x34 ./MPU6000/MPU6000.o
+                0x000010de                MPU6000::Set_Gyro_Offsets(long, long, long)
  .text._ZN7MPU600017Set_Accel_OffsetsElll
-                0x00000a04       0x34 ./MPU6000/MPU6000.o
-                0x00000a04                MPU6000::Set_Accel_Offsets(long, long, long)
+                0x00001112       0x34 ./MPU6000/MPU6000.o
+                0x00001112                MPU6000::Set_Accel_Offsets(long, long, long)
+ .text._ZN7MPU60009GetAccelXEv
+                0x00001146        0xc ./MPU6000/MPU6000.o
+                0x00001146                MPU6000::GetAccelX()
+ .text._ZN7MPU60009GetAccelYEv
+                0x00001152        0xc ./MPU6000/MPU6000.o
+                0x00001152                MPU6000::GetAccelY()
+ .text._ZN7MPU60009GetAccelZEv
+                0x0000115e        0xc ./MPU6000/MPU6000.o
+                0x0000115e                MPU6000::GetAccelZ()
+ .text._ZN7MPU60008GetGyroXEv
+                0x0000116a        0xc ./MPU6000/MPU6000.o
+                0x0000116a                MPU6000::GetGyroX()
+ .text._ZN7MPU60008GetGyroYEv
+                0x00001176        0xc ./MPU6000/MPU6000.o
+                0x00001176                MPU6000::GetGyroY()
+ .text._ZN7MPU60008GetGyroZEv
+                0x00001182        0xc ./MPU6000/MPU6000.o
+                0x00001182                MPU6000::GetGyroZ()
+ .text._ZN7MPU600012GetDataCountEv
+                0x0000118e        0x6 ./MPU6000/MPU6000.o
+                0x0000118e                MPU6000::GetDataCount()
  .text._Z16MPU6000_data_intv
-                0x00000a38        0xc ./MPU6000/MPU6000.o
-                0x00000a38                MPU6000_data_int()
+                0x00001194        0xc ./MPU6000/MPU6000.o
+                0x00001194                MPU6000_data_int()
  .text._GLOBAL__I_Mpu6000
-                0x00000a44        0xa ./MPU6000/MPU6000.o
+                0x000011a0        0xa ./MPU6000/MPU6000.o
  .text._ZN7MPU60008SPI_readEh
-                0x00000a4e       0x30 ./MPU6000/MPU6000.o
-                0x00000a4e                MPU6000::SPI_read(unsigned char)
+                0x000011aa       0x30 ./MPU6000/MPU6000.o
+                0x000011aa                MPU6000::SPI_read(unsigned char)
+ .text._ZN7MPU60009Read_GyroEv
+                0x000011da      0x192 ./MPU6000/MPU6000.o
+                0x000011da                MPU6000::Read_Gyro()
+ .text._ZN7MPU600010Read_AccelEv
+                0x0000136c      0x2c8 ./MPU6000/MPU6000.o
+                0x0000136c                MPU6000::Read_Accel()
+ .text._ZN7MPU600019Read_Accel_and_GyroEv
+                0x00001634       0x2e ./MPU6000/MPU6000.o
+                0x00001634                MPU6000::Read_Accel_and_Gyro()
  .text._ZN7MPU60009SPI_writeEhh
-                0x00000a7e       0x32 ./MPU6000/MPU6000.o
-                0x00000a7e                MPU6000::SPI_write(unsigned char, unsigned char)
+                0x00001662       0x32 ./MPU6000/MPU6000.o
+                0x00001662                MPU6000::SPI_write(unsigned char, unsigned char)
  .text._ZN7MPU600010InitializeEjhhh
-                0x00000ab0      0x26e ./MPU6000/MPU6000.o
-                0x00000ab0                MPU6000::Initialize(unsigned int, unsigned char, unsigned char, unsigned char)
+                0x00001694      0x26e ./MPU6000/MPU6000.o
+                0x00001694                MPU6000::Initialize(unsigned int, unsigned char, unsigned char, unsigned char)
  .text._ZN10GyroKalmanC1Ev
-                0x00000d1e       0x84 ./Kalman_Filters/GyroKalman.o
-                0x00000d1e                GyroKalman::GyroKalman()
+                0x00001902       0x84 ./Kalman_Filters/GyroKalman.o
+                0x00001902                GyroKalman::GyroKalman()
+ .text._ZN10GyroKalman10InitializeEllllllll
+                0x00001986       0xf8 ./Kalman_Filters/GyroKalman.o
+                0x00001986                GyroKalman::Initialize(long, long, long, long, long, long, long, long)
+ .text._ZN10GyroKalman8GetAngleEv
+                0x00001a7e        0xc ./Kalman_Filters/GyroKalman.o
+                0x00001a7e                GyroKalman::GetAngle()
+ .text._ZN10GyroKalman7GetRateEv
+                0x00001a8a        0xc ./Kalman_Filters/GyroKalman.o
+                0x00001a8a                GyroKalman::GetRate()
  .text._GLOBAL__I_XAxisGyroKalman
-                0x00000da2       0x1a ./Kalman_Filters/GyroKalman.o
+                0x00001a96       0x1a ./Kalman_Filters/GyroKalman.o
+ .text._ZN10GyroKalman7PredictEll
+                0x00001ab0      0x284 ./Kalman_Filters/GyroKalman.o
+                0x00001ab0                GyroKalman::Predict(long, long)
+ .text._ZN10GyroKalman7PredictEl
+                0x00001d34       0x16 ./Kalman_Filters/GyroKalman.o
+                0x00001d34                GyroKalman::Predict(long)
+ .text._ZN10GyroKalman17Est_NoCtrl_NoMeasEl
+                0x00001d4a       0x72 ./Kalman_Filters/GyroKalman.o
+                0x00001d4a                GyroKalman::Est_NoCtrl_NoMeas(long)
+ .text._ZN10GyroKalman26Update_with_Angle_and_RateEll
+                0x00001dbc      0x466 ./Kalman_Filters/GyroKalman.o
+                0x00001dbc                GyroKalman::Update_with_Angle_and_Rate(long, long)
+ .text._ZN10GyroKalman27Est_NoCtrl_MeasAngleAndRateElll
+                0x00002222       0x4a ./Kalman_Filters/GyroKalman.o
+                0x00002222                GyroKalman::Est_NoCtrl_MeasAngleAndRate(long, long, long)
+ .text._ZN10GyroKalman16Update_with_RateEl
+                0x0000226c      0x1b8 ./Kalman_Filters/GyroKalman.o
+                0x0000226c                GyroKalman::Update_with_Rate(long)
+ .text._ZN10GyroKalman19Est_NoCtrl_MeasRateEll
+                0x00002424       0x36 ./Kalman_Filters/GyroKalman.o
+                0x00002424                GyroKalman::Est_NoCtrl_MeasRate(long, long)
+ .text._ZN10GyroKalman17Update_with_AngleEl
+                0x0000245a      0x1b8 ./Kalman_Filters/GyroKalman.o
+                0x0000245a                GyroKalman::Update_with_Angle(long)
+ .text._ZN10GyroKalman20Est_NoCtrl_MeasAngleEll
+                0x00002612       0x36 ./Kalman_Filters/GyroKalman.o
+                0x00002612                GyroKalman::Est_NoCtrl_MeasAngle(long, long)
  .text._ZN7HMC588310set_offsetElll
-                0x00000dbc       0x1c ./HMC5883/HMC5883.o
-                0x00000dbc                HMC5883::set_offset(long, long, long)
+                0x00002648       0x1c ./HMC5883/HMC5883.o
+                0x00002648                HMC5883::set_offset(long, long, long)
  .text._ZN7HMC588319set_mag_declinationEl
-                0x00000dd8        0xc ./HMC5883/HMC5883.o
-                0x00000dd8                HMC5883::set_mag_declination(long)
+                0x00002664        0xc ./HMC5883/HMC5883.o
+                0x00002664                HMC5883::set_mag_declination(long)
+ .text._ZN7HMC588312GetDataCountEv
+                0x00002670        0x6 ./HMC5883/HMC5883.o
+                0x00002670                HMC5883::GetDataCount()
  .text._Z16HMC5883_data_intv
-                0x00000de4        0xc ./HMC5883/HMC5883.o
-                0x00000de4                HMC5883_data_int()
+                0x00002676        0xc ./HMC5883/HMC5883.o
+                0x00002676                HMC5883_data_int()
  .text._GLOBAL__I_Hmc5883
-                0x00000df0       0xaa ./HMC5883/HMC5883.o
+                0x00002682       0xaa ./HMC5883/HMC5883.o
  .text._ZN7HMC58835writeEhh
-                0x00000e9a       0x3e ./HMC5883/HMC5883.o
-                0x00000e9a                HMC5883::write(unsigned char, unsigned char)
+                0x0000272c       0x3e ./HMC5883/HMC5883.o
+                0x0000272c                HMC5883::write(unsigned char, unsigned char)
  .text._ZN7HMC58834readEhhPh
-                0x00000ed8       0x74 ./HMC5883/HMC5883.o
-                0x00000ed8                HMC5883::read(unsigned char, unsigned char, unsigned char*)
+                0x0000276a       0x74 ./HMC5883/HMC5883.o
+                0x0000276a                HMC5883::read(unsigned char, unsigned char, unsigned char*)
+ .text._ZN7HMC588313Read_Mag_DataEv
+                0x000027de      0x164 ./HMC5883/HMC5883.o
+                0x000027de                HMC5883::Read_Mag_Data()
+ .text._ZN7HMC588312Calc_HeadingEll
+                0x00002942      0x212 ./HMC5883/HMC5883.o
+                0x00002942                HMC5883::Calc_Heading(long, long)
  .text._ZN7HMC588310InitializeEhhhh
-                0x00000f4c      0x226 ./HMC5883/HMC5883.o
-                0x00000f4c                HMC5883::Initialize(unsigned char, unsigned char, unsigned char, unsigned char)
- .text.loop     0x00001172      0x112 ./IMU_Kalman.o
-                0x00001172                loop
- .text.setup    0x00001284       0xf0 ./IMU_Kalman.o
-                0x00001284                setup
+                0x00002b54      0x226 ./HMC5883/HMC5883.o
+                0x00002b54                HMC5883::Initialize(unsigned char, unsigned char, unsigned char, unsigned char)
+ .text.loop     0x00002d7a       0x74 ./IMU_Kalman.o
+                0x00002d7a                loop
+ .text.setup    0x00002dee      0x220 ./IMU_Kalman.o
+                0x00002dee                setup
+ .text._Z22Print_Filter_Debug_Outv
+                0x0000300e      0x3b2 ./utilities.o
+                0x0000300e                Print_Filter_Debug_Out()
+ .text._Z26Calculate_Kalman_Estimatesv
+                0x000033c0      0x246 ./utilities.o
+                0x000033c0                Calculate_Kalman_Estimates()
+ .text._Z12CheckForDatav
+                0x00003606      0x124 ./utilities.o
+                0x00003606                CheckForData()
  .text._Z11serialEventv
-                0x00001374        0x2 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x00001374                serialEvent()
+                0x0000372a        0x2 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x0000372a                serialEvent()
  .text.__vector_18
-                0x00001376       0x76 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x00001376                __vector_18
+                0x0000372c       0x76 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x0000372c                __vector_18
  .text._Z14serialEventRunv
-                0x000013ec       0x26 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x000013ec                serialEventRun()
+                0x000037a2       0x26 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x000037a2                serialEventRun()
  .text.__vector_19
-                0x00001412       0x76 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x00001412                __vector_19
+                0x000037c8       0x76 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x000037c8                __vector_19
  .text._ZN14HardwareSerial5beginEm
-                0x00001488      0x10e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x00001488                HardwareSerial::begin(unsigned long)
+                0x0000383e      0x10e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x0000383e                HardwareSerial::begin(unsigned long)
  .text._ZN14HardwareSerial9availableEv
-                0x00001596       0x22 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x00001596                HardwareSerial::available()
+                0x0000394c       0x22 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x0000394c                HardwareSerial::available()
  .text._ZN14HardwareSerial4peekEv
-                0x000015b8       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x000015b8                HardwareSerial::peek()
+                0x0000396e       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x0000396e                HardwareSerial::peek()
  .text._ZN14HardwareSerial4readEv
-                0x000015f8       0x52 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x000015f8                HardwareSerial::read()
+                0x000039ae       0x52 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x000039ae                HardwareSerial::read()
  .text._ZN14HardwareSerial5flushEv
-                0x0000164a       0x20 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x0000164a                HardwareSerial::flush()
+                0x00003a00       0x20 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x00003a00                HardwareSerial::flush()
  .text._ZN14HardwareSerial5writeEh
-                0x0000166a       0x80 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x0000166a                HardwareSerial::write(unsigned char)
+                0x00003a20       0x80 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x00003a20                HardwareSerial::write(unsigned char)
  .text._GLOBAL__I_rx_buffer
-                0x000016ea       0xac D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x00003aa0       0xac D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
  .text._ZN5Print5writeEPKhj
-                0x00001796       0x54 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                0x00001796                Print::write(unsigned char const*, unsigned int)
+                0x00003b4c       0x54 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00003b4c                Print::write(unsigned char const*, unsigned int)
  .text._ZN5Print7printlnEv
-                0x000017ea       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                0x000017ea                Print::println()
+                0x00003ba0       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00003ba0                Print::println()
  .text._ZN5Print5writeEPKc
-                0x0000182a       0x38 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                0x0000182a                Print::write(char const*)
+                0x00003be0       0x38 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00003be0                Print::write(char const*)
  .text._ZN5Print11printNumberEmh
-                0x00001862       0xc8 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                0x00001862                Print::printNumber(unsigned long, unsigned char)
+                0x00003c18       0xc8 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00003c18                Print::printNumber(unsigned long, unsigned char)
+ .text._ZN5Print5printEmi
+                0x00003ce0       0x1e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00003ce0                Print::print(unsigned long, int)
  .text._ZN5Print5printEli
-                0x0000192a       0x80 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                0x0000192a                Print::print(long, int)
+                0x00003cfe       0x80 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00003cfe                Print::print(long, int)
+ .text._ZN5Print5printEii
+                0x00003d7e       0x26 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00003d7e                Print::print(int, int)
  .text._ZN5Print5printEPKc
-                0x000019aa        0x6 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                0x000019aa                Print::print(char const*)
+                0x00003da4        0x6 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00003da4                Print::print(char const*)
  .text._ZN5Print7printlnEPKc
-                0x000019b0       0x26 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                0x000019b0                Print::println(char const*)
+                0x00003daa       0x26 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00003daa                Print::println(char const*)
  .text.attachInterrupt
-                0x000019d6       0x46 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
-                0x000019d6                attachInterrupt
+                0x00003dd0       0x46 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+                0x00003dd0                attachInterrupt
  .text.__vector_1
-                0x00001a1c       0x5a D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
-                0x00001a1c                __vector_1
+                0x00003e16       0x5a D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+                0x00003e16                __vector_1
  .text.__vector_2
-                0x00001a76       0x5a D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
-                0x00001a76                __vector_2
- .text.main     0x00001ad0       0x1e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
-                0x00001ad0                main
+                0x00003e70       0x5a D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+                0x00003e70                __vector_2
+ .text.main     0x00003eca       0x1e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+                0x00003eca                main
  .text.__vector_16
-                0x00001aee       0x90 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
-                0x00001aee                __vector_16
- .text.micros   0x00001b7e       0x4c D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
-                0x00001b7e                micros
- .text.delay    0x00001bca       0xb2 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
-                0x00001bca                delay
- .text.init     0x00001c7c       0x76 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
-                0x00001c7c                init
- .text.pinMode  0x00001cf2       0x7e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
-                0x00001cf2                pinMode
+                0x00003ee8       0x90 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x00003ee8                __vector_16
+ .text.micros   0x00003f78       0x4c D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x00003f78                micros
+ .text.delay    0x00003fc4       0xb2 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x00003fc4                delay
+ .text.init     0x00004076       0x76 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x00004076                init
+ .text.pinMode  0x000040ec       0x7e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+                0x000040ec                pinMode
  .text.digitalWrite
-                0x00001d70       0xa8 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
-                0x00001d70                digitalWrite
- .text.libgcc   0x00001e18       0x3e c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_mulsi3.o)
-                0x00001e18                __mulsi3
- .text.libgcc   0x00001e56       0x28 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodhi4.o)
-                0x00001e56                __udivmodhi4
- .text.libgcc   0x00001e7e       0x44 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodsi4.o)
-                0x00001e7e                __udivmodsi4
- .text.libgcc   0x00001ec2       0x36 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_divmodsi4.o)
-                0x00001ec2                __divmodsi4
- .text.libgcc   0x00001ef8        0xc c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_tablejump.o)
-                0x00001efc                __tablejump__
-                0x00001ef8                __tablejump2__
-                0x00001f04                . = ALIGN (0x2)
+                0x0000416a       0xa8 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+                0x0000416a                digitalWrite
+ .text.libgcc   0x00004212       0x3e c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_mulsi3.o)
+                0x00004212                __mulsi3
+ .text.libgcc   0x00004250       0x28 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodhi4.o)
+                0x00004250                __udivmodhi4
+ .text.libgcc   0x00004278       0x44 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodsi4.o)
+                0x00004278                __udivmodsi4
+ .text.libgcc   0x000042bc       0x36 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_divmodsi4.o)
+                0x000042bc                __divmodsi4
+ .text.libgcc   0x000042f2        0xc c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_tablejump.o)
+                0x000042f6                __tablejump__
+                0x000042f2                __tablejump2__
+                0x000042fe                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001f04        0x0 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
-                0x00001f04                exit
-                0x00001f04                _exit
+ .fini9         0x000042fe        0x0 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
+                0x000042fe                exit
+                0x000042fe                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1189,112 +1241,150 @@ LOAD c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/av
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001f04        0x4 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x000042fe        0x4 c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001f08                _etext = .
+                0x00004302                _etext = .
 
-.data           0x00800100       0xcc load address 0x00001f08
+.data           0x00800100      0x220 load address 0x00004302
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
- .data          0x00800100       0xac ./IMU_Kalman.o
+ .data          0x00800100       0x8b ./IMU_Kalman.o
+ .data          0x0080018b      0x111 ./utilities.o
+ .data          0x0080029c       0x64 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(cordicck.o)
  *(.data*)
  *(.rodata)
  *(.rodata*)
  .rodata._ZTV7TwoWire
-                0x008001ac       0x10 ./Wire/Wire.o
-                0x008001ac                vtable for TwoWire
+                0x00800300       0x10 ./Wire/Wire.o
+                0x00800300                vtable for TwoWire
  .rodata._ZTV14HardwareSerial
-                0x008001bc       0x10 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x008001bc                vtable for HardwareSerial
+                0x00800310       0x10 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x00800310                vtable for HardwareSerial
  *(.gnu.linkonce.d*)
-                0x008001cc                . = ALIGN (0x2)
-                0x008001cc                _edata = .
-                0x008001cc                PROVIDE (__data_end, .)
+                0x00800320                . = ALIGN (0x2)
+                0x00800320                _edata = .
+                0x00800320                PROVIDE (__data_end, .)
 
-.bss            0x008001cc      0x2a5
-                0x008001cc                PROVIDE (__bss_start, .)
+.bss            0x00800320      0x2d4
+                0x00800320                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x008001cc       0x6e ./Wire/twi.o
+ .bss           0x00800320       0x6e ./Wire/twi.o
  *(.bss*)
  .bss._ZN7TwoWire8rxBufferE
-                0x0080023a       0x20 ./Wire/Wire.o
-                0x0080023a                TwoWire::rxBuffer
+                0x0080038e       0x20 ./Wire/Wire.o
+                0x0080038e                TwoWire::rxBuffer
  .bss._ZN7TwoWire13rxBufferIndexE
-                0x0080025a        0x1 ./Wire/Wire.o
-                0x0080025a                TwoWire::rxBufferIndex
+                0x008003ae        0x1 ./Wire/Wire.o
+                0x008003ae                TwoWire::rxBufferIndex
  .bss._ZN7TwoWire14rxBufferLengthE
-                0x0080025b        0x1 ./Wire/Wire.o
-                0x0080025b                TwoWire::rxBufferLength
+                0x008003af        0x1 ./Wire/Wire.o
+                0x008003af                TwoWire::rxBufferLength
  .bss._ZN7TwoWire9txAddressE
-                0x0080025c        0x1 ./Wire/Wire.o
-                0x0080025c                TwoWire::txAddress
+                0x008003b0        0x1 ./Wire/Wire.o
+                0x008003b0                TwoWire::txAddress
  .bss._ZN7TwoWire8txBufferE
-                0x0080025d       0x20 ./Wire/Wire.o
-                0x0080025d                TwoWire::txBuffer
+                0x008003b1       0x20 ./Wire/Wire.o
+                0x008003b1                TwoWire::txBuffer
  .bss._ZN7TwoWire13txBufferIndexE
-                0x0080027d        0x1 ./Wire/Wire.o
-                0x0080027d                TwoWire::txBufferIndex
+                0x008003d1        0x1 ./Wire/Wire.o
+                0x008003d1                TwoWire::txBufferIndex
  .bss._ZN7TwoWire14txBufferLengthE
-                0x0080027e        0x1 ./Wire/Wire.o
-                0x0080027e                TwoWire::txBufferLength
+                0x008003d2        0x1 ./Wire/Wire.o
+                0x008003d2                TwoWire::txBufferLength
  .bss._ZN7TwoWire12transmittingE
-                0x0080027f        0x1 ./Wire/Wire.o
-                0x0080027f                TwoWire::transmitting
- .bss.Wire      0x00800280        0xc ./Wire/Wire.o
-                0x00800280                Wire
- .bss.Mpu6000   0x0080028c       0x36 ./MPU6000/MPU6000.o
-                0x0080028c                Mpu6000
+                0x008003d3        0x1 ./Wire/Wire.o
+                0x008003d3                TwoWire::transmitting
+ .bss.Wire      0x008003d4        0xc ./Wire/Wire.o
+                0x008003d4                Wire
+ .bss.Mpu6000   0x008003e0       0x36 ./MPU6000/MPU6000.o
+                0x008003e0                Mpu6000
  .bss.XAxisGyroKalman
-                0x008002c2       0x40 ./Kalman_Filters/GyroKalman.o
-                0x008002c2                XAxisGyroKalman
+                0x00800416       0x40 ./Kalman_Filters/GyroKalman.o
+                0x00800416                XAxisGyroKalman
  .bss.YAxisGyroKalman
-                0x00800302       0x40 ./Kalman_Filters/GyroKalman.o
-                0x00800302                YAxisGyroKalman
+                0x00800456       0x40 ./Kalman_Filters/GyroKalman.o
+                0x00800456                YAxisGyroKalman
  .bss.ZAxisGyroKalman
-                0x00800342       0x40 ./Kalman_Filters/GyroKalman.o
-                0x00800342                ZAxisGyroKalman
- .bss.Hmc5883   0x00800382       0x28 ./HMC5883/HMC5883.o
-                0x00800382                Hmc5883
+                0x00800496       0x40 ./Kalman_Filters/GyroKalman.o
+                0x00800496                ZAxisGyroKalman
+ .bss.Hmc5883   0x008004d6       0x28 ./HMC5883/HMC5883.o
+                0x008004d6                Hmc5883
  .bss.loopstarttime_us
-                0x008003aa        0x4 ./GlobalVariables.o
-                0x008003aa                loopstarttime_us
- .bss.templAccum1
-                0x008003ae        0x4 ./GlobalVariables.o
-                0x008003ae                templAccum1
- .bss.templAccum2
-                0x008003b2        0x4 ./GlobalVariables.o
-                0x008003b2                templAccum2
- .bss.templAccum3
-                0x008003b6        0x4 ./GlobalVariables.o
-                0x008003b6                templAccum3
+                0x008004fe        0x4 ./GlobalVariables.o
+                0x008004fe                loopstarttime_us
+ .bss.loopdeltatime_us
+                0x00800502        0x4 ./GlobalVariables.o
+                0x00800502                loopdeltatime_us
+ .bss.newmagdata
+                0x00800506        0x1 ./GlobalVariables.o
+                0x00800506                newmagdata
+ .bss.newmpudata
+                0x00800507        0x1 ./GlobalVariables.o
+                0x00800507                newmpudata
+ .bss.rollrate_meas
+                0x00800508        0x4 ./GlobalVariables.o
+                0x00800508                rollrate_meas
+ .bss.pitchrate_meas
+                0x0080050c        0x4 ./GlobalVariables.o
+                0x0080050c                pitchrate_meas
+ .bss.yawrate_meas
+                0x00800510        0x4 ./GlobalVariables.o
+                0x00800510                yawrate_meas
+ .bss.accelX_meas
+                0x00800514        0x4 ./GlobalVariables.o
+                0x00800514                accelX_meas
+ .bss.accelY_meas
+                0x00800518        0x4 ./GlobalVariables.o
+                0x00800518                accelY_meas
+ .bss.accelZ_meas
+                0x0080051c        0x4 ./GlobalVariables.o
+                0x0080051c                accelZ_meas
+ .bss.heading_rad
+                0x00800520        0x4 ./GlobalVariables.o
+                0x00800520                heading_rad
+ .bss.roll      0x00800524        0x4 ./GlobalVariables.o
+                0x00800524                roll
+ .bss.pitch     0x00800528        0x4 ./GlobalVariables.o
+                0x00800528                pitch
+ .bss.yaw       0x0080052c        0x4 ./GlobalVariables.o
+                0x0080052c                yaw
+ .bss.rollrate  0x00800530        0x4 ./GlobalVariables.o
+                0x00800530                rollrate
+ .bss.pitchrate
+                0x00800534        0x4 ./GlobalVariables.o
+                0x00800534                pitchrate
+ .bss.yawrate   0x00800538        0x4 ./GlobalVariables.o
+                0x00800538                yawrate
+ .bss._ZZ22Print_Filter_Debug_OutvE1i
+                0x0080053c        0x1 ./utilities.o
  .bss.rx_buffer
-                0x008003ba       0x44 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x008003ba                rx_buffer
+                0x0080053d       0x44 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x0080053d                rx_buffer
  .bss.tx_buffer
-                0x008003fe       0x44 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x008003fe                tx_buffer
- .bss.Serial    0x00800442       0x22 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x00800442                Serial
- .bss.intFunc   0x00800464        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+                0x00800581       0x44 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x00800581                tx_buffer
+ .bss.Serial    0x008005c5       0x22 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x008005c5                Serial
+ .bss.intFunc   0x008005e7        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
  .bss.timer0_overflow_count
-                0x00800468        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
-                0x00800468                timer0_overflow_count
+                0x008005eb        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x008005eb                timer0_overflow_count
  .bss.timer0_millis
-                0x0080046c        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
-                0x0080046c                timer0_millis
+                0x008005ef        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x008005ef                timer0_millis
  .bss.timer0_fract
-                0x00800470        0x1 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x008005f3        0x1 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
  *(COMMON)
-                0x00800471                PROVIDE (__bss_end, .)
-                0x00001f08                __data_load_start = LOADADDR (.data)
-                0x00001fd4                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008005f4                PROVIDE (__bss_end, .)
+                0x00004302                __data_load_start = LOADADDR (.data)
+                0x00004522                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800471        0x0
-                0x00800471                PROVIDE (__noinit_start, .)
+.noinit         0x008005f4        0x0
+                0x008005f4                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800471                PROVIDE (__noinit_end, .)
-                0x00800471                _end = .
-                0x00800471                PROVIDE (__heap_start, .)
+                0x008005f4                PROVIDE (__noinit_end, .)
+                0x008005f4                _end = .
+                0x008005f4                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -1345,7 +1435,7 @@ LOAD c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/av
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x918
+.debug_aranges  0x00000000      0x960
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0xd8 ./Wire/Wire.o
@@ -1356,32 +1446,34 @@ LOAD c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/av
  .debug_aranges
                 0x00000138       0xe0 ./MPU6000/MPU6000.o
  .debug_aranges
-                0x00000218       0xc8 ./Kalman_Filters/GyroKalman.o
+                0x00000218       0xe0 ./Kalman_Filters/GyroKalman.o
  .debug_aranges
-                0x000002e0       0xd0 ./HMC5883/HMC5883.o
+                0x000002f8       0xd0 ./HMC5883/HMC5883.o
  .debug_aranges
-                0x000003b0       0x28 ./IMU_Kalman.o
+                0x000003c8       0x28 ./IMU_Kalman.o
  .debug_aranges
-                0x000003d8       0x98 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x000003f0       0x30 ./utilities.o
  .debug_aranges
-                0x00000470       0xf0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00000420       0x98 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
  .debug_aranges
-                0x00000560       0x38 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+                0x000004b8       0xf0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
  .debug_aranges
-                0x00000598      0x260 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+                0x000005a8       0x38 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
  .debug_aranges
-                0x000007f8       0x20 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+                0x000005e0      0x260 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
  .debug_aranges
-                0x00000818       0x30 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
+                0x00000840       0x20 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
  .debug_aranges
-                0x00000848       0x58 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
+                0x00000860       0x30 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
  .debug_aranges
-                0x000008a0       0x48 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x00000890       0x58 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
  .debug_aranges
-                0x000008e8       0x30 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+                0x000008e8       0x48 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+ .debug_aranges
+                0x00000930       0x30 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 
 .debug_pubnames
-                0x00000000     0x19a5
+                0x00000000     0x1b28
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000      0x33b ./Wire/Wire.o
@@ -1392,202 +1484,225 @@ LOAD c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/av
  .debug_pubnames
                 0x000004a5      0x25e ./MPU6000/MPU6000.o
  .debug_pubnames
-                0x00000703      0x316 ./Kalman_Filters/GyroKalman.o
+                0x00000703      0x361 ./Kalman_Filters/GyroKalman.o
  .debug_pubnames
-                0x00000a19      0x240 ./HMC5883/HMC5883.o
+                0x00000a64      0x240 ./HMC5883/HMC5883.o
  .debug_pubnames
-                0x00000c59       0xbd ./GlobalVariables.o
+                0x00000ca4      0x198 ./GlobalVariables.o
  .debug_pubnames
-                0x00000d16       0x25 ./IMU_Kalman.o
+                0x00000e3c       0x25 ./IMU_Kalman.o
  .debug_pubnames
-                0x00000d3b      0x1b4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x00000e61       0x5d ./utilities.o
  .debug_pubnames
-                0x00000eef      0x200 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                0x00000ebe      0x1b4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
  .debug_pubnames
-                0x000010ef       0x58 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+                0x00001072      0x200 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
  .debug_pubnames
-                0x00001147      0x5bf D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+                0x00001272       0x58 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
  .debug_pubnames
-                0x00001706       0x1b D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+                0x000012ca      0x5bf D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
  .debug_pubnames
-                0x00001721       0x5e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
+                0x00001889       0x1b D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
  .debug_pubnames
-                0x0000177f       0xbf D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
+                0x000018a4       0x5e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
  .debug_pubnames
-                0x0000183e       0x8d D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x00001902       0xbf D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
  .debug_pubnames
-                0x000018cb       0xda D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+                0x000019c1       0x8d D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+ .debug_pubnames
+                0x00001a4e       0xda D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 
-.debug_info     0x00000000     0xb49b
+.debug_info     0x00000000     0xc7fb
  *(.debug_info)
  .debug_info    0x00000000     0x196e ./Wire/Wire.o
  .debug_info    0x0000196e      0x557 ./Wire/twi.o
  .debug_info    0x00001ec5      0x286 ./SPI/SPI.o
  .debug_info    0x0000214b      0xbc1 ./MPU6000/MPU6000.o
- .debug_info    0x00002d0c      0xc1e ./Kalman_Filters/GyroKalman.o
- .debug_info    0x0000392a      0xab8 ./HMC5883/HMC5883.o
- .debug_info    0x000043e2      0x21a ./GlobalVariables.o
- .debug_info    0x000045fc      0x8c0 ./IMU_Kalman.o
- .debug_info    0x00004ebc     0x1904 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
- .debug_info    0x000067c0     0x1ad1 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
- .debug_info    0x00008291      0x1fb D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
- .debug_info    0x0000848c     0x21c5 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
- .debug_info    0x0000a651      0x14b D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
- .debug_info    0x0000a79c      0x2c2 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
- .debug_info    0x0000aa5e      0x195 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
- .debug_info    0x0000abf3      0x319 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
- .debug_info    0x0000af0c      0x58f D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+ .debug_info    0x00002d0c      0xd02 ./Kalman_Filters/GyroKalman.o
+ .debug_info    0x00003a0e      0xab8 ./HMC5883/HMC5883.o
+ .debug_info    0x000044c6      0x333 ./GlobalVariables.o
+ .debug_info    0x000047f9      0xc9d ./IMU_Kalman.o
+ .debug_info    0x00005496      0xd86 ./utilities.o
+ .debug_info    0x0000621c     0x1904 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+ .debug_info    0x00007b20     0x1ad1 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+ .debug_info    0x000095f1      0x1fb D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+ .debug_info    0x000097ec     0x21c5 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+ .debug_info    0x0000b9b1      0x14b D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+ .debug_info    0x0000bafc      0x2c2 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
+ .debug_info    0x0000bdbe      0x195 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
+ .debug_info    0x0000bf53      0x319 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+ .debug_info    0x0000c26c      0x58f D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000     0x2227
+.debug_abbrev   0x00000000     0x23fd
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x3a7 ./Wire/Wire.o
  .debug_abbrev  0x000003a7      0x1f5 ./Wire/twi.o
  .debug_abbrev  0x0000059c      0x130 ./SPI/SPI.o
  .debug_abbrev  0x000006cc      0x2f7 ./MPU6000/MPU6000.o
- .debug_abbrev  0x000009c3      0x242 ./Kalman_Filters/GyroKalman.o
- .debug_abbrev  0x00000c05      0x2c5 ./HMC5883/HMC5883.o
- .debug_abbrev  0x00000eca       0x76 ./GlobalVariables.o
- .debug_abbrev  0x00000f40      0x163 ./IMU_Kalman.o
- .debug_abbrev  0x000010a3      0x450 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
- .debug_abbrev  0x000014f3      0x336 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
- .debug_abbrev  0x00001829       0xe7 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
- .debug_abbrev  0x00001910      0x343 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
- .debug_abbrev  0x00001c53       0x7a D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
- .debug_abbrev  0x00001ccd      0x16f D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
- .debug_abbrev  0x00001e3c       0xf7 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
- .debug_abbrev  0x00001f33      0x17d D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
- .debug_abbrev  0x000020b0      0x177 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+ .debug_abbrev  0x000009c3      0x269 ./Kalman_Filters/GyroKalman.o
+ .debug_abbrev  0x00000c2c      0x2c5 ./HMC5883/HMC5883.o
+ .debug_abbrev  0x00000ef1       0x87 ./GlobalVariables.o
+ .debug_abbrev  0x00000f78      0x163 ./IMU_Kalman.o
+ .debug_abbrev  0x000010db      0x19e ./utilities.o
+ .debug_abbrev  0x00001279      0x450 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+ .debug_abbrev  0x000016c9      0x336 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+ .debug_abbrev  0x000019ff       0xe7 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+ .debug_abbrev  0x00001ae6      0x343 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+ .debug_abbrev  0x00001e29       0x7a D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+ .debug_abbrev  0x00001ea3      0x16f D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
+ .debug_abbrev  0x00002012       0xf7 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
+ .debug_abbrev  0x00002109      0x17d D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+ .debug_abbrev  0x00002286      0x177 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 
-.debug_line     0x00000000     0x5bcb
+.debug_line     0x00000000     0x6119
  *(.debug_line)
  .debug_line    0x00000000      0x61a ./Wire/Wire.o
  .debug_line    0x0000061a      0x534 ./Wire/twi.o
  .debug_line    0x00000b4e      0x213 ./SPI/SPI.o
  .debug_line    0x00000d61      0x97b ./MPU6000/MPU6000.o
- .debug_line    0x000016dc      0x7da ./Kalman_Filters/GyroKalman.o
- .debug_line    0x00001eb6      0x7f2 ./HMC5883/HMC5883.o
- .debug_line    0x000026a8      0x163 ./GlobalVariables.o
- .debug_line    0x0000280b      0x2dd ./IMU_Kalman.o
- .debug_line    0x00002ae8      0x76f D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
- .debug_line    0x00003257      0x760 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
- .debug_line    0x000039b7      0x238 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
- .debug_line    0x00003bef     0x111a D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
- .debug_line    0x00004d09      0x17b D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
- .debug_line    0x00004e84      0x419 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
- .debug_line    0x0000529d      0x238 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
- .debug_line    0x000054d5      0x3c1 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
- .debug_line    0x00005896      0x335 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+ .debug_line    0x000016dc      0x894 ./Kalman_Filters/GyroKalman.o
+ .debug_line    0x00001f70      0x7f2 ./HMC5883/HMC5883.o
+ .debug_line    0x00002762      0x163 ./GlobalVariables.o
+ .debug_line    0x000028c5      0x304 ./IMU_Kalman.o
+ .debug_line    0x00002bc9      0x46d ./utilities.o
+ .debug_line    0x00003036      0x76f D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+ .debug_line    0x000037a5      0x760 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+ .debug_line    0x00003f05      0x238 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+ .debug_line    0x0000413d     0x111a D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+ .debug_line    0x00005257      0x17b D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+ .debug_line    0x000053d2      0x419 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
+ .debug_line    0x000057eb      0x238 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
+ .debug_line    0x00005a23      0x3c1 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+ .debug_line    0x00005de4      0x335 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 
-.debug_frame    0x00000000     0x10d0
+.debug_frame    0x00000000     0x1140
  *(.debug_frame)
  .debug_frame   0x00000000      0x190 ./Wire/Wire.o
  .debug_frame   0x00000190       0xc0 ./Wire/twi.o
  .debug_frame   0x00000250       0x60 ./SPI/SPI.o
  .debug_frame   0x000002b0      0x1a0 ./MPU6000/MPU6000.o
- .debug_frame   0x00000450      0x170 ./Kalman_Filters/GyroKalman.o
- .debug_frame   0x000005c0      0x180 ./HMC5883/HMC5883.o
- .debug_frame   0x00000740       0x30 ./IMU_Kalman.o
- .debug_frame   0x00000770      0x110 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
- .debug_frame   0x00000880      0x1c0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
- .debug_frame   0x00000a40       0x50 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
- .debug_frame   0x00000a90      0x4a0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
- .debug_frame   0x00000f30       0x20 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
- .debug_frame   0x00000f50       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
- .debug_frame   0x00000f90       0x90 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
- .debug_frame   0x00001020       0x70 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
- .debug_frame   0x00001090       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+ .debug_frame   0x00000450      0x1a0 ./Kalman_Filters/GyroKalman.o
+ .debug_frame   0x000005f0      0x180 ./HMC5883/HMC5883.o
+ .debug_frame   0x00000770       0x30 ./IMU_Kalman.o
+ .debug_frame   0x000007a0       0x40 ./utilities.o
+ .debug_frame   0x000007e0      0x110 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+ .debug_frame   0x000008f0      0x1c0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+ .debug_frame   0x00000ab0       0x50 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+ .debug_frame   0x00000b00      0x4a0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+ .debug_frame   0x00000fa0       0x20 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+ .debug_frame   0x00000fc0       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
+ .debug_frame   0x00001000       0x90 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
+ .debug_frame   0x00001090       0x70 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+ .debug_frame   0x00001100       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 
-.debug_str      0x00000000     0x2f09
+.debug_str      0x00000000     0x309e
  *(.debug_str)
  .debug_str     0x00000000      0xf11 ./Wire/Wire.o
                                 0xffa (size before relaxing)
  .debug_str     0x00000f11      0x1bf ./Wire/twi.o
                                 0x27c (size before relaxing)
- .debug_str     0x000010d0      0x159 ./SPI/SPI.o
+ .debug_str     0x000010d0      0x154 ./SPI/SPI.o
                                 0x22a (size before relaxing)
- .debug_str     0x00001229      0x4a3 ./MPU6000/MPU6000.o
+ .debug_str     0x00001224      0x4a3 ./MPU6000/MPU6000.o
                                 0x719 (size before relaxing)
- .debug_str     0x000016cc      0x67f ./Kalman_Filters/GyroKalman.o
-                                0x7dc (size before relaxing)
- .debug_str     0x00001d4b      0x433 ./HMC5883/HMC5883.o
+ .debug_str     0x000016c7      0x6eb ./Kalman_Filters/GyroKalman.o
+                                0x84d (size before relaxing)
+ .debug_str     0x00001db2      0x433 ./HMC5883/HMC5883.o
                                 0x5e6 (size before relaxing)
- .debug_str     0x0000217e       0x96 ./GlobalVariables.o
-                                0x178 (size before relaxing)
- .debug_str     0x00002214       0x2c ./IMU_Kalman.o
-                                0x849 (size before relaxing)
- .debug_str     0x00002240      0x2de D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+ .debug_str     0x000021e5      0x126 ./GlobalVariables.o
+                                0x21b (size before relaxing)
+ .debug_str     0x0000230b       0x2c ./IMU_Kalman.o
+                                0xdd7 (size before relaxing)
+ .debug_str     0x00002337       0x9e ./utilities.o
+                                0xedd (size before relaxing)
+ .debug_str     0x000023d5      0x2de D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
                                 0xe3b (size before relaxing)
- .debug_str     0x0000251e      0x3b9 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+ .debug_str     0x000026b3      0x3b9 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
                                 0xc01 (size before relaxing)
- .debug_str     0x000028d7       0x94 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+ .debug_str     0x00002a6c       0x94 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
                                 0x14f (size before relaxing)
- .debug_str     0x0000296b      0x1c3 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+ .debug_str     0x00002b00      0x1c3 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
                                 0x99d (size before relaxing)
- .debug_str     0x00002b2e       0x54 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+ .debug_str     0x00002cc3       0x54 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
                                  0xf7 (size before relaxing)
- .debug_str     0x00002b82       0xc6 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
+ .debug_str     0x00002d17       0xc6 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
                                 0x145 (size before relaxing)
- .debug_str     0x00002c48       0xfd D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
+ .debug_str     0x00002ddd       0xfd D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
                                 0x13b (size before relaxing)
- .debug_str     0x00002d45       0xb3 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+ .debug_str     0x00002eda       0xb3 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
                                 0x164 (size before relaxing)
- .debug_str     0x00002df8      0x111 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+ .debug_str     0x00002f8d      0x111 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
                                 0x1cf (size before relaxing)
 
-.debug_loc      0x00000000     0x5690
+.debug_loc      0x00000000     0x570b
  *(.debug_loc)
  .debug_loc     0x00000000      0x4cd ./Wire/Wire.o
  .debug_loc     0x000004cd      0x102 ./Wire/twi.o
  .debug_loc     0x000005cf       0x41 ./SPI/SPI.o
  .debug_loc     0x00000610      0x6a9 ./MPU6000/MPU6000.o
- .debug_loc     0x00000cb9      0x8ba ./Kalman_Filters/GyroKalman.o
- .debug_loc     0x00001573      0x669 ./HMC5883/HMC5883.o
- .debug_loc     0x00001bdc      0x473 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
- .debug_loc     0x0000204f      0xdb8 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
- .debug_loc     0x00002e07       0x29 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
- .debug_loc     0x00002e30     0x1f05 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
- .debug_loc     0x00004d35      0x5e0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
- .debug_loc     0x00005315       0xb0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
- .debug_loc     0x000053c5      0x16d D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
- .debug_loc     0x00005532      0x15e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+ .debug_loc     0x00000cb9      0x935 ./Kalman_Filters/GyroKalman.o
+ .debug_loc     0x000015ee      0x669 ./HMC5883/HMC5883.o
+ .debug_loc     0x00001c57      0x473 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+ .debug_loc     0x000020ca      0xdb8 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+ .debug_loc     0x00002e82       0x29 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+ .debug_loc     0x00002eab     0x1f05 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+ .debug_loc     0x00004db0      0x5e0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
+ .debug_loc     0x00005390       0xb0 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
+ .debug_loc     0x00005440      0x16d D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+ .debug_loc     0x000055ad      0x15e D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 
 .debug_macinfo
  *(.debug_macinfo)
 OUTPUT(IMU_Kalman.elf elf32-avr)
 LOAD linker stubs
 
-.debug_ranges   0x00000000      0x898
+.debug_ranges   0x00000000      0x8d8
  .debug_ranges  0x00000000       0xd0 ./Wire/Wire.o
  .debug_ranges  0x000000d0       0x38 ./SPI/SPI.o
  .debug_ranges  0x00000108       0xd8 ./MPU6000/MPU6000.o
- .debug_ranges  0x000001e0       0xc0 ./Kalman_Filters/GyroKalman.o
- .debug_ranges  0x000002a0       0xc8 ./HMC5883/HMC5883.o
- .debug_ranges  0x00000368       0x20 ./IMU_Kalman.o
- .debug_ranges  0x00000388       0x90 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
- .debug_ranges  0x00000418       0xe8 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
- .debug_ranges  0x00000500       0x30 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
- .debug_ranges  0x00000530      0x270 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
- .debug_ranges  0x000007a0       0x18 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
- .debug_ranges  0x000007b8       0x28 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
- .debug_ranges  0x000007e0       0x50 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
- .debug_ranges  0x00000830       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
- .debug_ranges  0x00000870       0x28 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
+ .debug_ranges  0x000001e0       0xd8 ./Kalman_Filters/GyroKalman.o
+ .debug_ranges  0x000002b8       0xc8 ./HMC5883/HMC5883.o
+ .debug_ranges  0x00000380       0x20 ./IMU_Kalman.o
+ .debug_ranges  0x000003a0       0x28 ./utilities.o
+ .debug_ranges  0x000003c8       0x90 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+ .debug_ranges  0x00000458       0xe8 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+ .debug_ranges  0x00000540       0x30 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+ .debug_ranges  0x00000570      0x270 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+ .debug_ranges  0x000007e0       0x18 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+ .debug_ranges  0x000007f8       0x28 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
+ .debug_ranges  0x00000820       0x50 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
+ .debug_ranges  0x00000870       0x40 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+ .debug_ranges  0x000008b0       0x28 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 
 Cross Reference Table
 
 Symbol                                            File
+Calculate_Kalman_Estimates()                      ./utilities.o
+                                                  ./IMU_Kalman.o
+CheckForData()                                    ./utilities.o
+                                                  ./IMU_Kalman.o
 GyroKalman::Est_Ctrl_MeasAngle(long, long, long)  ./Kalman_Filters/GyroKalman.o
 GyroKalman::Est_Ctrl_MeasAngleAndRate(long, long, long, long) ./Kalman_Filters/GyroKalman.o
 GyroKalman::Est_Ctrl_MeasRate(long, long, long)   ./Kalman_Filters/GyroKalman.o
 GyroKalman::Est_Ctrl_NoMeas(long, long)           ./Kalman_Filters/GyroKalman.o
 GyroKalman::Est_NoCtrl_MeasAngle(long, long)      ./Kalman_Filters/GyroKalman.o
+                                                  ./utilities.o
 GyroKalman::Est_NoCtrl_MeasAngleAndRate(long, long, long) ./Kalman_Filters/GyroKalman.o
+                                                  ./utilities.o
 GyroKalman::Est_NoCtrl_MeasRate(long, long)       ./Kalman_Filters/GyroKalman.o
+                                                  ./utilities.o
 GyroKalman::Est_NoCtrl_NoMeas(long)               ./Kalman_Filters/GyroKalman.o
+                                                  ./utilities.o
+GyroKalman::GetAngle()                            ./Kalman_Filters/GyroKalman.o
+                                                  ./utilities.o
+GyroKalman::GetEstCov(unsigned char)              ./Kalman_Filters/GyroKalman.o
+GyroKalman::GetRate()                             ./Kalman_Filters/GyroKalman.o
+                                                  ./utilities.o
 GyroKalman::GyroKalman()                          ./Kalman_Filters/GyroKalman.o
 GyroKalman::GyroKalman()                          ./Kalman_Filters/GyroKalman.o
 GyroKalman::Initialize(long, long, long, long, long, long, long, long) ./Kalman_Filters/GyroKalman.o
+                                                  ./IMU_Kalman.o
 GyroKalman::Predict(long)                         ./Kalman_Filters/GyroKalman.o
 GyroKalman::Predict(long, long)                   ./Kalman_Filters/GyroKalman.o
 GyroKalman::SetAngleObsNoiseVar(long)             ./Kalman_Filters/GyroKalman.o
@@ -1599,7 +1714,9 @@ GyroKalman::Update_with_Angle_and_Rate(long, long) ./Kalman_Filters/GyroKalman.o
 GyroKalman::Update_with_NoData()                  ./Kalman_Filters/GyroKalman.o
 GyroKalman::Update_with_Rate(long)                ./Kalman_Filters/GyroKalman.o
 HMC5883::Calc_Heading(long, long)                 ./HMC5883/HMC5883.o
+                                                  ./utilities.o
 HMC5883::GetDataCount()                           ./HMC5883/HMC5883.o
+                                                  ./utilities.o
 HMC5883::GetHeading()                             ./HMC5883/HMC5883.o
 HMC5883::GetIdentity1()                           ./HMC5883/HMC5883.o
 HMC5883::GetIdentity2()                           ./HMC5883/HMC5883.o
@@ -1614,6 +1731,7 @@ HMC5883::Initialize()                             ./HMC5883/HMC5883.o
 HMC5883::Initialize(unsigned char, unsigned char, unsigned char, unsigned char) ./HMC5883/HMC5883.o
                                                   ./IMU_Kalman.o
 HMC5883::Read_Mag_Data()                          ./HMC5883/HMC5883.o
+                                                  ./utilities.o
 HMC5883::Read_Mag_Data_And_Calc_Heading(long, long) ./HMC5883/HMC5883.o
 HMC5883::data_int()                               ./HMC5883/HMC5883.o
 HMC5883::read(unsigned char, unsigned char, unsigned char*) ./HMC5883/HMC5883.o
@@ -1636,14 +1754,22 @@ HardwareSerial::peek()                            D:\Documents\Arduino\IMU_Kalma
 HardwareSerial::read()                            D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
 HardwareSerial::write(unsigned char)              D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
 Hmc5883                                           ./HMC5883/HMC5883.o
+                                                  ./utilities.o
                                                   ./IMU_Kalman.o
 MPU6000::GetAccelX()                              ./MPU6000/MPU6000.o
+                                                  ./utilities.o
 MPU6000::GetAccelY()                              ./MPU6000/MPU6000.o
+                                                  ./utilities.o
 MPU6000::GetAccelZ()                              ./MPU6000/MPU6000.o
+                                                  ./utilities.o
 MPU6000::GetDataCount()                           ./MPU6000/MPU6000.o
+                                                  ./utilities.o
 MPU6000::GetGyroX()                               ./MPU6000/MPU6000.o
+                                                  ./utilities.o
 MPU6000::GetGyroY()                               ./MPU6000/MPU6000.o
+                                                  ./utilities.o
 MPU6000::GetGyroZ()                               ./MPU6000/MPU6000.o
+                                                  ./utilities.o
 MPU6000::GetIdentity()                            ./MPU6000/MPU6000.o
 MPU6000::GetTemp()                                ./MPU6000/MPU6000.o
 MPU6000::Initialize()                             ./MPU6000/MPU6000.o
@@ -1653,6 +1779,7 @@ MPU6000::MPU6000()                                ./MPU6000/MPU6000.o
 MPU6000::MPU6000()                                ./MPU6000/MPU6000.o
 MPU6000::Read_Accel()                             ./MPU6000/MPU6000.o
 MPU6000::Read_Accel_and_Gyro()                    ./MPU6000/MPU6000.o
+                                                  ./utilities.o
 MPU6000::Read_All_Data()                          ./MPU6000/MPU6000.o
 MPU6000::Read_Gyro()                              ./MPU6000/MPU6000.o
 MPU6000::Read_Temp()                              ./MPU6000/MPU6000.o
@@ -1665,28 +1792,30 @@ MPU6000::Set_Gyro_Offsets(long, long, long)       ./MPU6000/MPU6000.o
 MPU6000::data_int()                               ./MPU6000/MPU6000.o
 MPU6000_data_int()                                ./MPU6000/MPU6000.o
 Mpu6000                                           ./MPU6000/MPU6000.o
+                                                  ./utilities.o
                                                   ./IMU_Kalman.o
 Print::print(Printable const&)                    D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::print(String const&)                       D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::print(__FlashStringHelper const*)          D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::print(char const*)                         D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                                                  ./IMU_Kalman.o
+                                                  ./utilities.o
 Print::print(char)                                D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::print(double, int)                         D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::print(int, int)                            D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                                                  ./utilities.o
 Print::print(long, int)                           D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                                                  ./IMU_Kalman.o
 Print::print(unsigned char, int)                  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::print(unsigned int, int)                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::print(unsigned long, int)                  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                                                  ./utilities.o
 Print::printFloat(double, unsigned char)          D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::printNumber(unsigned long, unsigned char)  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::println()                                  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
-                                                  ./IMU_Kalman.o
 Print::println(Printable const&)                  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::println(String const&)                     D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::println(__FlashStringHelper const*)        D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::println(char const*)                       D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
+                                                  ./utilities.o
                                                   ./IMU_Kalman.o
 Print::println(char)                              D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 Print::println(double, int)                       D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
@@ -1699,6 +1828,8 @@ Print::write(char const*)                         D:\Documents\Arduino\IMU_Kalma
 Print::write(unsigned char const*, unsigned int)  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
                                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
                                                   ./Wire/Wire.o
+Print_Filter_Debug_Out()                          ./utilities.o
+                                                  ./IMU_Kalman.o
 SPI                                               ./SPI/SPI.o
 SPIClass::begin()                                 ./SPI/SPI.o
                                                   ./MPU6000/MPU6000.o
@@ -1708,6 +1839,7 @@ SPIClass::setClockDivider(unsigned char)          ./SPI/SPI.o
                                                   ./MPU6000/MPU6000.o
 SPIClass::setDataMode(unsigned char)              ./SPI/SPI.o
 Serial                                            D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                                                  ./utilities.o
                                                   ./IMU_Kalman.o
 String::String(String const&)                     D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
 String::String(String const&)                     D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
@@ -1818,8 +1950,14 @@ TwoWire::write(unsigned char)                     ./Wire/Wire.o
 Wire                                              ./Wire/Wire.o
                                                   ./HMC5883/HMC5883.o
 XAxisGyroKalman                                   ./Kalman_Filters/GyroKalman.o
+                                                  ./utilities.o
+                                                  ./IMU_Kalman.o
 YAxisGyroKalman                                   ./Kalman_Filters/GyroKalman.o
+                                                  ./utilities.o
+                                                  ./IMU_Kalman.o
 ZAxisGyroKalman                                   ./Kalman_Filters/GyroKalman.o
+                                                  ./utilities.o
+                                                  ./IMU_Kalman.o
 __addsf3                                          c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libm.a(addsf3.o)
                                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 __addsf3x                                         c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libm.a(addsf3x.o)
@@ -1867,6 +2005,7 @@ __do_clear_bss                                    c:/arduino-1.0.4-windows/ardui
                                                   D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lsincoslk.o)
                                                   D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(ldivlkD.o)
                                                   D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lmullkD.o)
+                                                  ./utilities.o
                                                   ./IMU_Kalman.o
                                                   ./GlobalVariables.o
                                                   ./HMC5883/HMC5883.o
@@ -1890,6 +2029,7 @@ __do_copy_data                                    c:/arduino-1.0.4-windows/ardui
                                                   D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lsincoslk.o)
                                                   D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(ldivlkD.o)
                                                   D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lmullkD.o)
+                                                  ./utilities.o
                                                   ./IMU_Kalman.o
                                                   ./GlobalVariables.o
                                                   ./HMC5883/HMC5883.o
@@ -1970,6 +2110,7 @@ __mulsf3x                                         c:/arduino-1.0.4-windows/ardui
 __mulsi3                                          c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_mulsi3.o)
                                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
                                                   D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lmullkD.o)
+                                                  ./utilities.o
                                                   ./HMC5883/HMC5883.o
                                                   ./Kalman_Filters/GyroKalman.o
                                                   ./MPU6000/MPU6000.o
@@ -2028,6 +2169,12 @@ __vector_9                                        c:/arduino-1.0.4-windows/ardui
 __vector_default                                  c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm328p.o
 __vectors                                         c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm328p.o
 _exit                                             c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
+accelX_meas                                       ./GlobalVariables.o
+                                                  ./utilities.o
+accelY_meas                                       ./GlobalVariables.o
+                                                  ./utilities.o
+accelZ_meas                                       ./GlobalVariables.o
+                                                  ./utilities.o
 atol                                              c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a(atol.o)
                                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
 attachInterrupt                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
@@ -2056,6 +2203,7 @@ free                                              D:\Documents\Arduino\IMU_Kalma
                                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
 heading_deg                                       ./GlobalVariables.o
 heading_rad                                       ./GlobalVariables.o
+                                                  ./utilities.o
 init                                              D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
                                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
 isspace                                           c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a(isspace.o)
@@ -2065,13 +2213,15 @@ itoa                                              c:/arduino-1.0.4-windows/ardui
 latan2lk                                          D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(latan2lk.o)
                                                   ./HMC5883/HMC5883.o
 ldivlkD                                           D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(ldivlkD.o)
-                                                  ./IMU_Kalman.o
                                                   ./Kalman_Filters/GyroKalman.o
 lmullkD                                           D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lmullkD.o)
                                                   ./HMC5883/HMC5883.o
                                                   ./Kalman_Filters/GyroKalman.o
 loop                                              ./IMU_Kalman.o
                                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(main.o)
+loopdeltatime_us                                  ./GlobalVariables.o
+                                                  ./utilities.o
+                                                  ./IMU_Kalman.o
 loopstarttime_us                                  ./GlobalVariables.o
                                                   ./IMU_Kalman.o
 lsincoslk                                         D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(lsincoslk.o)
@@ -2095,6 +2245,10 @@ memmove                                           c:/arduino-1.0.4-windows/ardui
 micros                                            D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
                                                   ./IMU_Kalman.o
 millis                                            D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+newmagdata                                        ./GlobalVariables.o
+                                                  ./utilities.o
+newmpudata                                        ./GlobalVariables.o
+                                                  ./utilities.o
 operator delete(void*)                            D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
 operator delete[](void*)                          D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
 operator new(unsigned int)                        D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(new.o)
@@ -2110,11 +2264,23 @@ operator+(StringSumHelper const&, unsigned long)  D:\Documents\Arduino\IMU_Kalma
 pinMode                                           D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
                                                   ./MPU6000/MPU6000.o
                                                   ./SPI/SPI.o
+pitch                                             ./GlobalVariables.o
+                                                  ./utilities.o
+pitchrate                                         ./GlobalVariables.o
+                                                  ./utilities.o
+pitchrate_meas                                    ./GlobalVariables.o
+                                                  ./utilities.o
 port_to_input_PGM                                 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 port_to_mode_PGM                                  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 port_to_output_PGM                                D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring_digital.o)
 realloc                                           D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(malloc.o)
                                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
+roll                                              ./GlobalVariables.o
+                                                  ./utilities.o
+rollrate                                          ./GlobalVariables.o
+                                                  ./utilities.o
+rollrate_meas                                     ./GlobalVariables.o
+                                                  ./utilities.o
 rx_buffer                                         D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
 serialEvent()                                     D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
 serialEventRun()                                  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
@@ -2141,11 +2307,8 @@ strrev                                            c:/arduino-1.0.4-windows/ardui
 strstr                                            c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a(strstr.o)
                                                   D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WString.o)
 templAccum1                                       ./GlobalVariables.o
-                                                  ./IMU_Kalman.o
 templAccum2                                       ./GlobalVariables.o
-                                                  ./IMU_Kalman.o
 templAccum3                                       ./GlobalVariables.o
-                                                  ./IMU_Kalman.o
 templAccum4                                       ./GlobalVariables.o
 timer0_millis                                     D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
 timer0_overflow_count                             D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
@@ -2179,3 +2342,9 @@ vtable for HardwareSerial                         D:\Documents\Arduino\IMU_Kalma
 vtable for Print                                  D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(Print.o)
 vtable for Stream                                 ./Wire/Wire.o
 vtable for TwoWire                                ./Wire/Wire.o
+yaw                                               ./GlobalVariables.o
+                                                  ./utilities.o
+yawrate                                           ./GlobalVariables.o
+                                                  ./utilities.o
+yawrate_meas                                      ./GlobalVariables.o
+                                                  ./utilities.o

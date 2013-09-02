@@ -46,6 +46,33 @@ void setup()
 						MAG_OFFSET_Y,
 						MAG_OFFSET_Z);				// set magnetic sensor offset values
 	Hmc5883.set_mag_declination(MAG_DECLINATION);	// set magnetic declination (difference between true and magnetic north)
+
+	XAxisGyroKalman.Initialize(	XGYRO_ANGLEPROCVAR,
+								XGYRO_RATEPROCVAR,
+								XGYRO_ANGLEOBSVAR,
+								XGYRO_RATEOBSVAR,
+								XGYRO_INITIALANGLE,
+								XGYRO_INITIALRATE,
+								XGYRO_ANGLEESTVAR,
+								XGYRO_RATEESTVAR);	// Initialize the x-axis gyroscopic kalman filter
+
+	YAxisGyroKalman.Initialize(	YGYRO_ANGLEPROCVAR,
+								YGYRO_RATEPROCVAR,
+								YGYRO_ANGLEOBSVAR,
+								YGYRO_RATEOBSVAR,
+								YGYRO_INITIALANGLE,
+								YGYRO_INITIALRATE,
+								YGYRO_ANGLEESTVAR,
+								YGYRO_RATEESTVAR);	// Initialize the y-axis gyroscopic kalman filter
+
+	ZAxisGyroKalman.Initialize(	ZGYRO_ANGLEPROCVAR,
+								ZGYRO_RATEPROCVAR,
+								ZGYRO_ANGLEOBSVAR,
+								ZGYRO_RATEOBSVAR,
+								ZGYRO_INITIALANGLE,
+								ZGYRO_INITIALRATE,
+								ZGYRO_ANGLEESTVAR,
+								ZGYRO_RATEESTVAR);	// Initialize the z-axis gyroscopic kalman filter
 	Serial.println("");
 }
 
@@ -55,55 +82,20 @@ void loop()
 //Add your repeated code here
 	if (micros() - loopstarttime_us >= FASTLOOP_TIME_US)	// if fast loop sample time has elapsed
 	{
-	loopstarttime_us = micros();							// begin new loop iteration, and record new starting time
+		loopdeltatime_us = micros() - loopstarttime_us;			// store amount of time elapsed since beginning last loop
+		loopstarttime_us = micros();							// begin new loop iteration, and record new starting time
 
 #ifdef DEBUG_MAGNETOMETER
-	if (Hmc5883.GetDataCount() > 0)							// if new data is available from magnetometer
-	{
-		mag_datacount = Hmc5883.GetDataCount();						// get number of data items ready
-		if (Hmc5883.Read_Mag_Data())									// read magnetic data
-		{
-			magX_Ga = Hmc5883.GetMagX();								// get x-axis magnetic field strength, in Gauss (*2^24)
-			magY_Ga = Hmc5883.GetMagY();								// get y-axis magnetic field strength, in Gauss (*2^24)
-			magZ_Ga = Hmc5883.GetMagZ();								// get z-axis magnetic field strength, in Gauss (*2^24)
-			heading_rad = Hmc5883.Calc_Heading(0,0);					// calculate heading
-			heading_deg = (int)(((heading_rad>>15)*((long)29335))>>18);	// heading, in degrees
-
-			Serial.println("Data Count\t\tX-Axis Mag(Ga*2^8)\t\tY-Axis Mag(Ga*2^8)\t\tZ-Axis Mag (Ga*2^8)\t\tHeading (deg)");
-			Serial.print(mag_datacount,DEC);
-			Serial.print("\t\t\t\t\t\t\t\t");
-			Serial.print(magX_Ga>>16,DEC);
-			Serial.print("\t\t\t\t\t\t\t\t\t\t");
-			Serial.print(magY_Ga>>16,DEC);
-			Serial.print("\t\t\t\t\t\t\t\t\t\t");
-			Serial.print(magZ_Ga>>16,DEC);
-			Serial.print("\t\t\t\t\t\t\t\t\t");
-			Serial.println(heading_deg,DEC);
-			Serial.println("");
-		}
-		else
-		{
-			Serial.println("Error reading magnetic data");
-		}
-
-	}
-	else
-	{
-		Serial.println("No Magnetic Data Ready");
-	}
+		Debug_Mag_Messages();	// print magnetometer debug messages
 #endif
 
-	templAccum1 = itolk(1);
-	templAccum2 = (long)1<<19;
-	templAccum3 = ldivlk(templAccum1,templAccum2);
+		CheckForData();					// check for new data
+		Calculate_Kalman_Estimates();	// Calculate all Kalman filter state estimates
 
-	Serial.print("Input 1: ");
-	Serial.print(templAccum1);
-	Serial.print("\t\tInput 2: ");
-	Serial.print(templAccum2);
-	Serial.print("\t\tOutput: ");
-	Serial.print(templAccum3);
-	Serial.println();
+#ifdef DEBUG_PRINTFILTEROUTS
+		Print_Filter_Debug_Out();		// print filter debugging output messages
+#endif
+
 
 	}	// end of fastest loop
 }

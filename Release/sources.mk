@@ -35,10 +35,10 @@ SIZEDUMMY :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+. \
 Wire \
 SPI \
 MPU6000 \
 Kalman_Filters \
-. \
 HMC5883 \
 
