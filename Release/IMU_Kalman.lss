@@ -9,23 +9,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .bss          000002a5  008001cc  008001cc  00002068  2**0
                   ALLOC
-  3 .debug_aranges 000008a0  00000000  00000000  00002068  2**0
+  3 .debug_aranges 000008b0  00000000  00000000  00002068  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_pubnames 00001788  00000000  00000000  00002908  2**0
+  4 .debug_pubnames 000017d4  00000000  00000000  00002918  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0000ad64  00000000  00000000  00004090  2**0
+  5 .debug_info   0000ae76  00000000  00000000  000040ec  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000021ac  00000000  00000000  0000edf4  2**0
+  6 .debug_abbrev 000021ac  00000000  00000000  0000ef62  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00005774  00000000  00000000  00010fa0  2**0
+  7 .debug_line   000058f6  00000000  00000000  0001110e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000fe0  00000000  00000000  00016714  2**2
+  8 .debug_frame  00001000  00000000  00000000  00016a04  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00002b3b  00000000  00000000  000176f4  2**0
+  9 .debug_str    00002b86  00000000  00000000  00017a04  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00004f9a  00000000  00000000  0001a22f  2**0
+ 10 .debug_loc    00005124  00000000  00000000  0001a58a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000820  00000000  00000000  0001f1c9  2**0
+ 11 .debug_ranges 00000830  00000000  00000000  0001f6ae  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2682,12 +2682,12 @@ GyroKalman ZAxisGyroKalman;	// Kalman filter for z-axis gyro measurement
      db2:	82 e4       	ldi	r24, 0x42	; 66
      db4:	93 e0       	ldi	r25, 0x03	; 3
      db6:	0e 94 8f 06 	call	0xd1e	; 0xd1e <_ZN10GyroKalmanC1Ev>
-	residual_var = constrain(est_cov_apriori[0] + angle_obs_noise_var,1,MAX_LK);	// calculate residual variance
-	residual_var_inv = ldivlk(ONE_LK,residual_var);
-
-
+								lmullk(est_cov_apriori[2],opt_gain[3]);	// update second row, first column of estimate covariance matrix
+	est_cov_aposteriori[3] = 	est_cov_apriori[3] -
+								lmullk(est_cov_apriori[1],opt_gain[2]) -
+								lmullk(est_cov_apriori[3],opt_gain[3]);	// update second row, second column of estimate covariance matrix
 	return;
-} // end of Update_with_Angle()
+} // end of Update_with_Angle_and_Rate()
      dba:	08 95       	ret
 
 00000dbc <_ZN7HMC588310set_offsetElll>:

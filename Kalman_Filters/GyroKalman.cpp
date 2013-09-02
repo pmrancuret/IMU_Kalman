@@ -104,8 +104,16 @@ void GyroKalman::Predict(long StepTime_us, _lAccum rateActuation_radps2){
  * 				in estimate instead
  */
 void GyroKalman::Update_with_NoData(void){
+	// Update State estimates
 	angle_est = angle_pred;			// set angle estimate to predicted value (no measurement)
 	rate_est = rate_pred;			// set rate estimate to predicted value (no measurement)
+
+	// Update Estimate Covariance Matrix
+	est_cov_aposteriori[0] = est_cov_apriori[0];	// update first row, first column of estimate covariance matrix
+	est_cov_aposteriori[1] = est_cov_apriori[1];	// update first row, second column of estimate covariance matrix
+	est_cov_aposteriori[2] = est_cov_apriori[2];	// update second row, first column of estimate covariance matrix
+	est_cov_aposteriori[3] = est_cov_apriori[3];	// update second row, second column of estimate covariance matrix
+
 	return;
 } // end of Update_with_NoData()
 
@@ -144,3 +152,103 @@ void GyroKalman::Update_with_Angle(_lAccum angle){
 	return;
 } // end of Update_with_Angle()
 
+/*
+ * Class:		GyroKalman
+ * Function:	Update_with_Rate()
+ * Scope:		Public
+ * Arguments:	_lAccum	rate	- rate measured at this time step, in radians/sec *2^24
+ * Description:	performs update step with measured rate data (from gyro), but no angle data.
+ */
+void GyroKalman::Update_with_Rate(_lAccum rate){
+	_lAccum meas_residual;				// measurement residual
+	_lAccum residual_var;				// residual variance
+	_lAccum residual_var_inv;			// inverse of residual variance;
+	_lAccum opt_gain[2];				// optimal Kalman gain vector
+
+	// calculate residual and variances
+	meas_residual = rate - rate_pred;	// calculate measurement residual
+	residual_var = est_cov_apriori[3] + rate_obs_noise_var;	// calculate residual variance
+	residual_var_inv = ldivlk(ONE_LK,residual_var);				// calculate inverse of residual variance
+
+	// Calculate the optimal kalman gain
+	opt_gain[0] = lmullk(residual_var_inv,est_cov_apriori[1]);	// calculate first element of optimal Kalman gain
+	opt_gain[1] = lmullk(residual_var_inv,est_cov_apriori[3]);	// calculate second element of optimal Kalman gain
+
+	// Update state estimates
+	angle_est = angle_pred + lmullk(opt_gain[0],meas_residual);	// update (a posteriori) angle state estimate
+	rate_est = rate_pred + lmullk(opt_gain[1],meas_residual);	// update (a posteriori) rate state estimate
+
+	// Update Estimate Covariance Matrix
+	est_cov_aposteriori[0] = est_cov_apriori[0] - lmullk(est_cov_apriori[2],opt_gain[0]);	// update first row, first column of estimate covariance matrix
+	est_cov_aposteriori[1] = est_cov_apriori[1] - lmullk(est_cov_apriori[3],opt_gain[0]);	// update first row, second column of estimate covariance matrix
+	est_cov_aposteriori[2] = est_cov_apriori[2] - lmullk(est_cov_apriori[2],opt_gain[1]);	// update second row, first column of estimate covariance matrix
+	est_cov_aposteriori[3] = est_cov_apriori[3] - lmullk(est_cov_apriori[3],opt_gain[1]);	// update second row, second column of estimate covariance matrix
+
+	return;
+} // end of Update_with_Rate()
+
+/*
+ * Class:		GyroKalman
+ * Function:	Update_with_Angle_and_Rate()
+ * Scope:		Public
+ * Arguments:	_lAccum	angle	- angle measured at this time step, in radians *2^24
+ * 				_lAccum	rate	- rate measured at this time step, in radians/sec *2^24
+ * Description:	performs update step with both measured angle and rate data
+ */
+void GyroKalman::Update_with_Angle_and_Rate(_lAccum angle, _lAccum rate){
+	_lAccum meas_residual[2];			// measurement residual
+	_lAccum det_res_cov;				// determinant of residual covariance matrix
+	_lAccum inv_det_res_cov;			// inverse of the determinant of the residual covariance matrix
+	_lAccum opt_gain[4];				// optimal Kalman gain matrix
+	_lAccum tempvalue;					// temporary _lAccum value used in Kalman gain calculations
+
+	// calculate residual and variances
+	meas_residual[0] = angle - angle_pred;	// calculate first element of measurement residual
+	meas_residual[1] = rate - rate_pred;	// calculate second element of measurement residual
+
+	/* In order to use less logic steps, will skip calculating the residual covariance separately,
+	 * and include it directly in the steps used to calculate the optimal Kalman gain.  The
+	 * determinant of the residual covariance matrix and its inverse will be calculated instead
+	 * as an intermediate step, since the matrix inverse is used in Kalman gain calculation
+	 */
+
+	// calculate determinate of residual covariance matrix
+	det_res_cov = 	lmullk((est_cov_apriori[0]+angle_obs_noise_var),(est_cov_apriori[3]+rate_obs_noise_var)) -
+					lmullk(est_cov_apriori[1],est_cov_apriori[2]);
+	inv_det_res_cov = ldivlk(ONE_LK,det_res_cov);				// calculate inverse of the determinant of the residual covariance matrix
+
+	// calculate the optimal Kalman gain
+	tempvalue = 	lmullk(est_cov_apriori[0],est_cov_apriori[3]) -
+					lmullk(est_cov_apriori[1],est_cov_apriori[2]) +
+					lmullk(est_cov_apriori[0],rate_obs_noise_var);	// calculate first element of optimal gain, with exception of division by determinant
+	opt_gain[0] = lmullk(inv_det_res_cov,tempvalue);				// finish calculation of first element of optimal Kalman gain
+	tempvalue =		lmullk(est_cov_apriori[1],angle_obs_noise_var);	// calculate second element of optimal gain, with exception of division by determinant
+	opt_gain[1] = lmullk(inv_det_res_cov,tempvalue);				// finish calculation of second element of optimal Kalman gain
+	tempvalue =		lmullk(est_cov_apriori[2],rate_obs_noise_var);	// calculate third element of optimal gain, with exception of division by determinant
+	opt_gain[2] = lmullk(inv_det_res_cov,tempvalue);				// finish calculation of third element of optimal Kalman gain
+	tempvalue = 	lmullk(est_cov_apriori[0],est_cov_apriori[3]) -
+					lmullk(est_cov_apriori[1],est_cov_apriori[2]) +
+					lmullk(est_cov_apriori[3],angle_obs_noise_var);	// calculate fourth element of optimal gain, with exception of division by determinant
+	opt_gain[3] = lmullk(inv_det_res_cov,tempvalue);				// finish calculation of fourth element of optimal Kalman gain
+
+	// Update state estimates
+	angle_est = angle_pred + 	lmullk(opt_gain[0],meas_residual[0]) +
+								lmullk(opt_gain[1],meas_residual[1]);	// update (a posteriori) angle state estimate
+	rate_est = rate_pred + 		lmullk(opt_gain[3],meas_residual[0]) +
+								lmullk(opt_gain[4],meas_residual[1]);	// update (a posteriori) rate state estimate
+
+	// Update Estimate Covariance Matrix
+	est_cov_aposteriori[0] = 	est_cov_apriori[0] -
+								lmullk(est_cov_apriori[0],opt_gain[0]) -
+								lmullk(est_cov_apriori[2],opt_gain[1]);	// update first row, first column of estimate covariance matrix
+	est_cov_aposteriori[1] = 	est_cov_apriori[1] -
+								lmullk(est_cov_apriori[1],opt_gain[0]) -
+								lmullk(est_cov_apriori[3],opt_gain[1]);	// update first row, second column of estimate covariance matrix
+	est_cov_aposteriori[2] = 	est_cov_apriori[2] -
+								lmullk(est_cov_apriori[0],opt_gain[2]) -
+								lmullk(est_cov_apriori[2],opt_gain[3]);	// update second row, first column of estimate covariance matrix
+	est_cov_aposteriori[3] = 	est_cov_apriori[3] -
+								lmullk(est_cov_apriori[1],opt_gain[2]) -
+								lmullk(est_cov_apriori[3],opt_gain[3]);	// update second row, second column of estimate covariance matrix
+	return;
+} // end of Update_with_Angle_and_Rate()
