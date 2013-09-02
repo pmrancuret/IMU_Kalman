@@ -93,7 +93,17 @@ void loop()
 	}
 #endif
 
+	templAccum1 = itolk(1);
+	templAccum2 = (long)1<<19;
+	templAccum3 = ldivlk(templAccum1,templAccum2);
 
+	Serial.print("Input 1: ");
+	Serial.print(templAccum1);
+	Serial.print("\t\tInput 2: ");
+	Serial.print(templAccum2);
+	Serial.print("\t\tOutput: ");
+	Serial.print(templAccum3);
+	Serial.println();
 
 	}	// end of fastest loop
 }

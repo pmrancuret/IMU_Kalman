@@ -18,5 +18,8 @@ extern _lAccum	magX_Ga;					// X-axis magnetic field, in Gauss (*2^24)
 extern _lAccum	magY_Ga;					// Y-axis magnetic field, in Gauss (*2^24)
 extern _lAccum	magZ_Ga;					// Z-axis magnetic field, in Gauss (*2^24)
 extern byte mag_datacount;					// number of data ready in magnetometer
-
+extern _lAccum templAccum1;					// temporary _lAccum for debugging purposes
+extern _lAccum templAccum2;					// temporary _lAccum for debugging purposes
+extern _lAccum templAccum3;					// temporary _lAccum for debugging purposes
+extern _lAccum templAccum4;					// temporary _lAccum for debugging purposes
 #endif /* GLOBALVARIABLES_H_ */

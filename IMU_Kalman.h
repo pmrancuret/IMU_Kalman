@@ -25,7 +25,7 @@ void setup();
 #endif
 
 // debug definitions
-#define DEBUG_MAGNETOMETER		// defining this variable will cause some basic debugging from the magnetometer
+//#define DEBUG_MAGNETOMETER		// defining this variable will cause some basic debugging from the magnetometer
 
 //add your function definitions for the project IMU_Kalman here
 

@@ -14,3 +14,7 @@ _lAccum	magX_Ga = 0;				// X-axis magnetic field, in Gauss (*2^24)
 _lAccum	magY_Ga = 0;				// Y-axis magnetic field, in Gauss (*2^24)
 _lAccum	magZ_Ga = 0;				// Z-axis magnetic field, in Gauss (*2^24)
 byte mag_datacount = 0;				// number of data ready in magnetometer
+_lAccum templAccum1 = 0;			// temporary _lAccum for debugging purposes
+_lAccum templAccum2 = 0;			// temporary _lAccum for debugging purposes
+_lAccum templAccum3 = 0;			// temporary _lAccum for debugging purposes
+_lAccum templAccum4 = 0;			// temporary _lAccum for debugging purposes
