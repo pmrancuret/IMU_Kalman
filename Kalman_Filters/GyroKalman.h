@@ -15,6 +15,12 @@
 #define	MICROSECONDTIMES2_32PWR		4295	// one microsecond (1e-6 sec), rescaled in seconds times 2^32.
 #define ONE_LK						0x1000000	// one times 2^32
 #define MAX_LK						0x7FFFFFFF	// maximum value of _lAccum data type
+#ifndef PILK
+#define PILK						52707178	// This value represents pi in the _lAccum data type (*2^24)
+#endif
+#ifndef TWOPILK
+#define TWOPILK					105414357	// This value represents 2*pi in the _lAccum data type (*2^24)
+#endif
 
 // GyroKalman Class Definition
 /*

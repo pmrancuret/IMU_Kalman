@@ -116,9 +116,15 @@
 
 // constant definitions
 #define MINUS128LK				0x8000	// This value represents the minimum number (-128) that can be represented using the _lAccum data type
+#ifndef PIOVER2LK
 #define PIOVER2LK				26353589	// This value represents pi/2 in the _lAccum data type (*2^24)
+#endif
+#ifndef PILK
 #define PILK					52707178	// This value represents pi in the _lAccum data type (*2^24)
+#endif
+#ifndef TWOPILK
 #define TWOPILK					105414357	// This value represents 2*pi in the _lAccum data type (*2^24)
+#endif
 
 // MPU6000 Class Definition
 /*

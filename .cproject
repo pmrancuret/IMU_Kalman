@@ -92,7 +92,7 @@
 							<tool command="avr-gcc" commandLinePattern="${COMMAND} -Os -Wl,--gc-sections  ${FLAGS} ${ARDUINO_LINK_OPTIONS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS} -lm" errorParsers="org.eclipse.cdt.core.GLDErrorParser" id="it.baeyens.avreclipse.tool.cpplinker.app.release.1612619751" name="AVR C++ Linker" superClass="it.baeyens.avreclipse.tool.cpplinker.app.release">
 								<option id="it.baeyens.avreclipse.cpplinker.option.libs.1826873105" name="Libraries (-l)" superClass="it.baeyens.avreclipse.cpplinker.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="avrfix"/>
-									<listOptionValue builtIn="false" value="${ARDUINOBOARDNAME}"/>
+									<listOptionValue builtIn="false" value="Arduino_Duemilanove_w__ATmega328"/>
 								</option>
 								<option id="it.baeyens.avreclipse.cpplinker.option.libpath.564686622" name="Libraries Path (-L)" superClass="it.baeyens.avreclipse.cpplinker.option.libpath" valueType="stringList">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/avrfix}&quot;"/>

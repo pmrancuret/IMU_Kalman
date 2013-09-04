@@ -335,6 +335,9 @@ void GyroKalman::Predict(long StepTime_us, _lAccum rateActuation_radps2){
 		rate_pred = rate_est + StepTime_x_input;			// calculate angular velocity prediction
 	}
 
+	if (angle_pred > PILK) angle_pred -= TWOPILK;			// if angle is greater than pi, subtract 2pi to normalize
+	else if (angle_pred < -PILK) angle_pred += TWOPILK;		// else if angle is less than -pi, add 2pi to normalize
+
 	StepTime_x_lastcov = lmullk(est_cov_aposteriori[3],StepTime_slk);								// calculate step time times  last element of a-posteriori estimate covariance matrix
 	est_cov_apriori[0] = 	est_cov_aposteriori[0] + lmullk(est_cov_aposteriori[1],StepTime_slk) +
 							lmullk(est_cov_aposteriori[2],StepTime_slk) +
@@ -359,6 +362,9 @@ void GyroKalman::Update_with_NoData(void){
 	// Update State estimates
 	angle_est = angle_pred;			// set angle estimate to predicted value (no measurement)
 	rate_est = rate_pred;			// set rate estimate to predicted value (no measurement)
+
+	if (angle_est > PILK)	angle_est -= TWOPILK;			// if angle is greater than pi, subtract 2pi to normalize
+	else if (angle_est < -PILK) angle_est += TWOPILK;		// else if angle is less than -pi, add 2pi to normalize
 
 	// Update Estimate Covariance Matrix
 	est_cov_aposteriori[0] = est_cov_apriori[0];	// update first row, first column of estimate covariance matrix
@@ -395,6 +401,9 @@ void GyroKalman::Update_with_Angle(_lAccum angle){
 	angle_est = angle_pred + lmullk(opt_gain[0],meas_residual);	// update (a posteriori) angle state estimate
 	rate_est = rate_pred + lmullk(opt_gain[1],meas_residual);	// update (a posteriori) rate state estimate
 
+	if (angle_est > PILK)	angle_est -= TWOPILK;			// if angle is greater than pi, subtract 2pi to normalize
+	else if (angle_est < -PILK) angle_est += TWOPILK;		// else if angle is less than -pi, add 2pi to normalize
+
 	// Update Estimate Covariance Matrix
 	est_cov_aposteriori[0] = est_cov_apriori[0] - lmullk(est_cov_apriori[0],opt_gain[0]);	// update first row, first column of estimate covariance matrix
 	est_cov_aposteriori[1] = est_cov_apriori[1] - lmullk(est_cov_apriori[1],opt_gain[0]);	// update first row, second column of estimate covariance matrix
@@ -429,6 +438,9 @@ void GyroKalman::Update_with_Rate(_lAccum rate){
 	// Update state estimates
 	angle_est = angle_pred + lmullk(opt_gain[0],meas_residual);	// update (a posteriori) angle state estimate
 	rate_est = rate_pred + lmullk(opt_gain[1],meas_residual);	// update (a posteriori) rate state estimate
+
+	if (angle_est > PILK)	angle_est -= TWOPILK;			// if angle is greater than pi, subtract 2pi to normalize
+	else if (angle_est < -PILK) angle_est += TWOPILK;		// else if angle is less than -pi, add 2pi to normalize
 
 	// Update Estimate Covariance Matrix
 	est_cov_aposteriori[0] = est_cov_apriori[0] - lmullk(est_cov_apriori[2],opt_gain[0]);	// update first row, first column of estimate covariance matrix
@@ -488,6 +500,9 @@ void GyroKalman::Update_with_Angle_and_Rate(_lAccum angle, _lAccum rate){
 								lmullk(opt_gain[1],meas_residual[1]);	// update (a posteriori) angle state estimate
 	rate_est = rate_pred + 		lmullk(opt_gain[3],meas_residual[0]) +
 								lmullk(opt_gain[4],meas_residual[1]);	// update (a posteriori) rate state estimate
+
+	if (angle_est > PILK)	angle_est -= TWOPILK;			// if angle is greater than pi, subtract 2pi to normalize
+	else if (angle_est < -PILK) angle_est += TWOPILK;		// else if angle is less than -pi, add 2pi to normalize
 
 	// Update Estimate Covariance Matrix
 	est_cov_aposteriori[0] = 	est_cov_apriori[0] -
