@@ -33,7 +33,7 @@ void setup();
 
 #define SERIAL_DATARATE 38400	// serial line datarate, baud
 
-#define FASTLOOP_TIME_US 7500	// fast loop sample rate, in microseconds.
+#define FASTLOOP_TIME_US 10000	// fast loop sample rate, in microseconds.
 
 // offsets for gyroscope
 #define GYRO_OFFSET_X	0	// gyroscope x-axis offset (in rad/s * 2^24)

@@ -108,6 +108,15 @@
 
 #define MAX_RADPSPCNT_LK			17872	// This value represents the number of rad/sec for each gyroscope count, times 2^24.  Max means it is the value with the +-2000 deg/sec full scale resolution.
 #define MAX_MPS2PCNT_LK				80337	// This value represents the number of m/s^2 for each accelerometer count, times 2^24.  Max means it is the value with the +-16g full scale resolution.
+#ifndef PIOVER2LK
+#define PIOVER2LK				26353589	// This value represents pi/2 in the _lAccum data type (*2^24)
+#endif
+#ifndef PILK
+#define PILK					52707178	// This value represents pi in the _lAccum data type (*2^24)
+#endif
+#ifndef TWOPILK
+#define TWOPILK					105414357	// This value represents 2*pi in the _lAccum data type (*2^24)
+#endif
 
 // MPU6000 Class Definition
 /*
@@ -132,12 +141,15 @@ private:
 	_lAccum 		gyroXoffset;			// X-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_lAccum 		gyroYoffset;			// Y-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_lAccum 		gyroZoffset;			// Z-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum			angleX;					// X-axis roll angle, in rad.  Positive value indicates roll right.  Calculated value using location of gravity vector measured from accelerometer values.   The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum			angleY;					// Y-axis pitch angle, in rad.  Positive value indicates pitch up.  Calculated value using location of gravity vector measured from accelerometer values.   The data type _lAccum implies it is stored with a factor of 2^24.
 	_sAccum			temp;					// temperature of MPU6000, deg C.  The data type _sAccum implies it is stored with a factor of 2^8.
 	volatile byte 	datacount;				// this counter increments whenever new data is available, and decrements when it is read
 	byte 			identity;				// stores the identity code of the MPU6000 processor
 	byte			Gyro_Select;			// stores the gyroscope scale selection
 	byte			Accel_Select;			// stores the accelerometer scale selection
 
+	void Calculate_Angles(void);			// This function calculates x-axis (roll) and y-axis (pitch) angles based on location of gravity vector measured from accelerometers.
 	void SPI_write(byte reg, byte data);	// Writes to a register in the MPU6000 using SPI
 	byte SPI_read(byte reg);				// reads a register in the MPU6000 using SPI
 
@@ -166,6 +178,8 @@ public:
 	_lAccum GetGyroX(void);					// returns latest read x-axis gyroscope measurement (does not perform a new read), rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_lAccum GetGyroY(void);					// returns latest read y-axis gyroscope measurement (does not perform a new read), rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_lAccum GetGyroZ(void);					// returns latest read z-axis gyroscope measurement (does not perform a new read), rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum GetAngleX(void);				// returns latest calculated x-axis roll angle (does not perform a new read), rad.  The data type _lAccum implies it is stored with a factor of 2^24.
+	_lAccum GetAngleY(void);				// returns latest calculated y-axis pitch angle (does not perform a new read), rad.  The data type _lAccum implies it is stored with a factor of 2^24.
 	_sAccum GetTemp(void);					// returns latest read temperature measurement (does not perform a new read), deg C.  The data type _sAccum implies it is stored with a factor of 2^8.
 	byte GetDataCount(void);				// returns number of unread data items waiting in the MPU6000
 	byte GetIdentity(void);					// returns identity of the MPU6000 device

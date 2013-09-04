@@ -21,6 +21,8 @@ extern _lAccum yawrate_meas;				// aircraft yaw rate about z-axis, in radians/se
 extern _lAccum accelX_meas;					// measured acceleration in x-direction, m/s^2.  measured from IMU
 extern _lAccum accelY_meas;					// measured acceleration in y-direction, m/s^2.  measured from IMU
 extern _lAccum accelZ_meas;					// measured acceleration in z-direction, m/s^2.  measured from IMU
+extern _lAccum roll_fromAccel;				// calculated roll angle (rad), using raw data from accels to determine where gravity vector is.
+extern _lAccum pitch_fromAccel;				// calculated roll angle (rad), using raw data from accels to determine where gravity vector is.
 extern _lAccum heading_rad;					// heading, in radians (*2^24).  Measurement from magnetometer.
 extern _lAccum roll;						// aircraft roll about x-axis, in radians.  a positive value indicates roll right
 extern _lAccum pitch;						// aircaft pitch about y-axis, in radians.  a positive value indicates pitch up

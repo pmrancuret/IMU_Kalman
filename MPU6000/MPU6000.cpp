@@ -35,6 +35,8 @@ MPU6000::MPU6000(){
 	gyroXoffset = 0;					// Initial value of 0.  X-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	gyroYoffset = 0;					// Initial value of 0.  Y-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
 	gyroZoffset = 0;					// Initial value of 0.  Z-axis gyroscopic rate offset, rad/sec.  The data type _lAccum implies it is stored with a factor of 2^24.
+	angleX = 0;							// X-axis roll angle, in rad.  Positive value indicates roll right.  Calculated value using location of gravity vector measured from accelerometer values.   The data type _lAccum implies it is stored with a factor of 2^24.
+	angleY = 0;							// Y-axis pitch angle, in rad.  Positive value indicates pitch up.  Calculated value using location of gravity vector measured from accelerometer values.   The data type _lAccum implies it is stored with a factor of 2^24.
 	temp = 0;							// Initial value of 0.  temperature of MPU6000, degC*2^8
 	datacount = 0;						// Initial value of 0.  this counter increments whenever new data is available, and decrements when it is read
 	identity = 0;						// Initial value of 0.  stores the identity code of the MPU6000 processor
@@ -320,6 +322,8 @@ void MPU6000::Read_Accel(void){
 		accelZ = (_lAccum)(((long)(((int)byte_H<<8)| byte_L) * ACCEL_ZAXIS_SIGN)*((long)MAX_MPS2PCNT_LK>>(SEL_ACCEL_16-Accel_Select))) + accelZoffset;
 	}
 
+	Calculate_Angles();
+
 	if (datacount > 0) datacount--;	// decrement data counter
 
 	return;
@@ -376,6 +380,7 @@ void MPU6000::Read_All_Data(void){
 
 	return;
 }
+
 
 /*
  * Class:		MPU6000
@@ -478,6 +483,30 @@ _lAccum MPU6000::GetGyroZ(void) {
 
 /*
  * Class:		MPU6000
+ * Function:	GetAngleX()
+ * Scope:		public
+ * Arguments:	none
+ * Description:	returns latest calculated x-axis roll angle (does not perform a new read), rad.
+ * 				The data type _lAccum implies it is stored with a factor of 2^24.
+ */
+_lAccum MPU6000::GetAngleX(void) {
+	return angleX;
+}	// end of GetAngleX()
+
+/*
+ * Class:		MPU6000
+ * Function:	GetAngleY()
+ * Scope:		public
+ * Arguments:	none
+ * Description:	returns latest calculated y-axis pitch angle (does not perform a new read), rad.
+ * 				The data type _lAccum implies it is stored with a factor of 2^24.
+ */
+_lAccum MPU6000::GetAngleY(void) {
+	return angleY;
+}	// end of GetAngleY()
+
+/*
+ * Class:		MPU6000
  * Function:	GetTemp()
  * Scope:		public
  * Arguments:	none
@@ -510,6 +539,36 @@ byte MPU6000::GetIdentity(void) {
 }
 
 // MPU6000 private SPI functions
+
+
+/*
+ * Class:		MPU6000
+ * Function:	Calculate_Angles()
+ * Scope:		private
+ * Arguments:	none
+ * Description:	This function calculates x-axis (roll) and y-axis (pitch) angles based on location of gravity vector
+ * 				measured from accelerometers.
+ */
+void MPU6000::Calculate_Angles(void){
+
+	if (accelZ >= 0)								// if gravity is down (craft is not upside-down)
+	{
+		angleX = latan2lk(accelZ,accelY);			// calculate roll angle
+		angleY = latan2lk(accelZ,-accelX);			// calculate pitch angle
+	}
+	else											// if gravity is up (craft is upside-down)
+	{
+		angleX = latan2lk(-accelZ,-accelY) + PILK;	// calculate roll angle as if gravity was down, then reverse angle by adding pi
+		angleY = latan2lk(-accelZ,accelX) + PILK;	// calculate pitch angle as if gravity was down, then reverse angle by adding pi
+	}
+	if (angleX > PILK) angleX -= TWOPILK;			// if angle is greater than pi, subtract 2pi to normalize
+	else if (angleX < -PILK) angleX += TWOPILK;		// else if angle is less than -pi, add 2pi to normalize
+	if (angleY > PILK) angleY -= TWOPILK;			// if angle is greater than pi, subtract 2pi to normalize
+	else if (angleY < -PILK) angleY += TWOPILK;		// else if angle is less than -pi, add 2pi to normalize
+
+	return;
+} // end of Calculate_Angles()
+
 
 /*
  * Class:		MPU6000

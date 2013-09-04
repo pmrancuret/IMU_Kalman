@@ -43,6 +43,8 @@ void CheckForData(void){
 		accelX_meas = Mpu6000.GetAccelX();						// measured acceleration in x-direction, m/s^2.  measured from IMU
 		accelY_meas = Mpu6000.GetAccelY();						// measured acceleration in y-direction, m/s^2.  measured from IMU
 		accelZ_meas = Mpu6000.GetAccelZ();						// measured acceleration in z-direction, m/s^2.  measured from IMU
+		roll_fromAccel = Mpu6000.GetAngleX();					// calculated roll angle, using accelerometer data (rad)
+		pitch_fromAccel = Mpu6000.GetAngleY();					// calculated pitch angle, using accelerometer data (rad)
 		newmpudata = true;										// denote that new data was read from MPU
 	}
 	else
@@ -64,30 +66,30 @@ void Calculate_Kalman_Estimates(void){
 	{
 		if (newmpudata)				// if new magnetometer and mpu data are both ready
 		{
-			XAxisGyroKalman.Est_NoCtrl_MeasRate(loopdeltatime_us,rollrate_meas);						// trigger x-axis gyro kalman estimation
-			YAxisGyroKalman.Est_NoCtrl_MeasRate(loopdeltatime_us,pitchrate_meas);						// trigger y-axis gyro kalman estimation
-			ZAxisGyroKalman.Est_NoCtrl_MeasAngleAndRate(loopdeltatime_us,heading_rad,yawrate_meas);		// trigger z-axis gyro kalman estimation
+			XAxisGyroKalman.Est_NoCtrl_MeasAngleAndRate(loopdeltatime_us,roll_fromAccel,rollrate_meas);		// trigger x-axis gyro kalman estimation
+			YAxisGyroKalman.Est_NoCtrl_MeasAngleAndRate(loopdeltatime_us,pitch_fromAccel,pitchrate_meas);	// trigger y-axis gyro kalman estimation
+			ZAxisGyroKalman.Est_NoCtrl_MeasAngleAndRate(loopdeltatime_us,heading_rad,yawrate_meas);			// trigger z-axis gyro kalman estimation
 		}
 		else						// if new magnetometer data is ready, but no mpu data
 		{
-			XAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);										// trigger x-axis gyro kalman estimation
-			YAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);										// trigger y-axis gyro kalman estimation
-			ZAxisGyroKalman.Est_NoCtrl_MeasAngle(loopdeltatime_us,heading_rad);							// trigger z-axis gyro kalman estimation
+			XAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);											// trigger x-axis gyro kalman estimation
+			YAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);											// trigger y-axis gyro kalman estimation
+			ZAxisGyroKalman.Est_NoCtrl_MeasAngle(loopdeltatime_us,heading_rad);								// trigger z-axis gyro kalman estimation
 		}
 	}
 	else							// if no magnetometer data is ready
 	{
 		if (newmpudata)				// if no magnetometer data, but new mpu data is ready
 		{
-			XAxisGyroKalman.Est_NoCtrl_MeasRate(loopdeltatime_us,rollrate_meas);						// trigger x-axis gyro kalman estimation
-			YAxisGyroKalman.Est_NoCtrl_MeasRate(loopdeltatime_us,pitchrate_meas);						// trigger y-axis gyro kalman estimation
-			ZAxisGyroKalman.Est_NoCtrl_MeasRate(loopdeltatime_us,yawrate_meas);							// trigger z-axis gyro kalman estimation
+			XAxisGyroKalman.Est_NoCtrl_MeasAngleAndRate(loopdeltatime_us,roll_fromAccel,rollrate_meas);		// trigger x-axis gyro kalman estimation
+			YAxisGyroKalman.Est_NoCtrl_MeasAngleAndRate(loopdeltatime_us,pitch_fromAccel,pitchrate_meas);	// trigger y-axis gyro kalman estimation
+			ZAxisGyroKalman.Est_NoCtrl_MeasRate(loopdeltatime_us,yawrate_meas);								// trigger z-axis gyro kalman estimation
 		}
 		else						// if no magnetometer data or mpu data is ready
 		{
-			XAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);										// trigger x-axis gyro kalman estimation
-			YAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);										// trigger y-axis gyro kalman estimation
-			ZAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);										// trigger z-axis gyro kalman estimation
+			XAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);											// trigger x-axis gyro kalman estimation
+			YAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);											// trigger y-axis gyro kalman estimation
+			ZAxisGyroKalman.Est_NoCtrl_NoMeas(loopdeltatime_us);											// trigger z-axis gyro kalman estimation
 		}
 	}
 
@@ -158,11 +160,11 @@ void Debug_Mag_Messages(void){
 void Print_Filter_Debug_Out(void){
 	static byte i = 0;			// counter variable
 
-	if (++i >= 10)				// if this is the tenth time this function has been called
+	if (++i >= 50)				// if this is the tenth time this function has been called
 	{
 		i = 0;					// reset counter
 
-		Serial.println("TimeStep (us)\t\tRaw Rollrate (deg/s)\t\tRaw Pitchrate (deg/s)\t\tRaw Yawrate (deg/s)\t\tRaw Yaw (deg)\t\tFilt Rollrate (deg/s)\t\tFilt Pitchrate (deg/s)\t\tFilt Yawrate (deg/s)\t\tFilt Roll (deg)\t\tFilt Pitch (deg)\t\tFilt Yaw (deg)");
+		Serial.println("TimeStep (us)\t\tRaw Rollrate (deg/s)\t\tRaw Pitchrate (deg/s)\t\tRaw Yawrate (deg/s)\t\tRaw Roll (deg)\t\tRaw Pitch (deg)\t\tRaw Yaw (deg)\t\tFilt Rollrate (deg/s)\t\tFilt Pitchrate (deg/s)\t\tFilt Yawrate (deg/s)\t\tFilt Roll (deg)\t\tFilt Pitch (deg)\t\tFilt Yaw (deg)");
 		Serial.print(loopdeltatime_us,DEC);
 		Serial.print("\t\t\t\t\t\t");
 		Serial.print((int)(((rollrate_meas>>15)*((long)29335))>>18),DEC);
@@ -171,8 +173,12 @@ void Print_Filter_Debug_Out(void){
 		Serial.print("\t\t\t\t\t\t\t\t\t\t\t");
 		Serial.print((int)(((yawrate_meas>>15)*((long)29335))>>18),DEC);
 		Serial.print("\t\t\t\t\t\t\t\t\t\t\t");
+		Serial.print((int)(((roll_fromAccel>>15)*((long)29335))>>18),DEC);
+		Serial.print("\t\t\t\t\t\t\t\t");
+		Serial.print((int)(((pitch_fromAccel>>15)*((long)29335))>>18),DEC);
+		Serial.print("\t\t\t\t\t\t\t\t");
 		Serial.print((int)(((heading_rad>>15)*((long)29335))>>18),DEC);
-		Serial.print("\t\t\t\t\t\t\t\t\t");
+		Serial.print("\t\t\t\t\t\t\t");
 		Serial.print((int)(((rollrate>>15)*((long)29335))>>18),DEC);
 		Serial.print("\t\t\t\t\t\t\t\t\t");
 		Serial.print((int)(((pitchrate>>15)*((long)29335))>>18),DEC);
