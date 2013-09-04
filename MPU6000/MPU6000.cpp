@@ -553,13 +553,13 @@ void MPU6000::Calculate_Angles(void){
 
 	if (accelZ >= 0)								// if gravity is down (craft is not upside-down)
 	{
-		angleX = latan2lk(accelZ,accelY);			// calculate roll angle
-		angleY = latan2lk(accelZ,-accelX);			// calculate pitch angle
+		angleX = latan2lk(accelZ,accelY) + PILK;	// calculate roll angle
+		angleY = latan2lk(accelZ,-accelX) + PILK;	// calculate pitch angle
 	}
 	else											// if gravity is up (craft is upside-down)
 	{
-		angleX = latan2lk(-accelZ,-accelY) + PILK;	// calculate roll angle as if gravity was down, then reverse angle by adding pi
-		angleY = latan2lk(-accelZ,accelX) + PILK;	// calculate pitch angle as if gravity was down, then reverse angle by adding pi
+		angleX = latan2lk(-accelZ,-accelY);			// calculate roll angle as if gravity was down, then reverse angle by not adding pi
+		angleY = latan2lk(-accelZ,accelX);			// calculate pitch angle as if gravity was down, then reverse angle by not adding pi
 	}
 	if (angleX > PILK) angleX -= TWOPILK;			// if angle is greater than pi, subtract 2pi to normalize
 	else if (angleX < -PILK) angleX += TWOPILK;		// else if angle is less than -pi, add 2pi to normalize

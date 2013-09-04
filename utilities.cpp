@@ -160,7 +160,7 @@ void Debug_Mag_Messages(void){
 void Print_Filter_Debug_Out(void){
 	static byte i = 0;			// counter variable
 
-	if (++i >= 50)				// if this is the tenth time this function has been called
+	if (++i >= 25)				// if this is the tenth time this function has been called
 	{
 		i = 0;					// reset counter
 
@@ -182,11 +182,11 @@ void Print_Filter_Debug_Out(void){
 		Serial.print((int)(((rollrate>>15)*((long)29335))>>18),DEC);
 		Serial.print("\t\t\t\t\t\t\t\t\t");
 		Serial.print((int)(((pitchrate>>15)*((long)29335))>>18),DEC);
-		Serial.print("\t\t\t\t\t\t\t\t\t");
+		Serial.print("\t\t\t\t\t\t\t\t\t\t\t");
 		Serial.print((int)(((yawrate>>15)*((long)29335))>>18),DEC);
-		Serial.print("\t\t\t\t\t\t\t\t\t");
+		Serial.print("\t\t\t\t\t\t\t\t\t\t");
 		Serial.print((int)(((roll>>15)*((long)29335))>>18),DEC);
-		Serial.print("\t\t\t\t\t\t\t\t\t");
+		Serial.print("\t\t\t\t\t\t\t\t");
 		Serial.print((int)(((pitch>>15)*((long)29335))>>18),DEC);
 		Serial.print("\t\t\t\t\t\t\t\t\t");
 		Serial.print((int)(((yaw>>15)*((long)29335))>>18),DEC);

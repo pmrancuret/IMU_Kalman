@@ -1255,152 +1255,153 @@ LOAD c:/arduino-1.0.4-windows/arduino-1.0.4/hardware/tools/avr/bin/../lib/gcc/av
  *(.fini0)
                 0x000046ce                _etext = .
 
-.data           0x00800100      0x252 load address 0x000046ce
+.data           0x00800100      0x25e load address 0x000046ce
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100       0x8b ./IMU_Kalman.o
- .data          0x0080018b      0x143 ./utilities.o
- .data          0x008002ce       0x64 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(cordicck.o)
+ .data          0x0080018b      0x14e ./utilities.o
+ .data          0x008002d9       0x64 D:\Documents\Arduino\IMU_Kalman\avrfix\libavrfix.a(cordicck.o)
  *(.data*)
  *(.rodata)
  *(.rodata*)
  .rodata._ZTV7TwoWire
-                0x00800332       0x10 ./Wire/Wire.o
-                0x00800332                vtable for TwoWire
+                0x0080033d       0x10 ./Wire/Wire.o
+                0x0080033d                vtable for TwoWire
  .rodata._ZTV14HardwareSerial
-                0x00800342       0x10 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x00800342                vtable for HardwareSerial
+                0x0080034d       0x10 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x0080034d                vtable for HardwareSerial
  *(.gnu.linkonce.d*)
-                0x00800352                . = ALIGN (0x2)
-                0x00800352                _edata = .
-                0x00800352                PROVIDE (__data_end, .)
+                0x0080035e                . = ALIGN (0x2)
+ *fill*         0x0080035d        0x1 00
+                0x0080035e                _edata = .
+                0x0080035e                PROVIDE (__data_end, .)
 
-.bss            0x00800352      0x2e4
-                0x00800352                PROVIDE (__bss_start, .)
+.bss            0x0080035e      0x2e4
+                0x0080035e                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x00800352       0x6e ./Wire/twi.o
+ .bss           0x0080035e       0x6e ./Wire/twi.o
  *(.bss*)
  .bss._ZN7TwoWire8rxBufferE
-                0x008003c0       0x20 ./Wire/Wire.o
-                0x008003c0                TwoWire::rxBuffer
+                0x008003cc       0x20 ./Wire/Wire.o
+                0x008003cc                TwoWire::rxBuffer
  .bss._ZN7TwoWire13rxBufferIndexE
-                0x008003e0        0x1 ./Wire/Wire.o
-                0x008003e0                TwoWire::rxBufferIndex
+                0x008003ec        0x1 ./Wire/Wire.o
+                0x008003ec                TwoWire::rxBufferIndex
  .bss._ZN7TwoWire14rxBufferLengthE
-                0x008003e1        0x1 ./Wire/Wire.o
-                0x008003e1                TwoWire::rxBufferLength
+                0x008003ed        0x1 ./Wire/Wire.o
+                0x008003ed                TwoWire::rxBufferLength
  .bss._ZN7TwoWire9txAddressE
-                0x008003e2        0x1 ./Wire/Wire.o
-                0x008003e2                TwoWire::txAddress
+                0x008003ee        0x1 ./Wire/Wire.o
+                0x008003ee                TwoWire::txAddress
  .bss._ZN7TwoWire8txBufferE
-                0x008003e3       0x20 ./Wire/Wire.o
-                0x008003e3                TwoWire::txBuffer
+                0x008003ef       0x20 ./Wire/Wire.o
+                0x008003ef                TwoWire::txBuffer
  .bss._ZN7TwoWire13txBufferIndexE
-                0x00800403        0x1 ./Wire/Wire.o
-                0x00800403                TwoWire::txBufferIndex
+                0x0080040f        0x1 ./Wire/Wire.o
+                0x0080040f                TwoWire::txBufferIndex
  .bss._ZN7TwoWire14txBufferLengthE
-                0x00800404        0x1 ./Wire/Wire.o
-                0x00800404                TwoWire::txBufferLength
+                0x00800410        0x1 ./Wire/Wire.o
+                0x00800410                TwoWire::txBufferLength
  .bss._ZN7TwoWire12transmittingE
-                0x00800405        0x1 ./Wire/Wire.o
-                0x00800405                TwoWire::transmitting
- .bss.Wire      0x00800406        0xc ./Wire/Wire.o
-                0x00800406                Wire
- .bss.Mpu6000   0x00800412       0x3e ./MPU6000/MPU6000.o
-                0x00800412                Mpu6000
+                0x00800411        0x1 ./Wire/Wire.o
+                0x00800411                TwoWire::transmitting
+ .bss.Wire      0x00800412        0xc ./Wire/Wire.o
+                0x00800412                Wire
+ .bss.Mpu6000   0x0080041e       0x3e ./MPU6000/MPU6000.o
+                0x0080041e                Mpu6000
  .bss.XAxisGyroKalman
-                0x00800450       0x40 ./Kalman_Filters/GyroKalman.o
-                0x00800450                XAxisGyroKalman
+                0x0080045c       0x40 ./Kalman_Filters/GyroKalman.o
+                0x0080045c                XAxisGyroKalman
  .bss.YAxisGyroKalman
-                0x00800490       0x40 ./Kalman_Filters/GyroKalman.o
-                0x00800490                YAxisGyroKalman
+                0x0080049c       0x40 ./Kalman_Filters/GyroKalman.o
+                0x0080049c                YAxisGyroKalman
  .bss.ZAxisGyroKalman
-                0x008004d0       0x40 ./Kalman_Filters/GyroKalman.o
-                0x008004d0                ZAxisGyroKalman
- .bss.Hmc5883   0x00800510       0x28 ./HMC5883/HMC5883.o
-                0x00800510                Hmc5883
+                0x008004dc       0x40 ./Kalman_Filters/GyroKalman.o
+                0x008004dc                ZAxisGyroKalman
+ .bss.Hmc5883   0x0080051c       0x28 ./HMC5883/HMC5883.o
+                0x0080051c                Hmc5883
  .bss.loopstarttime_us
-                0x00800538        0x4 ./GlobalVariables.o
-                0x00800538                loopstarttime_us
+                0x00800544        0x4 ./GlobalVariables.o
+                0x00800544                loopstarttime_us
  .bss.loopdeltatime_us
-                0x0080053c        0x4 ./GlobalVariables.o
-                0x0080053c                loopdeltatime_us
+                0x00800548        0x4 ./GlobalVariables.o
+                0x00800548                loopdeltatime_us
  .bss.newmagdata
-                0x00800540        0x1 ./GlobalVariables.o
-                0x00800540                newmagdata
+                0x0080054c        0x1 ./GlobalVariables.o
+                0x0080054c                newmagdata
  .bss.newmpudata
-                0x00800541        0x1 ./GlobalVariables.o
-                0x00800541                newmpudata
+                0x0080054d        0x1 ./GlobalVariables.o
+                0x0080054d                newmpudata
  .bss.rollrate_meas
-                0x00800542        0x4 ./GlobalVariables.o
-                0x00800542                rollrate_meas
- .bss.pitchrate_meas
-                0x00800546        0x4 ./GlobalVariables.o
-                0x00800546                pitchrate_meas
- .bss.yawrate_meas
-                0x0080054a        0x4 ./GlobalVariables.o
-                0x0080054a                yawrate_meas
- .bss.accelX_meas
                 0x0080054e        0x4 ./GlobalVariables.o
-                0x0080054e                accelX_meas
- .bss.accelY_meas
+                0x0080054e                rollrate_meas
+ .bss.pitchrate_meas
                 0x00800552        0x4 ./GlobalVariables.o
-                0x00800552                accelY_meas
- .bss.accelZ_meas
+                0x00800552                pitchrate_meas
+ .bss.yawrate_meas
                 0x00800556        0x4 ./GlobalVariables.o
-                0x00800556                accelZ_meas
- .bss.roll_fromAccel
+                0x00800556                yawrate_meas
+ .bss.accelX_meas
                 0x0080055a        0x4 ./GlobalVariables.o
-                0x0080055a                roll_fromAccel
- .bss.pitch_fromAccel
+                0x0080055a                accelX_meas
+ .bss.accelY_meas
                 0x0080055e        0x4 ./GlobalVariables.o
-                0x0080055e                pitch_fromAccel
- .bss.heading_rad
+                0x0080055e                accelY_meas
+ .bss.accelZ_meas
                 0x00800562        0x4 ./GlobalVariables.o
-                0x00800562                heading_rad
- .bss.roll      0x00800566        0x4 ./GlobalVariables.o
-                0x00800566                roll
- .bss.pitch     0x0080056a        0x4 ./GlobalVariables.o
-                0x0080056a                pitch
- .bss.yaw       0x0080056e        0x4 ./GlobalVariables.o
-                0x0080056e                yaw
- .bss.rollrate  0x00800572        0x4 ./GlobalVariables.o
-                0x00800572                rollrate
+                0x00800562                accelZ_meas
+ .bss.roll_fromAccel
+                0x00800566        0x4 ./GlobalVariables.o
+                0x00800566                roll_fromAccel
+ .bss.pitch_fromAccel
+                0x0080056a        0x4 ./GlobalVariables.o
+                0x0080056a                pitch_fromAccel
+ .bss.heading_rad
+                0x0080056e        0x4 ./GlobalVariables.o
+                0x0080056e                heading_rad
+ .bss.roll      0x00800572        0x4 ./GlobalVariables.o
+                0x00800572                roll
+ .bss.pitch     0x00800576        0x4 ./GlobalVariables.o
+                0x00800576                pitch
+ .bss.yaw       0x0080057a        0x4 ./GlobalVariables.o
+                0x0080057a                yaw
+ .bss.rollrate  0x0080057e        0x4 ./GlobalVariables.o
+                0x0080057e                rollrate
  .bss.pitchrate
-                0x00800576        0x4 ./GlobalVariables.o
-                0x00800576                pitchrate
- .bss.yawrate   0x0080057a        0x4 ./GlobalVariables.o
-                0x0080057a                yawrate
+                0x00800582        0x4 ./GlobalVariables.o
+                0x00800582                pitchrate
+ .bss.yawrate   0x00800586        0x4 ./GlobalVariables.o
+                0x00800586                yawrate
  .bss._ZZ22Print_Filter_Debug_OutvE1i
-                0x0080057e        0x1 ./utilities.o
+                0x0080058a        0x1 ./utilities.o
  .bss.rx_buffer
-                0x0080057f       0x44 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x0080057f                rx_buffer
+                0x0080058b       0x44 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x0080058b                rx_buffer
  .bss.tx_buffer
-                0x008005c3       0x44 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x008005c3                tx_buffer
- .bss.Serial    0x00800607       0x22 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
-                0x00800607                Serial
- .bss.intFunc   0x00800629        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
+                0x008005cf       0x44 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x008005cf                tx_buffer
+ .bss.Serial    0x00800613       0x22 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(HardwareSerial.o)
+                0x00800613                Serial
+ .bss.intFunc   0x00800635        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(WInterrupts.o)
  .bss.timer0_overflow_count
-                0x0080062d        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
-                0x0080062d                timer0_overflow_count
+                0x00800639        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x00800639                timer0_overflow_count
  .bss.timer0_millis
-                0x00800631        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
-                0x00800631                timer0_millis
+                0x0080063d        0x4 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x0080063d                timer0_millis
  .bss.timer0_fract
-                0x00800635        0x1 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
+                0x00800641        0x1 D:\Documents\Arduino\IMU_Kalman\Board_Support_Library\libArduino_Duemilanove_w__ATmega328.a(wiring.o)
  *(COMMON)
-                0x00800636                PROVIDE (__bss_end, .)
+                0x00800642                PROVIDE (__bss_end, .)
                 0x000046ce                __data_load_start = LOADADDR (.data)
-                0x00004920                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000492c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800636        0x0
-                0x00800636                PROVIDE (__noinit_start, .)
+.noinit         0x00800642        0x0
+                0x00800642                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800636                PROVIDE (__noinit_end, .)
-                0x00800636                _end = .
-                0x00800636                PROVIDE (__heap_start, .)
+                0x00800642                PROVIDE (__noinit_end, .)
+                0x00800642                _end = .
+                0x00800642                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
