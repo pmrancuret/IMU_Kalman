@@ -7,6 +7,143 @@
 
 #include "utilities.h"
 
+// class instantiations
+CalcMeanAndVariance XAxisAngleNoise;		// this is used to calculate the x-axis angle measurement mean (rad) and variance (rad^2)
+CalcMeanAndVariance YAxisAngleNoise;		// this is used to calculate the y-axis angle measurement mean (rad) and variance (rad^2)
+CalcMeanAndVariance ZAxisAngleNoise;		// this is used to calculate the z-axis angle measurement mean (rad) and variance (rad^2)
+CalcMeanAndVariance XAxisRateNoise;			// this is used to calculate the x-axis rate measurement mean (rad/sec) and variance (rad^2/sec^2)
+CalcMeanAndVariance YAxisRateNoise;			// this is used to calculate the y-axis rate measurement mean (rad/sec) and variance (rad^2/sec^2)
+CalcMeanAndVariance ZAxisRateNoise;			// this is used to calculate the z-axis rate measurement mean (rad/sec) and variance (rad^2/sec^2)
+CalcMeanAndVariance XAxisAccelNoise;		// this is used to calculate the x-axis rate measurement mean (rad/sec) and variance (rad^2/sec^2)
+CalcMeanAndVariance YAxisAccelNoise;		// this is used to calculate the y-axis rate measurement mean (rad/sec) and variance (rad^2/sec^2)
+CalcMeanAndVariance ZAxisAccelNoise;		// this is used to calculate the z-axis rate measurement mean (rad/sec) and variance (rad^2/sec^2)
+
+
+/*
+ * Class:		NA
+ * Function:	Initialize_System()
+ * Scope:		NA
+ * Arguments:	None
+ * Description:	Initializes the IMU system
+ */
+void Initialize_System(void){
+	_lAccum XAxisAccelMean = 0;				// x-axis accelerometer mean
+	_lAccum YAxisAccelMean = 0;				// y-axis accelerometer mean
+	_lAccum ZAxisAccelMean = 0;				// z-axis accelerometer mean
+	_lAccum XAxisAngleVar = 0;				// x-axis angle variance
+	_lAccum YAxisAngleVar = 0;				// y-axis angle variance
+	_lAccum ZAxisAngleVar = 0;				// z-axis angle variance
+	_lAccum XAxisRateMean = 0;				// x-axis rate mean
+	_lAccum YAxisRateMean = 0;				// y-axis rate mean
+	_lAccum ZAxisRateMean = 0;				// z-axis rate mean
+	_lAccum XAxisRateVar = 0;				// x-axis rate variance
+	_lAccum YAxisRateVar = 0;				// y-axis rate variance
+	_lAccum ZAxisRateVar = 0;				// z-axis rate variance
+	long numiterations = 0;					// number of iterations ran in attempt to calculate means and variances
+
+	// Begin Serial Communications
+	Serial.begin(SERIAL_DATARATE);
+
+	// Initialize the MPU6000 gyro/accel
+	if (Mpu6000.Initialize(	MPU_SAMPLERATE_HZ,
+						SEL_DLPF_DIS,
+						SEL_GYRO_1000,
+						SEL_ACCEL_4))				// initialize MPU6000 with 400 Hz sample rate, no low pass filter, +-1000 dps gyro scale, and +- 4g accel scale
+	{
+		Serial.println("Succesfully Initialized the MPU6000");
+	}
+	else
+	{
+		Serial.println("Failed to Initialize the MPU6000");
+	}
+
+	// Initialize the HMC5883 magnetometer
+	if (Hmc5883.Initialize(	SAMPLEAVERAGING_SEL_8,
+						DATAOUTPUTSEL_75HZ,
+						NORMALOPERATION_SEL,
+						MAGRANGE_SEL_1_3))			// initialize HMC5883 with 8 sample averaging, 75 Hz data rate, normal (no bias) operation, and +-1.3 gauss scale
+	{
+		Serial.println("Succesfully Initialized the HMC5883");
+	}
+	else
+	{
+		Serial.println("Failed to Initialize the HMC5883");
+	}
+
+	// Enter loop to calculate means and variances of measurements
+	while (numiterations < NUMBER_INITSAMPLES)
+	{
+		if (micros() - loopstarttime_us >= FASTLOOP_TIME_US)	// if fast loop sample time has elapsed
+		{
+			loopdeltatime_us = micros() - loopstarttime_us;		// store amount of time elapsed since beginning last loop
+			loopstarttime_us = micros();						// begin new loop iteration, and record new starting time
+			numiterations++;									// increment the number of iterations passed
+
+			CheckForData();										// check for new measured data
+
+			if (newmagdata)										// if new magnetometer data was read
+			{
+				ZAxisAngleNoise.CalcNextValue(heading_rad,&ZAxisAngleVar);	// calculate variance of yaw measurement
+			}
+
+			if (newmpudata)										// if new IMU data was read
+			{
+				XAxisAngleNoise.CalcNextValue(roll_fromAccel,&XAxisAngleVar);				// calculate variance of roll angle measurement
+				YAxisAngleNoise.CalcNextValue(pitch_fromAccel,&YAxisAngleVar);				// calculate variance of pitch angle measurement
+				XAxisAccelMean = XAxisAccelNoise.CalcNextValue(accelX_meas,NULL);			// calculate mean of  x-axis accelerometer measurement
+				YAxisAccelMean = YAxisAccelNoise.CalcNextValue(accelY_meas,NULL);			// calculate mean of  y-axis accelerometer measurement
+				ZAxisAccelMean = ZAxisAccelNoise.CalcNextValue(accelZ_meas,NULL);			// calculate mean of  z-axis accelerometer measurement
+				XAxisRateMean = XAxisRateNoise.CalcNextValue(rollrate_meas,&XAxisRateVar);	// calculate mean and variance of x-axis rate measurement
+				YAxisRateMean = YAxisRateNoise.CalcNextValue(pitchrate_meas,&YAxisRateVar);	// calculate mean and variance of y-axis rate measurement
+				ZAxisRateMean = ZAxisRateNoise.CalcNextValue(yawrate_meas,&ZAxisRateVar);	// calculate mean and variance of z-axis rate measurement
+			}
+
+		}
+
+	}
+
+	Mpu6000.Set_Gyro_Offsets(	-XAxisRateMean,
+								-YAxisRateMean,
+								-ZAxisRateMean);		// set gyroscope offsets
+	Mpu6000.Set_Accel_Offsets(	-XAxisAccelMean,
+								-YAxisAccelMean,
+								-(ZAxisAccelMean+GRAVITYMPS2_LK));		// set accelerometer offsets
+	Hmc5883.set_offset(	MAG_OFFSET_X,
+						MAG_OFFSET_Y,
+						MAG_OFFSET_Z);				// set magnetic sensor offset values
+	Hmc5883.set_mag_declination(MAG_DECLINATION);	// set magnetic declination (difference between true and magnetic north)
+
+	XAxisGyroKalman.Initialize(	XGYRO_ANGLEPROCVAR,
+								XGYRO_RATEPROCVAR,
+								XGYRO_ANGLEOBSVAR,
+								XGYRO_RATEOBSVAR,
+								XGYRO_INITIALANGLE,
+								XGYRO_INITIALRATE,
+								XAxisAngleVar,
+								XAxisRateVar);	// Initialize the x-axis gyroscopic kalman filter
+
+	YAxisGyroKalman.Initialize(	YGYRO_ANGLEPROCVAR,
+								YGYRO_RATEPROCVAR,
+								YGYRO_ANGLEOBSVAR,
+								YGYRO_RATEOBSVAR,
+								YGYRO_INITIALANGLE,
+								YGYRO_INITIALRATE,
+								YAxisAngleVar,
+								YAxisRateVar);	// Initialize the y-axis gyroscopic kalman filter
+
+	ZAxisGyroKalman.Initialize(	ZGYRO_ANGLEPROCVAR,
+								ZGYRO_RATEPROCVAR,
+								ZGYRO_ANGLEOBSVAR,
+								ZGYRO_RATEOBSVAR,
+								ZGYRO_INITIALANGLE,
+								ZGYRO_INITIALRATE,
+								ZAxisAngleVar,
+								ZAxisRateVar);	// Initialize the z-axis gyroscopic kalman filter
+	Serial.println("Finished Initialization");
+	Serial.println("");
+	return;
+}	// end of Initialize_System()
+
 
 /*
  * Class:		NA
@@ -20,12 +157,18 @@ void CheckForData(void){
 	{
 		if (Hmc5883.Read_Mag_Data())							// read magnetic data
 		{
-			heading_rad = Hmc5883.Calc_Heading(roll,pitch);		// calculate heading
-			newmagdata = true;									// denote new data ready
+			if ( (roll < FIVEDEGREES_LK) && (roll > -FIVEDEGREES_LK) && (pitch < FIVEDEGREES_LK) && (pitch > -FIVEDEGREES_LK) ) // if roll and pitch are suitably small
+			{
+				heading_rad = Hmc5883.Calc_Heading(roll,pitch);		// calculate heading
+				newmagdata = true;									// denote new data ready
+			}
+			else
+			{
+				newmagdata = false;
+			}
 		}
 		else													// if failed to read data
 		{
-			Serial.println("Error reading magnetic data");		// print failure message
 			newmagdata = false;									// denote no new data ready
 		}
 	}
@@ -197,3 +340,53 @@ void Print_Filter_Debug_Out(void){
 	return;		// print filter debugging output messages
 } // end of Print_Filter_Debug_Out()
 #endif
+
+/*
+ * Class:		CalcMeanAndVariance
+ * Function:	CalcMeanAndVariance
+ * Scope:		public
+ * Arguments:	None
+ * Description:	constructor for CalcMeanAndVariance class
+ */
+CalcMeanAndVariance::CalcMeanAndVariance(void){
+	n = 1;			// initialize number of samples taken to one
+	mean = 0;		// initialize mean to zero
+	variance = 0;	// initialize variance to zero
+	M2 = 0;			// initialize M2 to zero
+	return;
+} // end of CalcMeanAndVariance()
+
+/*
+ * Class:		CalcMeanAndVariance
+ * Function:	CalcNextValue
+ * Scope:		public
+ * Arguments:	None
+ * Description:	calculates the next value for mean and variance
+ */
+_lAccum CalcMeanAndVariance::CalcNextValue(_lAccum measured, _lAccum * variance_out){
+	_lAccum delta;				// change between this value and the current mean
+
+	n++;						// increment number of samples
+	delta = measured - mean;	// calculate change between this measurement and last mean
+	mean += delta/n;		// calculate new mean
+	M2 += lmullk(delta,(measured - mean));
+	variance = M2/(n-1);
+	*variance_out = variance;
+	return mean;
+}  // end of CalcNextValue()
+
+/*
+ * Class:		CalcMeanAndVariance
+ * Function:	ReInitialize
+ * Scope:		public
+ * Arguments:	_lAccum	mean_init	- initial value for mean
+ * 				_lAccum var_init	- initial value for variance
+ * Description:	initializes the mean and variance values
+ */
+void CalcMeanAndVariance::Initialize(_lAccum mean_init, _lAccum var_init){
+	n = 1;					// initialize number of samples taken to one
+	mean = mean_init;		// initialize mean to specified value
+	variance = var_init;	// initialize variance to specified value
+	M2 = 0;					// initialize M2 to zero
+	return;
+} // end of Initialize()

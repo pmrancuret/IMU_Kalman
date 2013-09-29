@@ -309,7 +309,7 @@ boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 mag
 			magX = mag_counts * Gauss_per_LSb + offsetx;	// calculate x-axis magnetic field, in Gauss
 		}
 
-		mag_counts = (( ((int)databuffer[4]) << 8 | databuffer[5] ) * MAG_YAXIS_SIGN + offsety);	// read y-axis adc counts
+		mag_counts = ( ((int)databuffer[4]) << 8 | databuffer[5] ) * MAG_YAXIS_SIGN;	// read y-axis adc counts
 		if ((mag_counts > 2047) | (mag_counts < -2048))		// if ADC counts fall outside ADC valid range (this happens for saturation)
 		{
 			rtn = false;									// set return value to false, indicating measurement didn't take place correctly
@@ -319,7 +319,7 @@ boolean HMC5883::Read_Mag_Data(void){				// reads magnetic data from HMC5883 mag
 			magY = mag_counts * Gauss_per_LSb + offsety;	// calculate y-axis magnetic field, in Gauss
 		}
 
-		mag_counts = (( ((int)databuffer[2]) << 8 | databuffer[3] ) * MAG_ZAXIS_SIGN + offsetz);	// read z-axis adc counts
+		mag_counts = ( ((int)databuffer[2]) << 8 | databuffer[3] ) * MAG_ZAXIS_SIGN;	// read z-axis adc counts
 		if ((mag_counts > 2047) | (mag_counts < -2048))		// if ADC counts fall outside ADC valid range (this happens for saturation)
 		{
 			rtn = false;									// set return value to false, indicating measurement didn't take place correctly

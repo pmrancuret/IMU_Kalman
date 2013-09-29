@@ -33,7 +33,9 @@ void setup();
 
 #define SERIAL_DATARATE 38400	// serial line datarate, baud
 
-#define FASTLOOP_TIME_US 8000	// fast loop sample rate, in microseconds.
+#define FASTLOOP_TIME_US 10000	// fast loop sample rate, in microseconds.
+#define MPU_SAMPLERATE_HZ 100	// sample rate for MPU, in Hz
+#define NUMBER_INITSAMPLES 1250	// number of fast loop rate samples to take during initialization to calculate offsets and variances
 
 // offsets for gyroscope
 #define GYRO_OFFSET_X	0	// gyroscope x-axis offset (in rad/s * 2^24)
@@ -55,15 +57,15 @@ void setup();
 #define XGYRO_ANGLEPROCVAR	itolk(1)>>2		// X-axis gyro angle process variance of 1/4 rad
 #define YGYRO_ANGLEPROCVAR	itolk(1)>>2		// Y-axis gyro angle process variance of 1/4 rad
 #define ZGYRO_ANGLEPROCVAR	itolk(1)>>2		// Z-axis gyro angle process variance of 1/4 rad
-#define XGYRO_ANGLEOBSVAR	itolk(1)>>2		// X-axis gyro angle observation variance of 1/4 rad
-#define YGYRO_ANGLEOBSVAR	itolk(1)>>2		// Y-axis gyro angle observation variance of 1/4 rad
-#define ZGYRO_ANGLEOBSVAR	itolk(1)>>2		// Z-axis gyro angle observation variance of 1/4 rad
+#define XGYRO_ANGLEOBSVAR	itolk(1)>>4		// X-axis gyro angle observation variance of 1/4 rad
+#define YGYRO_ANGLEOBSVAR	itolk(1)>>4		// Y-axis gyro angle observation variance of 1/4 rad
+#define ZGYRO_ANGLEOBSVAR	itolk(1)<<1		// Z-axis gyro angle observation variance of 1/4 rad
 #define XGYRO_RATEPROCVAR	itolk(1)>>2		// X-axis gyro rate process variance of 1/4 rad/sec
 #define YGYRO_RATEPROCVAR	itolk(1)>>2		// Y-axis gyro rate process variance of 1/4 rad/sec
 #define ZGYRO_RATEPROCVAR	itolk(1)>>2		// Z-axis gyro rate process variance of 1/4 rad/sec
-#define XGYRO_RATEOBSVAR	itolk(1)>>2		// X-axis gyro rate observation variance of 1/4 rad/sec
-#define YGYRO_RATEOBSVAR	itolk(1)>>2		// Y-axis gyro rate observation variance of 1/4 rad/sec
-#define ZGYRO_RATEOBSVAR	itolk(1)>>2		// Z-axis gyro rate observation variance of 1/4 rad/sec
+#define XGYRO_RATEOBSVAR	itolk(1)>>6		// X-axis gyro rate observation variance of 1/4 rad/sec
+#define YGYRO_RATEOBSVAR	itolk(1)>>6		// Y-axis gyro rate observation variance of 1/4 rad/sec
+#define ZGYRO_RATEOBSVAR	itolk(1)>>6		// Z-axis gyro rate observation variance of 1/4 rad/sec
 #define XGYRO_INITIALANGLE	0				// X-axis gyro initial angle, rad
 #define YGYRO_INITIALANGLE	0				// Y-axis gyro initial angle, rad
 #define ZGYRO_INITIALANGLE	0				// Z-axis gyro initial angle, rad
