@@ -27,7 +27,8 @@ void setup();
 
 // debug definitions
 //#define DEBUG_MAGNETOMETER		// defining this variable will cause some basic debugging from the magnetometer
-#define DEBUG_PRINTFILTEROUTS		// defining this variable will cause filter outputs to be printed over serial line every 10th time it is called
+//#define DEBUG_PRINTFILTEROUTS		// defining this variable will cause filter outputs to be printed over serial line every 10th time it is called
+//#define DEBUG_NOBINARYDATA			// defining this variable will cause the serial output to skip printing the binary data.  this must be commented out in order to communicate with the autopilot
 
 //add your function definitions for the project IMU_Kalman here
 
@@ -35,7 +36,7 @@ void setup();
 
 #define FASTLOOP_TIME_US 10000	// fast loop sample rate, in microseconds.
 #define MPU_SAMPLERATE_HZ 100	// sample rate for MPU, in Hz
-#define NUMBER_INITSAMPLES 1250	// number of fast loop rate samples to take during initialization to calculate offsets and variances
+#define NUMBER_INITSAMPLES 1000	// number of fast loop rate samples to take during initialization to calculate offsets and variances
 
 // offsets for gyroscope
 #define GYRO_OFFSET_X	0	// gyroscope x-axis offset (in rad/s * 2^24)

@@ -34,10 +34,13 @@ void loop()
 
 		Calculate_Kalman_Estimates();	// Calculate all Kalman filter state estimates
 
+#ifndef DEBUG_NOBINARYDATA
+		PrintBinaryData();				// print state output message for autopilot to read
+#endif
+
 #ifdef DEBUG_PRINTFILTEROUTS
 		Print_Filter_Debug_Out();		// print filter debugging output messages
 #endif
-
 
 	}	// end of fastest loop
 }

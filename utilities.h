@@ -17,6 +17,10 @@
 #define NULL ((void*)0)
 #endif
 
+#define ToDeg100(x) 	((int)((((long)x)>>19) * 179))
+#define ToDeg50(x)		((int)((((long)x)>>20) * 179))
+
+
 /*
  * Class:		CalcMeanAndVariance
  * Function:	NA
@@ -39,6 +43,7 @@ public:
 };
 
 // global functions
+extern void PrintBinaryData(void);				// prints binary data on Serial port to be used by autopilot
 extern void Initialize_System(void);			// initializes the IMU system
 extern void CheckForData(void);					// Checks for and reads data from MPU and magnetometer
 extern void Calculate_Kalman_Estimates(void);	// calculates all kalman state estimates, based on whatever new measurements are ready

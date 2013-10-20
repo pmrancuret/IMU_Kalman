@@ -21,6 +21,61 @@ CalcMeanAndVariance ZAxisAccelNoise;		// this is used to calculate the z-axis ra
 
 /*
  * Class:		NA
+ * Function:	PrintBinaryData
+ * Scope:		global
+ * Arguments:	None
+ * Description:	prints binary data on Serial port to be used by autopilot
+ */
+void PrintBinaryData(void){
+	byte IMU_buffer[14];					// buffer of bytes to send over Serial port
+	int tempint;							// temporary integer holding data to send
+	byte IMU_ck_a = 0;						// checksum value a
+	byte IMU_ck_b = 0;						// checksum value b
+
+	IMU_buffer[0] = 0x0c;					// first byte to send is 'form feed'
+	IMU_buffer[1] = 0x06;					// next byte is acknowledge
+
+	tempint = ToDeg100(roll);				// change roll angle from rad (_lAccum datatype) to deg*100 (int datatype)
+	IMU_buffer[2] = tempint & 0xff;			// next byte is lower 8 bits of roll angle
+	IMU_buffer[3] = (tempint>>8) & 0xff;	// next byte is upper 8 bits of roll angle
+
+	tempint = ToDeg100(pitch);				// change pitch angle from rad (_lAccum datatype) to deg*100 (int datatype)
+	IMU_buffer[4] = tempint & 0xff;			// next byte is lower 8 bits of pitch angle
+	IMU_buffer[5] = (tempint>>8) & 0xff;	// next byte is upper 8 bits of pitch angle
+
+	tempint = ToDeg100(yaw);				// change yaw angle from rad (_lAccum datatype) to deg*100 (int datatype)
+	IMU_buffer[6] = tempint & 0xff;			// next byte is lower 8 bits of yaw angle
+	IMU_buffer[7] = (tempint>>8) & 0xff;	// next byte is upper 8 bits of yaw angle
+
+	tempint = ToDeg50(rollrate);			// change roll rate from rad/sec (_lAccum datatype) to deg/sec*50 (int datatype)
+	IMU_buffer[8] = tempint & 0xff;			// next byte is lower 8 bits of roll rate
+	IMU_buffer[9] = (tempint>>8) & 0xff;	// next byte is upper 8 bits of roll rate
+
+	tempint = ToDeg50(pitchrate);			// change pitch rate from rad/sec (_lAccum datatype) to deg/sec*50 (int datatype)
+	IMU_buffer[10] = tempint & 0xff;		// next byte is lower 8 bits of pitch rate
+	IMU_buffer[11] = (tempint>>8) & 0xff;	// next byte is upper 8 bits of pitch rate
+
+	tempint = ToDeg50(yawrate);				// change yaw rate from rad/sec (_lAccum datatype) to deg/sec*50 (int datatype)
+	IMU_buffer[12] = tempint & 0xff;		// next byte is lower 8 bits of yaw rate
+	IMU_buffer[13] = (tempint>>8) & 0xff;	// next byte is upper 8 bits of yaw rate
+
+	for (int i=0;i<14;i++)
+	{
+		IMU_ck_a+=IMU_buffer[i];  			//Calculates checksums
+		IMU_ck_b+=IMU_ck_a;
+	}
+
+	Serial.print("DIYd");									// send the message preamble
+    for (int i=0;i<14;i++) Serial.write (IMU_buffer[i]);	// send all bytes of the data buffer
+    Serial.write(IMU_ck_a);									// send first checksum byte
+    Serial.write(IMU_ck_b);									// send second checksum byte
+
+	return;
+} // end of PrintBinaryData()
+
+
+/*
+ * Class:		NA
  * Function:	Initialize_System()
  * Scope:		NA
  * Arguments:	None
@@ -306,6 +361,8 @@ void Print_Filter_Debug_Out(void){
 	if (++i >= 25)				// if this is the tenth time this function has been called
 	{
 		i = 0;					// reset counter
+
+		Serial.println("");
 
 		Serial.println("TimeStep (us)\t\tRaw Rollrate (deg/s)\t\tRaw Pitchrate (deg/s)\t\tRaw Yawrate (deg/s)\t\tRaw Roll (deg)\t\tRaw Pitch (deg)\t\tRaw Yaw (deg)\t\tFilt Rollrate (deg/s)\t\tFilt Pitchrate (deg/s)\t\tFilt Yawrate (deg/s)\t\tFilt Roll (deg)\t\tFilt Pitch (deg)\t\tFilt Yaw (deg)");
 		Serial.print(loopdeltatime_us,DEC);

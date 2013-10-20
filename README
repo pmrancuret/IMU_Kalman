@@ -1,2 +1,13 @@
 This project, by Paul Rancuret and John McArthur, creates code for the ArduIMU (v3) board
 which includes Kalman filtering.
+
+Follow these steps in order to import this project into eclipse, then build and load the code:
+
+1)  Download this software from https://github.com/johnnyfisma/QuadCopter/tree/master/Code/IMU/KalmanIMU and save it in a known directory on your local disk.
+2)  Ensure the Baeyens arduino plugin for Eclipse is installed.  Follow instructions at www.baeyens.it/eclipse/Install.html to install this plugin.
+2)  In Eclipse (Juno version), click on File->Import...
+3)  Under the 'General' tab, select 'Existing Projects into Workspace.'  Click Next >
+4)  Next to 'Select root directory:,' browse for and select the directory in which this project's source code is located.  You may select 'Copy projects into workspace' if your Eclipse workspace is in a different directory and you want to work on another copy of the code.  Otherwise you may leave it unchecked, and it will keep the code where you had originally put it.
+5)  Ensure the correct Serial port you are using for your FTDI cable is selected in the project.  To do this, right click the project, select 'Properties.'  In that menu, under 'Arduino,' select 'Arduino.'  In the right pane, select the correct serial port from the dropdown next to 'Port:'
+6)  Clicking the 'build' button (or ctrl-b, or right clicking the project and selecting 'Build Project') should successfully build the project.
+7)  Clicking the AVR button in the top toolbar should upload the code into the arduino.
