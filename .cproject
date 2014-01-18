@@ -32,17 +32,17 @@
 								<option id="it.baeyens.avreclipse.compiler.option.debug.level.1349471076" name="Generate Debugging Info" superClass="it.baeyens.avreclipse.compiler.option.debug.level" value="it.baeyens.avreclipse.compiler.option.debug.level.none" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.compiler.option.optimize.1229451333" name="Optimization Level" superClass="it.baeyens.avreclipse.compiler.option.optimize" value="it.baeyens.avreclipse.compiler.optimize.size" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.compiler.option.incpath.83382774" name="Include Paths (-I)" superClass="it.baeyens.avreclipse.compiler.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Board_Support_Library/Arduino}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Board_Support_Library/standard}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Board_Support_Library\Arduino&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Board_Support_Library\standard&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/IMU_Kalman}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/avrfix}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SPI}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Wire}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/HMC5883}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Kalman_Filters}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/avr_includes}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/avr_includes/avr}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\avrfix&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\HMC5883&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\GyroKalman&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\avr_includes&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\avr_includes\avr&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\MPU6000&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\SPI&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Wire&quot;"/>
 								</option>
 								<option id="it.baeyens.avreclipse.compiler.option.def.1485111403" name="Define Syms (-D)" superClass="it.baeyens.avreclipse.compiler.option.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__IN_ECLIPSE__=1"/>
@@ -62,17 +62,17 @@
 								<option id="it.baeyens.avreclipse.cppcompiler.option.debug.level.1244205041" name="Generate Debugging Info" superClass="it.baeyens.avreclipse.cppcompiler.option.debug.level" value="it.baeyens.avreclipse.cppcompiler.option.debug.level.none" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.optimize.718166427" name="Optimization Level" superClass="it.baeyens.avreclipse.cppcompiler.option.optimize" value="it.baeyens.avreclipse.cppcompiler.optimize.size" valueType="enumerated"/>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.incpath.404803734" name="Include Paths (-I)" superClass="it.baeyens.avreclipse.cppcompiler.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Board_Support_Library/Arduino}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Board_Support_Library/standard}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Board_Support_Library\Arduino&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Board_Support_Library\standard&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/IMU_Kalman}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/avrfix}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SPI}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Wire}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/HMC5883}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Kalman_Filters}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/avr_includes}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/avr_includes/avr}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\avrfix&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\HMC5883&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\GyroKalman&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\avr_includes&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\avr_includes\avr&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\MPU6000&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\SPI&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Wire&quot;"/>
 								</option>
 								<option id="it.baeyens.avreclipse.cppcompiler.option.def.479432623" name="Define Syms (-D)" superClass="it.baeyens.avreclipse.cppcompiler.option.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__IN_ECLIPSE__=1"/>
@@ -91,14 +91,22 @@
 							<tool id="it.baeyens.avreclipse.tool.linker.winavr.app.release.1782124606" name="AVR C Linker" superClass="it.baeyens.avreclipse.tool.linker.winavr.app.release"/>
 							<tool command="avr-gcc" commandLinePattern="${COMMAND} -Os -Wl,--gc-sections  ${FLAGS} ${ARDUINO_LINK_OPTIONS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS} -lm" errorParsers="org.eclipse.cdt.core.GLDErrorParser" id="it.baeyens.avreclipse.tool.cpplinker.app.release.1612619751" name="AVR C++ Linker" superClass="it.baeyens.avreclipse.tool.cpplinker.app.release">
 								<option id="it.baeyens.avreclipse.cpplinker.option.libs.1826873105" name="Libraries (-l)" superClass="it.baeyens.avreclipse.cpplinker.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="avrfix"/>
 									<listOptionValue builtIn="false" value="Arduino_Duemilanove_w__ATmega328"/>
+									<listOptionValue builtIn="false" value="avrfix"/>
+									<listOptionValue builtIn="false" value="Wire"/>
+									<listOptionValue builtIn="false" value="SPI"/>
 									<listOptionValue builtIn="false" value="MPU6000"/>
+									<listOptionValue builtIn="false" value="HMC5883"/>
+									<listOptionValue builtIn="false" value="GyroKalman"/>
 								</option>
 								<option id="it.baeyens.avreclipse.cpplinker.option.libpath.564686622" name="Libraries Path (-L)" superClass="it.baeyens.avreclipse.cpplinker.option.libpath" valueType="stringList">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/avrfix}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Board_Support_Library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\avrfix&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Board_Support_Library&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\MPU6000&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\SPI&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Wire&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\HMC5883&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\GyroKalman&quot;"/>
 								</option>
 								<option id="it.baeyens.avreclipse.cpplinker.option.genmap.1519069921" name="Map Filename" superClass="it.baeyens.avreclipse.cpplinker.option.genmap" value="&quot;${ProjName}.map&quot;" valueType="string"/>
 								<option id="it.baeyens.avreclipse.cpplinker.option.otherlinkargs.2069903577" name="Other Arguments" superClass="it.baeyens.avreclipse.cpplinker.option.otherlinkargs" value="--export-all-symbols" valueType="string"/>
