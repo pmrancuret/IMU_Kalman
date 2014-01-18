@@ -160,36 +160,42 @@ void Initialize_System(void){
 	Mpu6000.Set_Gyro_Offsets(	-XAxisRateMean,
 								-YAxisRateMean,
 								-ZAxisRateMean);		// set gyroscope offsets
+#ifdef USE_MEANS_FOR_ACCEL_OFFSET
 	Mpu6000.Set_Accel_Offsets(	-XAxisAccelMean,
 								-YAxisAccelMean,
 								-(ZAxisAccelMean+GRAVITYMPS2_LK));		// set accelerometer offsets
+#else
+	Mpu6000.Set_Accel_Offsets(	ACCEL_OFFSET_X,
+								ACCEL_OFFSET_Y,
+								ACCEL_OFFSET_Z);		// set accelerometer offsets
+#endif
 	Hmc5883.set_offset(	MAG_OFFSET_X,
 						MAG_OFFSET_Y,
 						MAG_OFFSET_Z);				// set magnetic sensor offset values
 	Hmc5883.set_mag_declination(MAG_DECLINATION);	// set magnetic declination (difference between true and magnetic north)
 
 	XAxisGyroKalman.Initialize(	XGYRO_ANGLEPROCVAR,
-								XGYRO_RATEPROCVAR,
+								XAxisRateVar<<16,
 								XGYRO_ANGLEOBSVAR,
-								XGYRO_RATEOBSVAR,
+								XAxisRateVar,
 								XGYRO_INITIALANGLE,
 								XGYRO_INITIALRATE,
 								XAxisAngleVar,
 								XAxisRateVar);	// Initialize the x-axis gyroscopic kalman filter
 
 	YAxisGyroKalman.Initialize(	YGYRO_ANGLEPROCVAR,
-								YGYRO_RATEPROCVAR,
+								YAxisRateVar<<16,
 								YGYRO_ANGLEOBSVAR,
-								YGYRO_RATEOBSVAR,
+								YAxisRateVar,
 								YGYRO_INITIALANGLE,
 								YGYRO_INITIALRATE,
 								YAxisAngleVar,
 								YAxisRateVar);	// Initialize the y-axis gyroscopic kalman filter
 
 	ZAxisGyroKalman.Initialize(	ZGYRO_ANGLEPROCVAR,
-								ZGYRO_RATEPROCVAR,
+								ZAxisRateVar<<16,
 								ZGYRO_ANGLEOBSVAR,
-								ZGYRO_RATEOBSVAR,
+								ZAxisRateVar,
 								ZGYRO_INITIALANGLE,
 								ZGYRO_INITIALRATE,
 								ZAxisAngleVar,
