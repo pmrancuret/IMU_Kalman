@@ -36,4 +36,7 @@ SIZEDUMMY :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
+MPU6000 \
+HMC5883 \
+GyroKalman \
 

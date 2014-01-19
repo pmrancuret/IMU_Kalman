@@ -95,18 +95,12 @@
 									<listOptionValue builtIn="false" value="avrfix"/>
 									<listOptionValue builtIn="false" value="Wire"/>
 									<listOptionValue builtIn="false" value="SPI"/>
-									<listOptionValue builtIn="false" value="MPU6000"/>
-									<listOptionValue builtIn="false" value="HMC5883"/>
-									<listOptionValue builtIn="false" value="GyroKalman"/>
 								</option>
 								<option id="it.baeyens.avreclipse.cpplinker.option.libpath.564686622" name="Libraries Path (-L)" superClass="it.baeyens.avreclipse.cpplinker.option.libpath" valueType="stringList">
-									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\avrfix&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Board_Support_Library&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\MPU6000&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\SPI&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\avrfix&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\Wire&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\HMC5883&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\GyroKalman&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PWD}\..\..\..\libraries\SPI&quot;"/>
 								</option>
 								<option id="it.baeyens.avreclipse.cpplinker.option.genmap.1519069921" name="Map Filename" superClass="it.baeyens.avreclipse.cpplinker.option.genmap" value="&quot;${ProjName}.map&quot;" valueType="string"/>
 								<option id="it.baeyens.avreclipse.cpplinker.option.otherlinkargs.2069903577" name="Other Arguments" superClass="it.baeyens.avreclipse.cpplinker.option.otherlinkargs" value="--export-all-symbols" valueType="string"/>

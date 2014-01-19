@@ -8,6 +8,9 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include MPU6000/subdir.mk
+-include HMC5883/subdir.mk
+-include GyroKalman/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -70,7 +73,7 @@ all: IMU_Kalman.elf secondary-outputs
 IMU_Kalman.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C++ Linker'
-	avr-gcc -Os -Wl,--gc-sections  -Wl,-Map,"IMU_Kalman.map",--cref --export-all-symbols -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\avrfix" -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\Board_Support_Library" -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\MPU6000" -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\SPI" -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\Wire" -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\HMC5883" -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\GyroKalman" -mmcu=atmega328p  -o"IMU_Kalman.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm
+	avr-gcc -Os -Wl,--gc-sections  -Wl,-Map,"IMU_Kalman.map",--cref --export-all-symbols -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\Board_Support_Library" -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\avrfix" -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\Wire" -L"D:\Documents\QuadCopter\Code\IMU\KalmanIMU\Release\..\..\..\libraries\SPI" -mmcu=atmega328p  -o"IMU_Kalman.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 

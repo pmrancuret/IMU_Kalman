@@ -26,4 +26,35 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 		<nature>it.baeyens.arduinonature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>GyroKalman</name>
+			<type>2</type>
+			<locationURI>GYROKALMAN_PATH</locationURI>
+		</link>
+		<link>
+			<name>HMC5883</name>
+			<type>2</type>
+			<locationURI>$%7BHMC5883_PATH%7D</locationURI>
+		</link>
+		<link>
+			<name>MPU6000</name>
+			<type>2</type>
+			<locationURI>MPU6000_PATH</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>GYROKALMAN_PATH</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D/libraries/GyroKalman</value>
+		</variable>
+		<variable>
+			<name>HMC5883_PATH</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D/libraries/HMC5883</value>
+		</variable>
+		<variable>
+			<name>MPU6000_PATH</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D/libraries/MPU6000</value>
+		</variable>
+	</variableList>
 </projectDescription>
